@@ -1,0 +1,31 @@
+.input__size--large {
+  @apply w-full max-w-xs h-8 p-2 border border-solid box-border rounded-md;
+}
+
+.input__size--medium {
+  @apply w-2/4 max-w-xs h-8 p-1 border box-border rounded-md border;
+}
+
+.input__size--small {
+  @apply w-1/4 max-w-xs h-8 p-1 border box-border rounded-md;
+}
+
+.input__mode--primary {
+  @apply border-purple-500 hover:border-2 focus:border-2 focus:ring-purple-500 focus:shadow-md focus:shadow-purple-100 focus:outline-none;
+}
+
+.input__mode--edit {
+  @apply border-blue-500 hover:border-2 focus:border-2 focus:ring-blue-500 focus:shadow-md focus:shadow-blue-100 focus:outline-none;
+}
+
+.input__mode--error {
+  @apply border-red-500 hover:border-2 focus:border-2 focus:ring-red-500 focus:shadow-md focus:shadow-red-100 focus:outline-none;
+}
+
+.input__mode--success {
+  @apply border-emerald-500 hover:border-2 focus:border-2 focus:ring-emerald-500 focus:shadow-md focus:shadow-emerald-100 focus:outline-none;
+}
+
+.input__mode--disabled {
+  @apply border-zinc-500 hover:border-2 focus:border-2 focus:ring-zinc-500 focus:shadow-md focus:shadow-zinc-100 focus:outline-none;
+}

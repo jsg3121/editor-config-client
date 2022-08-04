@@ -1,17 +1,25 @@
 import React from 'react'
 import isEqual from 'fast-deep-equal'
-import styled from 'styled-components'
 
 interface InputTextProps {
+  type: 'form' | 'input'
   mode: 'Edit' | 'Primary' | 'Disabled' | 'Error' | 'Success'
   inputSize: 'large' | 'medium' | 'small'
   value?: string
 }
 
 const InputText: React.FC<InputTextProps> = (props) => {
-  const { value, mode, inputSize } = props
+  const { type, value, mode, inputSize } = props
+  const [style, setStyle] = React.useState<string>()
 
-  return <input type="text" className="" />
+  React.useEffect(() => {
+    if (type === 'input') {
+    }
+  }, [])
+
+  return (
+    <input type="text" className="input__size--large input__mode--primary" />
+  )
 }
 
 export default React.memo(InputText, isEqual)
