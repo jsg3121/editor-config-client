@@ -1,1 +1,1 @@
-export { default as InputText } from './src/InputText'
+export { Input } from './src/Input'

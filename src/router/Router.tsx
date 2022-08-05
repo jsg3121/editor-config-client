@@ -6,7 +6,6 @@ import { Login } from './src/public'
 
 const Router: React.FC = () => {
   const { isLogin } = useSelector((store) => store.account)
-
   return (
     <>
       {isLogin && (

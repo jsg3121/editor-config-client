@@ -1,11 +1,11 @@
 import React from 'react'
 import isEqual from 'fast-deep-equal'
-import { InputText } from '../../../../component'
+import { Input } from '../../../../component'
 
 const Login: React.FC = () => {
   return (
     <>
-      <InputText inputSize="medium" mode="Primary" type="form" />
+      <Input.Text type="text" inputSize="medium" mode="primary" />
     </>
   )
 }

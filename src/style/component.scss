@@ -1,31 +1,97 @@
-.input__size--large {
-  @apply w-full max-w-xs h-8 p-2 border border-solid box-border rounded-md;
+.input-text__size--large {
+  @apply w-full h-8 p-2 border border-solid box-border rounded-md transition-colors;
 }
 
-.input__size--medium {
-  @apply w-2/4 max-w-xs h-8 p-1 border box-border rounded-md border;
+.input-text__size--medium {
+  @apply w-2/4  h-8 p-2 border box-border border-solid rounded-md border transition-colors;
 }
 
 .input__size--small {
-  @apply w-1/4 max-w-xs h-8 p-1 border box-border rounded-md;
+  @apply w-1/4  h-8 p-2 border box-border border-solid rounded-md transition-colors;
 }
 
-.input__mode--primary {
-  @apply border-purple-500 hover:border-2 focus:border-2 focus:ring-purple-500 focus:shadow-md focus:shadow-purple-100 focus:outline-none;
+.input-text__mode--primary {
+  @apply border-purple-500 text-purple-500 hover:border-2 focus:border-2 focus:ring-purple-500 focus:shadow-md focus:shadow-purple-100 focus:outline-none;
 }
 
-.input__mode--edit {
-  @apply border-blue-500 hover:border-2 focus:border-2 focus:ring-blue-500 focus:shadow-md focus:shadow-blue-100 focus:outline-none;
+.input-text__mode--edit {
+  @apply border-blue-500 text-blue-500 hover:border-2 focus:border-2 focus:ring-blue-500 focus:shadow-md focus:shadow-blue-100 focus:outline-none;
 }
 
-.input__mode--error {
-  @apply border-red-500 hover:border-2 focus:border-2 focus:ring-red-500 focus:shadow-md focus:shadow-red-100 focus:outline-none;
+.input-text__mode--error {
+  @apply border-red-500 text-red-500 hover:border-2 focus:border-2 focus:ring-red-500 focus:shadow-md focus:shadow-red-100 focus:outline-none;
 }
 
-.input__mode--success {
-  @apply border-emerald-500 hover:border-2 focus:border-2 focus:ring-emerald-500 focus:shadow-md focus:shadow-emerald-100 focus:outline-none;
+.input-text__mode--success {
+  @apply border-emerald-500 text-emerald-500 hover:border-2 focus:border-2 focus:ring-emerald-500 focus:shadow-md focus:shadow-emerald-100 focus:outline-none;
 }
 
-.input__mode--disabled {
-  @apply border-zinc-500 hover:border-2 focus:border-2 focus:ring-zinc-500 focus:shadow-md focus:shadow-zinc-100 focus:outline-none;
+.input-text__mode--disabled {
+  @apply border-zinc-500 text-zinc-500 focus:outline-none cursor-not-allowed;
+}
+
+.input-checkbox {
+  @apply flex items-start items-center mb-4;
+
+  &:hover {
+    .input-checkbox__label {
+      svg {
+        path {
+          stroke-dashoffset: 0;
+        }
+      }
+    }
+  }
+}
+
+.input-checkbox__checked {
+  @apply bg-gray-50 focus:ring-1 focus:ring-blue-300 rounded w-0 h-0 absolute;
+
+  &:checked {
+    & + .input-checkbox__label {
+      div {
+        border-color: #20c2e0;
+        svg {
+          path {
+            fill: #20c2e0;
+          }
+          polyline {
+            stroke-dashoffset: 0;
+          }
+        }
+      }
+    }
+  }
+}
+
+.input-checkbox__label {
+  @apply text-sm ml-1 font-medium text-purple-600 flex items-center;
+
+  div {
+    @apply w-4 h-4 relative mr-2 border-solid border-gray-300 border-[2px] rounded box-content;
+
+    svg {
+      @apply absolute -top-[2px] -left-[2px];
+      path {
+        fill: none;
+        stroke: #20c2e0;
+        stroke-width: 2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-dasharray: 71px;
+        stroke-dashoffset: 71px;
+        transition: all 0.6s ease;
+      }
+      polyline {
+        fill: none;
+        stroke: #fff;
+        stroke-width: 2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-dasharray: 18px;
+        stroke-dashoffset: 18px;
+        transition: all 0.3s ease;
+      }
+    }
+  }
 }
