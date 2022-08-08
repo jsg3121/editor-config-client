@@ -1,7 +1,7 @@
 import Text from './src/Text'
-import Chekbox from './src/Chekbox'
+import Checkbox from './src/Checkbox'
 
 export const Input = {
   Text,
-  Chekbox,
+  Checkbox,
 }

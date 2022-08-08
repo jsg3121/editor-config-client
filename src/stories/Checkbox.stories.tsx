@@ -4,16 +4,16 @@ import '../index.css'
 import { Input } from '../component'
 
 export default {
-  title: 'Input/Chekbox',
-  component: Input.Chekbox,
-} as ComponentMeta<typeof Input.Chekbox>
+  title: 'Input/Checkbox',
+  component: Input.Checkbox,
+} as ComponentMeta<typeof Input.Checkbox>
 
-const Template: ComponentStory<typeof Input.Chekbox> = (props) => (
-  <Input.Chekbox {...props} />
+const Template: ComponentStory<typeof Input.Checkbox> = (props) => (
+  <Input.Checkbox {...props} />
 )
 
-export const Chekbox = Template.bind({})
-Chekbox.args = {
+export const Checkbox = Template.bind({})
+Checkbox.args = {
   checked: true,
   disabled: false,
   label: 'Checkbox',

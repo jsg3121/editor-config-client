@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ['./src/**/*.{js,jsx,ts,tsx,html,js,scss,css}', './index.html'],
+  content: ['./src/**/*.{js,jsx,ts,tsx}', './index.html'],
   theme: {
     extend: {
       spacing: {
@@ -9,7 +9,5 @@ module.exports = {
     },
   },
   plugins: [],
-  corePlugins: {
-    preflight: false,
-  },
+  corePlugins: {},
 }

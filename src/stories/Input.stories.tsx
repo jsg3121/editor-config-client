@@ -7,7 +7,7 @@ export default {
   title: 'Input/Text',
   component: Input.Text,
   argTypes: {
-    inputSize: { defaultValue: 'medium', name: '크기' },
+    inputSize: { name: '크기' },
     mode: {
       name: '입력값 상태',
       options: ['edit', 'primary', 'error', 'success'],
