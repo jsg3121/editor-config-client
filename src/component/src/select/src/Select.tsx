@@ -28,7 +28,7 @@ const Select: React.FC<SelectProps> = (props) => {
   const handleSelect = React.useCallback((val: string) => {
     setSelectVal(val)
     setIsSelect(false)
-    // onSelect(val)
+    onSelect(val)
   }, [])
 
   return (

@@ -33,7 +33,7 @@
 }
 
 .input-checkbox {
-  @apply flex items-start items-center mb-4;
+  @apply flex items-center mb-4;
 
   &:hover {
     .input-checkbox__label {
@@ -160,5 +160,34 @@
 
   p {
     @apply h-full text-primary-500 leading-8;
+  }
+}
+
+.toggle__button {
+  @apply w-0 h-0 absolute;
+
+  &:checked {
+    & + .toggle__switch {
+      .toggle__switch--icon {
+        @apply bg-primary-500 border-primary-500;
+
+        &::after {
+          @apply translate-x-full;
+        }
+      }
+    }
+  }
+}
+
+.toggle__switch {
+  @apply flex items-center cursor-pointer relative mb-4;
+}
+
+.toggle__switch--icon {
+  @apply bg-gray-200 border-2 border-gray-200 h-6 w-11 rounded-full relative mr-2;
+
+  &::after {
+    content: '';
+    @apply w-5 h-5 bg-gray-100 rounded-full absolute top-0 left-0 transition-transform translate-x-0;
   }
 }

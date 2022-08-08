@@ -32,4 +32,7 @@ SelectBox.args = {
   options: ['Option1', 'Option2', 'Option3', 'Option4'],
   placeholder: 'select',
   disabled: false,
+  onSelect: (val) => {
+    console.log(val)
+  },
 }
