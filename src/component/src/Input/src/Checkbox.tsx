@@ -20,7 +20,12 @@ const Chekbox: React.FC<ChekboxProps> = (props) => {
 
   return (
     <>
-      <div className="input-checkbox">
+      <div
+        className={[
+          'input-checkbox',
+          disabled ? 'input-checkbox--disabled' : '',
+        ].join(' ')}
+      >
         <input
           id={value}
           type="checkbox"
@@ -29,7 +34,7 @@ const Chekbox: React.FC<ChekboxProps> = (props) => {
           disabled={disabled}
           value={value}
         />
-        <label htmlFor={value} className="input-checkbox__label">
+        <label htmlFor={value} className={'input-checkbox__label'}>
           <div>
             <CheckSVG />
           </div>

@@ -3,7 +3,7 @@
 }
 
 .input-text__size--medium {
-  @apply w-2/4  h-8 p-2 border box-border border-solid rounded-md border transition-colors;
+  @apply w-2/4  h-8 p-2 border box-border border-solid rounded-md transition-colors;
 }
 
 .input__size--small {
@@ -11,23 +11,19 @@
 }
 
 .input-text__mode--primary {
-  @apply border-purple-500 text-purple-500 hover:border-2 focus:border-2 focus:ring-purple-500 focus:shadow-md focus:shadow-purple-100 focus:outline-none;
+  @apply border-primary-500 text-primary-500 hover:border-2 focus:border-2 focus:ring-primary-500 focus:shadow-md focus:shadow-primary-100 focus:outline-none;
 }
 
 .input-text__mode--edit {
-  @apply border-blue-500 text-blue-500 hover:border-2 focus:border-2 focus:ring-blue-500 focus:shadow-md focus:shadow-blue-100 focus:outline-none;
+  @apply border-edit-500 text-edit-500 hover:border-2 focus:border-2 focus:ring-edit-500 focus:shadow-md focus:shadow-edit-100 focus:outline-none;
 }
 
 .input-text__mode--error {
-  @apply border-red-500 text-red-500 hover:border-2 focus:border-2 focus:ring-red-500 focus:shadow-md focus:shadow-red-100 focus:outline-none;
+  @apply border-error-500 text-error-500 hover:border-2 focus:border-2 focus:ring-error-500 focus:shadow-md focus:shadow-error-100 focus:outline-none;
 }
 
 .input-text__mode--success {
-  @apply border-emerald-500 text-emerald-500 hover:border-2 focus:border-2 focus:ring-emerald-500 focus:shadow-md focus:shadow-emerald-100 focus:outline-none;
-}
-
-.input-text__mode--disabled {
-  @apply border-zinc-500 text-zinc-500 focus:outline-none cursor-not-allowed;
+  @apply border-success-500 text-success-500 hover:border-2 focus:border-2 focus:ring-success-500 focus:shadow-md focus:shadow-success-100 focus:outline-none;
 }
 
 .input-checkbox {
@@ -42,18 +38,40 @@
       }
     }
   }
+
+  &.input-checkbox--disabled {
+    .input-checkbox__label {
+      @apply text-gray-300;
+
+      div {
+        @apply relative;
+
+        svg {
+          path {
+            stroke-width: 0;
+          }
+        }
+
+        &::after {
+          content: '';
+          @apply bg-gray-300/50 w-full h-full top-0 left-0 absolute;
+        }
+      }
+    }
+  }
 }
 
 .input-checkbox__checked {
-  @apply bg-gray-50 focus:ring-1 focus:ring-blue-300 rounded w-0 h-0 absolute;
+  @apply bg-gray-500 w-0 h-0 absolute;
 
   &:checked {
     & + .input-checkbox__label {
       div {
-        border-color: #20c2e0;
+        @apply border-primary-400;
+
         svg {
           path {
-            fill: #20c2e0;
+            @apply fill-primary-400;
           }
           polyline {
             stroke-dashoffset: 0;
@@ -65,7 +83,7 @@
 }
 
 .input-checkbox__label {
-  @apply text-sm ml-1 font-medium text-purple-600 flex items-center;
+  @apply text-sm ml-1 font-medium text-primary-600 flex items-center;
 
   div {
     @apply w-4 h-4 relative mr-2 border-solid border-gray-300 border-[2px] rounded box-content;
@@ -73,19 +91,15 @@
     svg {
       @apply absolute -top-[2px] -left-[2px];
       path {
-        fill: none;
-        stroke: #20c2e0;
-        stroke-width: 2;
+        @apply fill-transparent stroke-primary-500 stroke-2;
         stroke-linecap: round;
         stroke-linejoin: round;
         stroke-dasharray: 71px;
         stroke-dashoffset: 71px;
-        transition: all 0.6s ease;
+        transition: all 0.3s ease;
       }
       polyline {
-        fill: none;
-        stroke: #fff;
-        stroke-width: 2;
+        @apply fill-transparent stroke-gray-100 stroke-2;
         stroke-linecap: round;
         stroke-linejoin: round;
         stroke-dasharray: 18px;
@@ -97,7 +111,7 @@
 }
 
 .select {
-  @apply w-full h-6 rounded border-2 border-solid border-purple-400 box-content cursor-pointer hover:border-purple-600 relative;
+  @apply w-full h-6 rounded border-2 border-solid border-primary-400 box-content cursor-pointer hover:border-primary-600 relative;
 }
 
 .select--disabled {
@@ -112,29 +126,29 @@
 }
 
 .select__input--value {
-  @apply m-0 text-purple-500;
+  @apply m-0 text-primary-500;
 }
 
 .select__input--icon {
   @apply w-4 h-4;
 
   svg {
-    @apply w-full h-full fill-purple-500;
+    @apply w-full h-full fill-primary-500;
   }
 }
 
 .select__option {
-  @apply border-purple-400 w-full border-2 absolute top-6 rounded-b-md max-h-40 overflow-y-auto;
+  @apply border-primary-400 w-full border-2 absolute top-6 rounded-b-md max-h-40 overflow-y-auto;
 }
 
 .select__option--item {
-  @apply h-7 hover:bg-purple-300 px-2 border-b-2 border-purple-400;
+  @apply h-7 hover:bg-primary-300 px-2 border-b-2 border-primary-400;
 
   &:last-child {
     @apply border-0;
   }
 
   p {
-    @apply h-full text-purple-500;
+    @apply h-full text-primary-500;
   }
 }
