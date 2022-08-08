@@ -3,9 +3,9 @@ import { Router } from './router'
 
 const App: React.FC = () => {
   return (
-    <div className="App">
+    <main className="App">
       <Router />
-    </div>
+    </main>
   )
 }
 

@@ -4,8 +4,9 @@ import isEqual from 'fast-deep-equal'
 interface ChekboxProps {
   label: string
   value: string
-  disabled: boolean
-  checked: boolean
+  disabled?: boolean
+  checked?: boolean
+  onChange: (val: boolean) => void
 }
 
 const CheckSVG = () => (
@@ -15,34 +16,40 @@ const CheckSVG = () => (
   </svg>
 )
 
-const Chekbox: React.FC<ChekboxProps> = (props) => {
-  const { value, label, disabled, checked } = props
+const Checkbox: React.FC<ChekboxProps> = (props) => {
+  const { value, label, disabled = false, checked = false, onChange } = props
+
+  const handleChange = React.useCallback(
+    (e: { target: { checked: boolean } }) => {
+      onChange(e.target.checked)
+    },
+    []
+  )
 
   return (
-    <>
-      <div
-        className={[
-          'input-checkbox',
-          disabled ? 'input-checkbox--disabled' : '',
-        ].join(' ')}
-      >
-        <input
-          id={value}
-          type="checkbox"
-          className="input-checkbox__checked"
-          defaultChecked={checked}
-          disabled={disabled}
-          value={value}
-        />
-        <label htmlFor={value} className={'input-checkbox__label'}>
-          <div>
-            <CheckSVG />
-          </div>
-          {label}
-        </label>
-      </div>
-    </>
+    <div
+      className={[
+        'input-checkbox',
+        disabled ? 'input-checkbox--disabled' : '',
+      ].join(' ')}
+    >
+      <input
+        id={value}
+        type="checkbox"
+        className="input-checkbox__checked"
+        defaultChecked={checked}
+        disabled={disabled}
+        value={value}
+        onChange={handleChange}
+      />
+      <label htmlFor={value} className={'input-checkbox__label'}>
+        <div>
+          <CheckSVG />
+        </div>
+        {label}
+      </label>
+    </div>
   )
 }
 
-export default React.memo(Chekbox, isEqual)
+export default React.memo(Checkbox, isEqual)

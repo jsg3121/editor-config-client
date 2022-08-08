@@ -6,6 +6,13 @@ import { Input } from '../component'
 export default {
   title: 'Input/Checkbox',
   component: Input.Checkbox,
+  argTypes: {
+    onChange: {
+      table: {
+        disable: true,
+      },
+    },
+  },
 } as ComponentMeta<typeof Input.Checkbox>
 
 const Template: ComponentStory<typeof Input.Checkbox> = (props) => (
