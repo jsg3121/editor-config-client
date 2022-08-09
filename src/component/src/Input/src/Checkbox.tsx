@@ -1,12 +1,15 @@
 import React from 'react'
 import isEqual from 'fast-deep-equal'
+import { Path, UseFormRegister } from 'react-hook-form'
 
 interface ChekboxProps {
-  label: string
+  description: string
+  label: Path<LoginForm>
   value: string
   disabled?: boolean
   checked?: boolean
-  onChange: (val: boolean) => void
+  register: UseFormRegister<LoginForm> | (() => void)
+  required: boolean
 }
 
 const CheckSVG = () => (
@@ -17,14 +20,15 @@ const CheckSVG = () => (
 )
 
 const Checkbox: React.FC<ChekboxProps> = (props) => {
-  const { value, label, disabled = false, checked = false, onChange } = props
-
-  const handleChange = React.useCallback(
-    (e: { target: { checked: boolean } }) => {
-      onChange(e.target.checked)
-    },
-    []
-  )
+  const {
+    value,
+    label,
+    disabled = false,
+    checked = false,
+    description,
+    register,
+    required,
+  } = props
 
   return (
     <div
@@ -39,14 +43,13 @@ const Checkbox: React.FC<ChekboxProps> = (props) => {
         className="input-checkbox__checked"
         defaultChecked={checked}
         disabled={disabled}
-        value={value}
-        onChange={handleChange}
+        {...register(label, { required })}
       />
       <label htmlFor={value} className={'input-checkbox__label'}>
         <div>
           <CheckSVG />
         </div>
-        {label}
+        {description}
       </label>
     </div>
   )

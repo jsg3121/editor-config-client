@@ -22,6 +22,10 @@
   @apply text-primary-400;
 }
 
+.form__input--error {
+  @apply text-error-400 text-sm;
+}
+
 .form__input-options {
   @apply flex items-center mb-4 w-full justify-between;
 }

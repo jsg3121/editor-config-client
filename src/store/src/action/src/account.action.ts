@@ -1,10 +1,7 @@
-import { createAction } from '@reduxjs/toolkit'
+import { createAsyncThunk } from '@reduxjs/toolkit'
+import { Service } from '../../../../service'
 
-type UserLoginType = {
-  email: User['email']
-  password: User['password']
-}
-
-export const login = createAction<UserLoginType, '@@ACCOUNT/LOGIN'>(
-  '@@ACCOUNT/LOGIN'
+export const login = createAsyncThunk<Promise<LoginResult>, LoginForm>(
+  '@@ACCOUNT/LOGIN',
+  Service.login
 )

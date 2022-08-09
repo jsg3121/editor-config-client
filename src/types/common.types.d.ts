@@ -15,6 +15,27 @@ declare global {
     createAt: Date
     updateAt: Date
   }
+
+  interface LoginForm {
+    email: string
+    password: string
+    isAutoLogin: boolean
+  }
+
+  type LoginRequestForm = {
+    email: string
+    password: string
+  }
+
+  type LoginResult = {
+    isLogin: boolean
+    accessToken: string
+    accessTokenExp: string
+    refreshToken: string
+    refreshTokenExp: string
+    email: string
+    name: string
+  }
 }
 
 export default {}

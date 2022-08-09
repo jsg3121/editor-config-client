@@ -13,9 +13,11 @@ export default {
   },
 } as ComponentMeta<typeof ButtonComponent>
 
-const Template: ComponentStory<typeof ButtonComponent> = (props) => (
-  <ButtonComponent {...props} />
-)
+const Template: ComponentStory<typeof ButtonComponent> = (props) => {
+  const {} = props
+
+  return <ButtonComponent {...props} />
+}
 
 export const Button = Template.bind({})
 Button.args = {

@@ -1,7 +1,7 @@
-import { ComponentStory, ComponentMeta } from '@storybook/react'
-import '../style/component.scss'
-import '../index.css'
+import { ComponentMeta, ComponentStory } from '@storybook/react'
 import { Input } from '../component'
+import '../index.css'
+import '../style/component.scss'
 
 export default {
   title: 'Input/Text',
@@ -19,12 +19,28 @@ export default {
       name: '입력 타입',
     },
     value: { name: '입력값' },
+    register: {
+      control: false,
+      table: {
+        disable: true,
+      },
+    },
+    label: {
+      control: false,
+      table: {
+        disable: true,
+      },
+    },
   },
 } as ComponentMeta<typeof Input.Text>
 
-const Template: ComponentStory<typeof Input.Text> = (props) => (
-  <Input.Text {...props} />
-)
+const Template: ComponentStory<typeof Input.Text> = (props) => {
+  const { register, ...rest } = props
+
+  const handleRegister = () => {}
+
+  return <Input.Text register={handleRegister} {...rest} />
+}
 
 export const Primary = Template.bind({})
 Primary.args = {

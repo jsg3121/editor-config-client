@@ -1,7 +1,9 @@
 import { createReducer } from '@reduxjs/toolkit'
+import produce from 'immer'
 import { accountActions } from '../../action'
 
 export type AccountStateTypes = {
+  isLoading: boolean
   isLogin: boolean
   email: User['email']
   name: User['name']
@@ -13,6 +15,7 @@ export type AccountStateTypes = {
 }
 
 const accountState: AccountStateTypes = {
+  isLoading: false,
   accessToken: '',
   accessTokenExp: '',
   email: 'sdfgsdfg  d',
@@ -26,9 +29,16 @@ const accountState: AccountStateTypes = {
 const accountReducer = createReducer<AccountStateTypes>(
   accountState,
   (builder) => {
-    builder.addCase(accountActions.login, (store, { payload }) => {
-      console.log(store)
-    })
+    builder
+      .addCase(accountActions.login.pending, (store, _) => {
+        return produce(store, (draft) => {
+          draft.isLoading = true
+        })
+      })
+      .addCase(accountActions.login.fulfilled, (store, { payload }) => {
+        console.log(payload)
+      })
+      .addCase(accountActions.login.rejected, (store, { payload }) => {})
   }
 )
 

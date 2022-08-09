@@ -3,14 +3,17 @@ import isEqual from 'fast-deep-equal'
 
 interface ButtonProps {
   label: string
-  onClick: () => void
+  onClick?: () => void
+  disabled?: boolean
 }
 
 const Button: React.FC<ButtonProps> = (props) => {
-  const { label, onClick } = props
+  const { label, onClick, disabled } = props
 
   const handleClick = React.useCallback(() => {
-    onClick()
+    if (onClick) {
+      onClick()
+    }
   }, [])
 
   return (
