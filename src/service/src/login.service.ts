@@ -8,11 +8,13 @@ const login = async (form: LoginForm): Promise<LoginResult> => {
       data: form,
     })
     .then((res) => {
-      console.log(res)
       return res.data
+    })
+    .catch((err) => {
+      return err
     })
 }
 
-export const Service = {
+export const LoginService = {
   login,
 }

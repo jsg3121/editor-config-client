@@ -36,7 +36,9 @@ const accountReducer = createReducer<AccountStateTypes>(
         })
       })
       .addCase(accountActions.login.fulfilled, (store, { payload }) => {
-        console.log(payload)
+        return produce(store, (draft) => {
+          draft.isLoading = false
+        })
       })
       .addCase(accountActions.login.rejected, (store, { payload }) => {})
   }
