@@ -1,5 +1,6 @@
 import React from 'react'
 import isEqual from 'fast-deep-equal'
+import { Path, UseFormRegister } from 'react-hook-form'
 
 interface TextProps {
   type: 'text' | 'password'
@@ -7,10 +8,22 @@ interface TextProps {
   inputSize: 'large' | 'medium' | 'small'
   disabled?: boolean
   value?: string
+  label: Path<LoginRequestForm>
+  register: UseFormRegister<LoginRequestForm> | (() => void)
+  required: boolean
 }
 
 const Text: React.FC<TextProps> = (props) => {
-  const { type, value, mode, inputSize, disabled = false } = props
+  const {
+    type,
+    value,
+    mode,
+    inputSize,
+    disabled = false,
+    label,
+    register,
+    required,
+  } = props
 
   return (
     <input
@@ -18,6 +31,7 @@ const Text: React.FC<TextProps> = (props) => {
       className={`input-text__mode--${mode} input-text__size--${inputSize}`}
       disabled={disabled}
       defaultValue={value}
+      {...register(label, { required })}
     />
   )
 }

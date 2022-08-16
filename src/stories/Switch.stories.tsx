@@ -4,6 +4,13 @@ import { Switch as SwitchComponent } from '../component'
 export default {
   title: 'Input/Switch',
   component: SwitchComponent,
+  argTypes: {
+    onChange: {
+      table: {
+        disable: true,
+      },
+    },
+  },
 } as ComponentMeta<typeof SwitchComponent>
 
 const Template: ComponentStory<typeof SwitchComponent> = (props) => (

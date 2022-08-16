@@ -1,11 +1,15 @@
 import React from 'react'
 import isEqual from 'fast-deep-equal'
+import { Path, UseFormRegister } from 'react-hook-form'
 
 interface ChekboxProps {
-  label: string
+  description: string
+  label: Path<LoginRequestForm>
   value: string
-  disabled: boolean
-  checked: boolean
+  disabled?: boolean
+  checked?: boolean
+  register: UseFormRegister<LoginRequestForm> | (() => void)
+  required: boolean
 }
 
 const CheckSVG = () => (
@@ -15,34 +19,40 @@ const CheckSVG = () => (
   </svg>
 )
 
-const Chekbox: React.FC<ChekboxProps> = (props) => {
-  const { value, label, disabled, checked } = props
+const Checkbox: React.FC<ChekboxProps> = (props) => {
+  const {
+    value,
+    label,
+    disabled = false,
+    checked = false,
+    description,
+    register,
+    required,
+  } = props
 
   return (
-    <>
-      <div
-        className={[
-          'input-checkbox',
-          disabled ? 'input-checkbox--disabled' : '',
-        ].join(' ')}
-      >
-        <input
-          id={value}
-          type="checkbox"
-          className="input-checkbox__checked"
-          defaultChecked={checked}
-          disabled={disabled}
-          value={value}
-        />
-        <label htmlFor={value} className={'input-checkbox__label'}>
-          <div>
-            <CheckSVG />
-          </div>
-          {label}
-        </label>
-      </div>
-    </>
+    <div
+      className={[
+        'input-checkbox',
+        disabled ? 'input-checkbox--disabled' : '',
+      ].join(' ')}
+    >
+      <input
+        id={value}
+        type="checkbox"
+        className="input-checkbox__checked"
+        defaultChecked={checked}
+        disabled={disabled}
+        {...register(label, { required })}
+      />
+      <label htmlFor={value} className={'input-checkbox__label'}>
+        <div>
+          <CheckSVG />
+        </div>
+        {description}
+      </label>
+    </div>
   )
 }
 
-export default React.memo(Chekbox, isEqual)
+export default React.memo(Checkbox, isEqual)

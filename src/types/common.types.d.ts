@@ -15,6 +15,49 @@ declare global {
     createAt: Date
     updateAt: Date
   }
+
+  interface LoginRequestForm {
+    email: string
+    password: string
+    isAutoLogin: boolean
+  }
+
+  type LoginResult = {
+    status: number
+    description: string
+    data: {
+      isLogin: boolean
+      accessToken: string
+      accessTokenExp: string
+      refreshToken: string
+      refreshTokenExp: string
+      email: string
+      name: string
+    }
+  }
+
+  type LogoutResult = {
+    isLogin: boolean
+  }
+
+  type TokenRequsetForm = {
+    accessToken: string
+    refreshToken: string
+  }
+
+  type TokenResult = {
+    status: number
+    description: string
+    data: {
+      isLogin: boolean
+      newAccessToken?: string
+      newAccessTokenExp?: string
+      newRefreshToken?: string
+      newRefreshTokenExp?: string
+      email: string
+      name: string
+    }
+  }
 }
 
 export default {}

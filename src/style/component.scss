@@ -1,5 +1,11 @@
 .input-text__size--large {
   @apply w-full h-8 p-2 border border-solid box-border rounded-md transition-colors;
+
+  &:disabled {
+    &:hover {
+      @apply border;
+    }
+  }
 }
 
 .input-text__size--medium {
@@ -12,8 +18,14 @@
   }
 }
 
-.input__size--small {
+.input-text__size--small {
   @apply w-1/4  h-8 p-2 border box-border border-solid rounded-md transition-colors;
+
+  &:disabled {
+    &:hover {
+      @apply border;
+    }
+  }
 }
 
 .input-text__mode--primary {
@@ -33,7 +45,7 @@
 }
 
 .input-checkbox {
-  @apply flex items-center mb-4;
+  @apply flex items-center;
 
   &:hover {
     .input-checkbox__label {
@@ -190,4 +202,8 @@
     content: '';
     @apply w-5 h-5 bg-gray-100 rounded-full absolute top-0 left-0 transition-transform translate-x-0;
   }
+}
+
+.button {
+  @apply w-full h-12 bg-primary-600 text-gray-200 font-bold rounded-lg shadow-primary-800 shadow-sm hover:bg-primary-700 active:bg-primary-800;
 }

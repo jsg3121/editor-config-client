@@ -1,9 +1,5 @@
 import { combineReducers } from '@reduxjs/toolkit'
-import account, { AccountStateTypes } from './src/account.reducer'
-
-export type RootState = {
-  account: AccountStateTypes
-}
+import account from './src/account.reducer'
 
 const rootReducer = combineReducers({
   account,
