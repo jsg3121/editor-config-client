@@ -1,6 +1,7 @@
-import { createReducer } from '@reduxjs/toolkit'
+import { createReducer, isAnyOf } from '@reduxjs/toolkit'
 import produce from 'immer'
-import { accountActions } from '../../action'
+import { TokenService } from '../../../../service'
+import { accountActions, tokenActions } from '../../action'
 
 export type AccountStateTypes = {
   isLoading: boolean
@@ -30,17 +31,77 @@ const accountReducer = createReducer<AccountStateTypes>(
   accountState,
   (builder) => {
     builder
-      .addCase(accountActions.login.pending, (store, _) => {
-        return produce(store, (draft) => {
-          draft.isLoading = true
-        })
-      })
       .addCase(accountActions.login.fulfilled, (store, { payload }) => {
         return produce(store, (draft) => {
-          draft.isLoading = false
+          if (payload.status === 200) {
+            draft.isLoading = false
+            draft.isLogin = payload.data.isLogin
+            draft.accessToken = payload.data.accessToken
+            draft.refreshToken = payload.data.refreshToken
+            draft.accessTokenExp = payload.data.accessTokenExp
+            draft.refreshTokenExp = payload.data.refreshTokenExp
+            draft.email = payload.data.email
+            draft.name = payload.data.name
+          } else {
+            draft.isLoading = false
+            draft.isLogin = payload.data.isLogin
+          }
         })
       })
-      .addCase(accountActions.login.rejected, (store, { payload }) => {})
+
+      .addCase(tokenActions.tokenCheck.fulfilled, (store, { payload }) => {
+        const [access, refresh] = TokenService.decryptToken()
+
+        return produce(store, (draft) => {
+          draft.isLoading = false
+          draft.isLogin = payload.data.isLogin
+          draft.email = payload.data.email
+          draft.name = payload.data.name
+          draft.accessToken = JSON.parse(access).accessToken
+          draft.accessTokenExp = JSON.parse(access).accessTokenExp
+          draft.refreshToken = JSON.parse(refresh).refreshToken
+          draft.refreshTokenExp = JSON.parse(refresh).refreshTokenExp
+        })
+      })
+      .addCase(accountActions.logout.fulfilled, (store, { payload }) => {
+        TokenService.removeToken()
+
+        return produce(store, (draft) => {
+          draft.isLogin = payload.isLogin
+          draft.isLoading = false
+          draft.email = ''
+          draft.name = ''
+          draft.accessToken = ''
+          draft.accessTokenExp = ''
+          draft.refreshToken = ''
+          draft.refreshTokenExp = ''
+        })
+      })
+      .addMatcher(
+        isAnyOf(
+          accountActions.login.pending,
+          tokenActions.tokenCheck.pending,
+          accountActions.logout.pending
+        ),
+        (store) => {
+          return produce(store, (draft) => {
+            draft.isLoading = true
+          })
+        }
+      )
+      .addMatcher(
+        isAnyOf(
+          accountActions.login.rejected,
+          tokenActions.tokenCheck.rejected,
+          accountActions.logout.rejected
+        ),
+        (store) => {
+          return produce(store, (draft) => {
+            draft.isLoading = false
+            draft.isLogin = false
+          })
+        }
+      )
   }
 )
 

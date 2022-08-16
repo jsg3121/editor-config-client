@@ -7,7 +7,6 @@ export const accountEpic: Epic = (action$, _) => {
     ofType('@@ACCOUNT/LOGIN/fulfilled'),
     map(({ payload }) => {
       TokenService.encrypToken(payload)
-
       return {
         type: '',
       }

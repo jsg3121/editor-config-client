@@ -10,14 +10,17 @@ const Login: React.FC = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<LoginForm>()
+  } = useForm<LoginRequestForm>()
 
   const { isLoading } = useSelector((store) => store.account)
   const dispatch = useDispatch()
 
-  const onSubmit: SubmitHandler<LoginForm> = React.useCallback((data) => {
-    dispatch(Actions.account.login(data))
-  }, [])
+  const onSubmit: SubmitHandler<LoginRequestForm> = React.useCallback(
+    (data) => {
+      dispatch(Actions.account.login(data))
+    },
+    []
+  )
 
   return (
     <>

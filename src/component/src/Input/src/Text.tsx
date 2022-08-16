@@ -8,8 +8,8 @@ interface TextProps {
   inputSize: 'large' | 'medium' | 'small'
   disabled?: boolean
   value?: string
-  label: Path<LoginForm>
-  register: UseFormRegister<LoginForm> | (() => void)
+  label: Path<LoginRequestForm>
+  register: UseFormRegister<LoginRequestForm> | (() => void)
   required: boolean
 }
 

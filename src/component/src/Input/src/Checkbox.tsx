@@ -4,11 +4,11 @@ import { Path, UseFormRegister } from 'react-hook-form'
 
 interface ChekboxProps {
   description: string
-  label: Path<LoginForm>
+  label: Path<LoginRequestForm>
   value: string
   disabled?: boolean
   checked?: boolean
-  register: UseFormRegister<LoginForm> | (() => void)
+  register: UseFormRegister<LoginRequestForm> | (() => void)
   required: boolean
 }
 
