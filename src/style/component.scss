@@ -207,3 +207,23 @@
 .button {
   @apply w-full h-12 bg-primary-600 text-gray-200 font-bold rounded-lg shadow-primary-800 shadow-sm hover:bg-primary-700 active:bg-primary-800;
 }
+
+.modal {
+  @apply w-screen h-screen fixed z-50 top-0 left-0;
+}
+
+.modal__dim {
+  @apply w-full h-full bg-gray-700/50 flex items-center justify-center;
+}
+
+.modal__container {
+  @apply w-96 h-auto bg-gray-100 rounded-lg p-7 flex flex-col justify-between;
+}
+
+.modal__container--text {
+  @apply w-full h-12 mb-8 text-center;
+
+  p {
+    @apply text-xl font-semibold;
+  }
+}

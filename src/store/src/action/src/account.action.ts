@@ -1,4 +1,4 @@
-import { createAsyncThunk } from '@reduxjs/toolkit'
+import { createAction, createAsyncThunk } from '@reduxjs/toolkit'
 import { LoginService } from '../../../../service'
 
 export const login = createAsyncThunk<LoginResult, LoginRequestForm>(
@@ -10,3 +10,5 @@ export const logout = createAsyncThunk<LogoutResult, void>(
   '@@ACCOUNT/LOGOUT',
   LoginService.logout
 )
+
+export const clear = createAction<void, '@@ACCOUNT/CLEAR'>('@@ACCOUNT/CLEAR')

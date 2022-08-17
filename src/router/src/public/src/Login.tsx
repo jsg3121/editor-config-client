@@ -1,7 +1,7 @@
 import isEqual from 'fast-deep-equal'
 import React from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import { Button, Input } from '../../../../component'
+import { Button, Input, Modal } from '../../../../component'
 import { Actions, useDispatch, useSelector } from '../../../../store'
 import '../../../../style/login.scss'
 
@@ -12,7 +12,7 @@ const Login: React.FC = () => {
     formState: { errors },
   } = useForm<LoginRequestForm>()
 
-  const { isLoading } = useSelector((store) => store.account)
+  const { isLoading, isError } = useSelector((store) => store.account)
   const dispatch = useDispatch()
 
   const onSubmit: SubmitHandler<LoginRequestForm> = React.useCallback(
@@ -21,6 +21,10 @@ const Login: React.FC = () => {
     },
     []
   )
+
+  const handleClickModal = React.useCallback(() => {
+    dispatch(Actions.account.clear())
+  }, [])
 
   return (
     <>
@@ -80,6 +84,7 @@ const Login: React.FC = () => {
           </form>
         </article>
       </section>
+      {isError && <Modal description={isError} onClick={handleClickModal} />}
     </>
   )
 }

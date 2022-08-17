@@ -13,6 +13,7 @@ export type AccountStateTypes = {
   accessTokenExp: string
   refreshToken: string
   refreshTokenExp: string
+  isError?: string
 }
 
 const accountState: AccountStateTypes = {
@@ -32,6 +33,7 @@ const accountReducer = createReducer<AccountStateTypes>(
   (builder) => {
     builder
       .addCase(accountActions.login.fulfilled, (store, { payload }) => {
+        console.log(payload)
         return produce(store, (draft) => {
           if (payload.status === 200) {
             draft.isLoading = false
@@ -45,10 +47,10 @@ const accountReducer = createReducer<AccountStateTypes>(
           } else {
             draft.isLoading = false
             draft.isLogin = payload.data.isLogin
+            draft.isError = payload.description
           }
         })
       })
-
       .addCase(tokenActions.tokenCheck.fulfilled, (store, { payload }) => {
         const [access, refresh] = TokenService.decryptToken()
 
@@ -69,6 +71,19 @@ const accountReducer = createReducer<AccountStateTypes>(
         return produce(store, (draft) => {
           draft.isLogin = payload.isLogin
           draft.isLoading = false
+          draft.email = ''
+          draft.name = ''
+          draft.accessToken = ''
+          draft.accessTokenExp = ''
+          draft.refreshToken = ''
+          draft.refreshTokenExp = ''
+        })
+      })
+      .addCase(accountActions.clear, (store) => {
+        return produce(store, (draft) => {
+          draft.isError = undefined
+          draft.isLoading = false
+          draft.isLogin = false
           draft.email = ''
           draft.name = ''
           draft.accessToken = ''
