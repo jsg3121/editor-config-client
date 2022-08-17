@@ -33,7 +33,6 @@ const accountReducer = createReducer<AccountStateTypes>(
   (builder) => {
     builder
       .addCase(accountActions.login.fulfilled, (store, { payload }) => {
-        console.log(payload)
         return produce(store, (draft) => {
           if (payload.status === 200) {
             draft.isLoading = false

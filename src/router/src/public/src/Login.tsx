@@ -80,7 +80,7 @@ const Login: React.FC = () => {
                 <p>비밀번호를 잊어버렸어요</p>
               </div>
             </div>
-            {!isLoading && <Button label="로그인" />}
+            <Button label="로그인" disabled={isLoading} />
           </form>
         </article>
       </section>

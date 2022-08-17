@@ -19,7 +19,13 @@ const Template: ComponentStory<typeof ButtonComponent> = (props) => {
   return <ButtonComponent {...props} />
 }
 
-export const Button = Template.bind({})
-Button.args = {
+export const Primary = Template.bind({})
+Primary.args = {
   label: 'Button',
+}
+
+export const Loading = Template.bind({})
+Loading.args = {
+  label: 'Button',
+  disabled: true,
 }
