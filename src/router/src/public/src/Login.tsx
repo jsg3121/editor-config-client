@@ -30,8 +30,15 @@ const Login: React.FC = () => {
     <>
       <section className="login__container">
         <article className="login__container--form">
-          <h1 className="form__title">Editor Config</h1>
-          <form onSubmit={handleSubmit(onSubmit)}>
+          <h1 className="form__title">
+            <span>Editor</span> Config
+          </h1>
+          <p className="form__title-sub">
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+            <br />
+            Dolores nemo, nihil sit culpa repellendus impedit
+          </p>
+          <form onSubmit={handleSubmit(onSubmit)} className="form__container">
             <div className="form__input">
               <div className="form__input-box">
                 <p className="form__input--label">Email</p>

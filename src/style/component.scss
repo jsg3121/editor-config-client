@@ -1,5 +1,5 @@
 .input-text__size--large {
-  @apply w-full h-8 p-2 border border-solid box-border rounded-md transition-colors;
+  @apply w-full h-10 p-2 border border-solid box-border rounded-md transition-colors;
 
   &:disabled {
     &:hover {
@@ -9,7 +9,7 @@
 }
 
 .input-text__size--medium {
-  @apply w-2/4  h-8 p-2 border box-border border-solid rounded-md transition-colors;
+  @apply w-2/4  h-9 p-2 border box-border border-solid rounded-md transition-colors;
 
   &:disabled {
     &:hover {
