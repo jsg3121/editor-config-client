@@ -101,7 +101,7 @@
 }
 
 .input-checkbox__label {
-  @apply text-sm ml-1 font-medium text-primary-500 flex items-center;
+  @apply text-sm ml-1 font-medium text-primary-500 hover:text-primary-700  flex items-center;
 
   div {
     @apply w-4 h-4 relative mr-2 border-solid border-gray-300 border-[2px] rounded box-content;

@@ -6,7 +6,9 @@ export const accountEpic: Epic = (action$, _) => {
   return action$.pipe(
     ofType('@@ACCOUNT/LOGIN/fulfilled'),
     map(({ payload }) => {
-      TokenService.encrypToken(payload)
+      if (payload.isAutoLogin === true) {
+        TokenService.encrypToken(payload)
+      }
       return {
         type: '',
       }

@@ -8,18 +8,20 @@ const login = async (form: LoginRequestForm): Promise<LoginResult> => {
       data: form,
     })
     .then((res) => {
-      return res.data
+      return {
+        isAutoLogin: form.isAutoLogin,
+        ...res.data,
+      }
     })
 }
 
-const logout = async () => {
-  const token = localStorage.getItem('editor_config_access_tk')
+const logout = async (form: LogoutRequestForm) => {
   return await http
     .request({
       url: 'http://localhost:4000/api/account/logout',
       method: 'POST',
       data: {
-        accessToken: token,
+        accessToken: form,
       },
     })
     .then((res) => res.data)

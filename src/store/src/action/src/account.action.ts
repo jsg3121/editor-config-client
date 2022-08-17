@@ -6,7 +6,7 @@ export const login = createAsyncThunk<LoginResult, LoginRequestForm>(
   LoginService.login
 )
 
-export const logout = createAsyncThunk<LogoutResult, void>(
+export const logout = createAsyncThunk<LogoutResult, LogoutRequestForm>(
   '@@ACCOUNT/LOGOUT',
   LoginService.logout
 )

@@ -4,12 +4,12 @@ import { Actions, useDispatch, useSelector } from '../../../../store'
 import { Button } from '../../../../component'
 
 const Main: React.FC = () => {
-  const { name } = useSelector((store) => store.account)
+  const { name, accessToken } = useSelector((store) => store.account)
 
   const dispatch = useDispatch()
 
   const handleClick = React.useCallback(() => {
-    dispatch(Actions.account.logout())
+    dispatch(Actions.account.logout(accessToken))
   }, [])
 
   return (

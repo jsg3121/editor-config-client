@@ -36,6 +36,8 @@ declare global {
     }
   }
 
+  type LogoutRequestForm = string
+
   type LogoutResult = {
     isLogin: boolean
   }
