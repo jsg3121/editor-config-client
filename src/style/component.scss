@@ -205,7 +205,19 @@
 }
 
 .button {
-  @apply w-full h-12 bg-primary-600 text-gray-200 font-bold rounded-lg shadow-primary-800 shadow-sm hover:bg-primary-700 active:bg-primary-800 disabled:bg-gray-500 disabled:text-gray-300;
+  @apply w-full h-12 font-bold rounded-lg  disabled:bg-gray-500 disabled:text-gray-300;
+}
+
+.button--default {
+  @apply bg-gray-100  text-gray-800 shadow-gray-200 shadow-sm hover:bg-gray-200 active:bg-gray-300 border-gray-300 border-2;
+}
+
+.button--danger {
+  @apply bg-error-500  text-gray-200 shadow-gray-300 shadow-sm hover:bg-error-600 active:bg-error-700;
+}
+
+.button--primary {
+  @apply bg-primary-600  text-gray-200 shadow-primary-800 shadow-sm hover:bg-primary-700 active:bg-primary-800;
 }
 
 .modal {

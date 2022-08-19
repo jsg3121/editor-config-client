@@ -6,22 +6,20 @@ import { Button, Input, Modal } from '../../../../component'
 import { Actions, useDispatch, useSelector } from '../../../../store'
 import '../../../../style/login.scss'
 
-const Login: React.FC = () => {
+const SignUp: React.FC = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormType<LoginRequestForm>>()
+  } = useForm<FormType<SignUpRequestForm>>()
 
   const { isLoading, isError } = useSelector((store) => store.account)
   const dispatch = useDispatch()
 
-  const onSubmit: SubmitHandler<FormType<LoginRequestForm>> = React.useCallback(
-    (data) => {
+  const onSubmit: SubmitHandler<FormType<SignUpRequestForm>> =
+    React.useCallback((data) => {
       dispatch(Actions.account.login(data))
-    },
-    []
-  )
+    }, [])
 
   const handleClickModal = React.useCallback(() => {
     dispatch(Actions.account.clear())
@@ -31,19 +29,12 @@ const Login: React.FC = () => {
     <>
       <section className="login__container">
         <article className="login__container--form">
-          <h1 className="form__title">
-            <span>Editor</span> Config
-          </h1>
-          <p className="form__title-sub">
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-            <br />
-            Dolores nemo, nihil sit culpa repellendus impedit
-          </p>
+          <h1 className="form__title">회원 가입</h1>
           <form className="form__container" onSubmit={handleSubmit(onSubmit)}>
             <div className="form__input">
               <div className="form__input-box">
                 <p className="form__input--label">Email</p>
-                <Input.Text
+                <Input.Text<SignUpRequestForm>
                   type="text"
                   inputSize="large"
                   mode="primary"
@@ -54,6 +45,22 @@ const Login: React.FC = () => {
                 {errors.email && (
                   <span className="form__input--error">
                     이메일을 입력해주세요
+                  </span>
+                )}
+              </div>
+              <div className="form__input-box">
+                <p className="form__input--label">Name</p>
+                <Input.Text
+                  type="text"
+                  inputSize="large"
+                  mode="primary"
+                  label="email"
+                  register={register}
+                  required
+                />
+                {errors.email && (
+                  <span className="form__input--error">
+                    이름을 입력해주세요
                   </span>
                 )}
               </div>
@@ -74,29 +81,16 @@ const Login: React.FC = () => {
                 )}
               </div>
             </div>
-            <div className="form__input-options">
-              <div className="form__input-checkbox--remember">
-                <Input.Checkbox
-                  value="auto_login"
-                  description="자동 로그인"
-                  label="isAutoLogin"
-                  register={register}
-                  required={false}
-                />
-              </div>
-              <div className="form__link--foget-password">
-                <p>비밀번호를 잊어버렸어요</p>
-              </div>
-            </div>
+            <div className="form__input-options"></div>
             <div className="form__button">
               <Button
-                label="로그인"
+                label="가입하기"
                 disabled={isLoading}
                 type="submit"
                 buttonType="primary"
               />
-              <Link to="/signup">
-                <Button label="회원 가입" type="button" buttonType="default" />
+              <Link to="/login" replace>
+                <Button label="뒤로가기" type="button" buttonType="default" />
               </Link>
             </div>
           </form>
@@ -108,4 +102,4 @@ const Login: React.FC = () => {
   )
 }
 
-export default React.memo(Login, isEqual)
+export default React.memo(SignUp, isEqual)

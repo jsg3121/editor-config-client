@@ -2,13 +2,13 @@ import React from 'react'
 import isEqual from 'fast-deep-equal'
 import { Path, UseFormRegister } from 'react-hook-form'
 
-interface ChekboxProps {
+interface ChekboxProps<T> {
   description: string
   label: Path<LoginRequestForm>
   value: string
   disabled?: boolean
   checked?: boolean
-  register: UseFormRegister<LoginRequestForm> | (() => void)
+  register: UseFormRegister<FormType<T>>
   required: boolean
 }
 
@@ -19,7 +19,7 @@ const CheckSVG = () => (
   </svg>
 )
 
-const Checkbox: React.FC<ChekboxProps> = (props) => {
+export const Checkbox = <T extends unknown>(props: ChekboxProps<T>) => {
   const {
     value,
     label,
@@ -54,5 +54,3 @@ const Checkbox: React.FC<ChekboxProps> = (props) => {
     </div>
   )
 }
-
-export default React.memo(Checkbox, isEqual)

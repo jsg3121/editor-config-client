@@ -1,10 +1,11 @@
-import React from 'react'
 import isEqual from 'fast-deep-equal'
+import React from 'react'
 
-interface ButtonProps {
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   label: string
   onClick?: () => void
   disabled?: boolean
+  buttonType: 'primary' | 'danger' | 'default'
 }
 
 const Loading = () => {
@@ -29,7 +30,7 @@ const Loading = () => {
 }
 
 const Button: React.FC<ButtonProps> = (props) => {
-  const { label, onClick, disabled } = props
+  const { label, onClick, disabled, type, buttonType } = props
 
   const handleClick = React.useCallback(() => {
     if (onClick) {
@@ -38,7 +39,12 @@ const Button: React.FC<ButtonProps> = (props) => {
   }, [])
 
   return (
-    <button className="button" onClick={handleClick} disabled={disabled}>
+    <button
+      className={['button', `button--${buttonType}`].join(' ')}
+      onClick={handleClick}
+      disabled={disabled}
+      type={type}
+    >
       {disabled && Loading()}
       {label}
     </button>

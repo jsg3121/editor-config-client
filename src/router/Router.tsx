@@ -3,7 +3,7 @@ import React from 'react'
 import { Navigate, Route, Routes } from 'react-router-dom'
 import { Actions, useDispatch, useSelector } from '../store'
 import { Main } from './src/private'
-import { Login } from './src/public'
+import { Login, SignUp } from './src/public'
 
 const Router: React.FC = () => {
   const { isLogin } = useSelector((store) => store.account)
@@ -33,6 +33,7 @@ const Router: React.FC = () => {
         <>
           <Routes>
             <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<SignUp />} />
             <Route path="*" element={<Navigate to={'/login'} replace />} />
           </Routes>
         </>

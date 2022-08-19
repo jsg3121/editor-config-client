@@ -2,18 +2,18 @@ import React from 'react'
 import isEqual from 'fast-deep-equal'
 import { Path, UseFormRegister } from 'react-hook-form'
 
-interface TextProps {
+interface TextProps<T> {
   type: 'text' | 'password'
   mode: 'edit' | 'primary' | 'error' | 'success'
   inputSize: 'large' | 'medium' | 'small'
   disabled?: boolean
   value?: string
-  label: Path<LoginRequestForm>
-  register: UseFormRegister<LoginRequestForm> | (() => void)
+  label: Path<FormType<T>>
+  register: UseFormRegister<FormType<T>>
   required: boolean
 }
 
-const Text: React.FC<TextProps> = (props) => {
+export const Text = <T extends unknown>(props: TextProps<T>) => {
   const {
     type,
     value,
@@ -35,5 +35,3 @@ const Text: React.FC<TextProps> = (props) => {
     />
   )
 }
-
-export default React.memo(Text, isEqual)

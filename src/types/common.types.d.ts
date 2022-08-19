@@ -36,6 +36,12 @@ declare global {
     }
   }
 
+  type SignUpRequestForm = {
+    email: string
+    name: string
+    password: string
+  }
+
   type LogoutRequestForm = string
 
   type LogoutResult = {
@@ -59,6 +65,10 @@ declare global {
       email: string
       name: string
     }
+  }
+
+  interface FormType<T> extends LoginRequestForm, SignUpRequestForm {
+    [K in T]: T[K]
   }
 }
 
