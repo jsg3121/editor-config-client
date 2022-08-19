@@ -11,15 +11,17 @@ const SignUp: React.FC = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormType<SignUpRequestForm>>()
+  } = useForm<SignUpRequestForm>()
 
   const { isLoading, isError } = useSelector((store) => store.account)
   const dispatch = useDispatch()
 
-  const onSubmit: SubmitHandler<FormType<SignUpRequestForm>> =
-    React.useCallback((data) => {
-      dispatch(Actions.account.login(data))
-    }, [])
+  const onSubmit: SubmitHandler<SignUpRequestForm> = React.useCallback(
+    (data) => {
+      // dispatch(Actions.account.login(data))
+    },
+    []
+  )
 
   const handleClickModal = React.useCallback(() => {
     dispatch(Actions.account.clear())
@@ -34,7 +36,7 @@ const SignUp: React.FC = () => {
             <div className="form__input">
               <div className="form__input-box">
                 <p className="form__input--label">Email</p>
-                <Input.Text<SignUpRequestForm>
+                <Input.Text
                   type="text"
                   inputSize="large"
                   mode="primary"

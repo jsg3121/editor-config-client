@@ -8,12 +8,12 @@ interface TextProps<T> {
   inputSize: 'large' | 'medium' | 'small'
   disabled?: boolean
   value?: string
-  label: Path<FormType<T>>
-  register: UseFormRegister<FormType<T>>
+  label: Path<T>
+  register: UseFormRegister<T>
   required: boolean
 }
 
-export const Text = <T extends unknown>(props: TextProps<T>) => {
+const Text = <T extends unknown>(props: TextProps<T>) => {
   const {
     type,
     value,
@@ -35,3 +35,4 @@ export const Text = <T extends unknown>(props: TextProps<T>) => {
     />
   )
 }
+export default React.memo(Text, isEqual)

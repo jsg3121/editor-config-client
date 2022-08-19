@@ -66,10 +66,6 @@ declare global {
       name: string
     }
   }
-
-  interface FormType<T> extends LoginRequestForm, SignUpRequestForm {
-    [K in T]: T[K]
-  }
 }
 
 export default {}
