@@ -42,6 +42,11 @@ declare global {
     password: string
   }
 
+  type SignUpResult = {
+    status: number
+    description: string
+  }
+
   type LogoutRequestForm = string
 
   type LogoutResult = {

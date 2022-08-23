@@ -18,7 +18,7 @@ const SignUp: React.FC = () => {
 
   const onSubmit: SubmitHandler<SignUpRequestForm> = React.useCallback(
     (data) => {
-      // dispatch(Actions.account.login(data))
+      dispatch(Actions.account.signup(data))
     },
     []
   )
@@ -56,7 +56,7 @@ const SignUp: React.FC = () => {
                   type="text"
                   inputSize="large"
                   mode="primary"
-                  label="email"
+                  label="name"
                   register={register}
                   required
                 />

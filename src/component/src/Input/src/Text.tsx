@@ -1,5 +1,3 @@
-import React from 'react'
-import isEqual from 'fast-deep-equal'
 import { Path, UseFormRegister } from 'react-hook-form'
 
 interface TextProps<T> {
@@ -13,7 +11,7 @@ interface TextProps<T> {
   required: boolean
 }
 
-const Text = <T extends unknown>(props: TextProps<T>) => {
+export const Text = <T extends unknown>(props: TextProps<T>) => {
   const {
     type,
     value,
@@ -35,4 +33,3 @@ const Text = <T extends unknown>(props: TextProps<T>) => {
     />
   )
 }
-export default React.memo(Text, isEqual)

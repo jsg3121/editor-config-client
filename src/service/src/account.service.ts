@@ -15,6 +15,19 @@ const login = async (form: LoginRequestForm): Promise<LoginResult> => {
     })
 }
 
+const signup = async (form: SignUpRequestForm): Promise<SignUpResult> => {
+  return await http
+    .request({
+      url: 'http://localhost:4000/api/account/signup',
+      method: 'POST',
+      data: form,
+    })
+    .then((res) => {
+      console.log(res.data)
+      return res.data
+    })
+}
+
 const logout = async (form: LogoutRequestForm) => {
   return await http
     .request({
@@ -27,7 +40,8 @@ const logout = async (form: LogoutRequestForm) => {
     .then((res) => res.data)
 }
 
-export const LoginService = {
+export const AccountService = {
   login,
   logout,
+  signup,
 }
