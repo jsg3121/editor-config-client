@@ -8,7 +8,7 @@ interface ChekboxProps<T> {
   value: string
   disabled?: boolean
   checked?: boolean
-  register: UseFormRegister<T>
+  register: UseFormRegister<T> | (() => void)
   required: boolean
 }
 

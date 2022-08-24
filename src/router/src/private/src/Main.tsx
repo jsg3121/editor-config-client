@@ -15,7 +15,7 @@ const Main: React.FC = () => {
   return (
     <div>
       <h1>{name}</h1>
-      <Button label="로그아웃" onClick={handleClick} />
+      <Button label="로그아웃" onClick={handleClick} buttonType="primary" />
     </div>
   )
 }

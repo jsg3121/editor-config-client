@@ -21,7 +21,7 @@ const Modal: React.FC<ModalProps> = (props) => {
           <div className="modal__container--text">
             <p>{description}</p>
           </div>
-          <Button label="확인" onClick={handleClick} />
+          <Button label="확인" onClick={handleClick} buttonType="danger" />
         </div>
       </article>
     </section>

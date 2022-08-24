@@ -27,6 +27,10 @@ const SignUp: React.FC = () => {
     dispatch(Actions.account.clear())
   }, [])
 
+  const handleClickRoute = React.useCallback(() => {
+    dispatch(Actions.routerActions.push('/login'))
+  }, [])
+
   return (
     <>
       <section className="login__container">
@@ -36,7 +40,7 @@ const SignUp: React.FC = () => {
             <div className="form__input">
               <div className="form__input-box">
                 <p className="form__input--label">Email</p>
-                <Input.Text
+                <Input.Text<SignUpRequestForm>
                   type="text"
                   inputSize="large"
                   mode="primary"
@@ -52,7 +56,7 @@ const SignUp: React.FC = () => {
               </div>
               <div className="form__input-box">
                 <p className="form__input--label">Name</p>
-                <Input.Text
+                <Input.Text<SignUpRequestForm>
                   type="text"
                   inputSize="large"
                   mode="primary"
@@ -68,7 +72,7 @@ const SignUp: React.FC = () => {
               </div>
               <div className="form__input-box">
                 <p className="form__input--label">Password</p>
-                <Input.Text
+                <Input.Text<SignUpRequestForm>
                   type="password"
                   inputSize="large"
                   mode="primary"
@@ -91,9 +95,12 @@ const SignUp: React.FC = () => {
                 type="submit"
                 buttonType="primary"
               />
-              <Link to="/login" replace>
-                <Button label="뒤로가기" type="button" buttonType="default" />
-              </Link>
+              <Button
+                label="뒤로가기"
+                type="button"
+                buttonType="default"
+                onClick={handleClickRoute}
+              />
             </div>
           </form>
         </article>

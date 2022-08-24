@@ -1,4 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit'
+import { routerMiddleware } from 'connected-react-router'
 import {
   TypedUseSelectorHook,
   useDispatch as useReduxDispatch,
@@ -7,14 +8,18 @@ import {
 import { createEpicMiddleware } from 'redux-observable'
 import rootActions from './src/action'
 import rootEpic from './src/epic'
-import rootReducer from './src/reducer'
+import rootReducer, { history as initHistory } from './src/reducer'
+
+export const history = initHistory
 
 const epicMiddleware = createEpicMiddleware()
 
 const store = configureStore({
   reducer: rootReducer,
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(epicMiddleware),
+    getDefaultMiddleware()
+      .concat(routerMiddleware(history))
+      .concat(epicMiddleware),
   devTools: process.env.NODE_ENV !== 'production',
 })
 

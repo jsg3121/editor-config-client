@@ -27,6 +27,10 @@ const Login: React.FC = () => {
     dispatch(Actions.account.clear())
   }, [])
 
+  const handleClickRoute = React.useCallback(() => {
+    dispatch(Actions.routerActions.push('/signup'))
+  }, [])
+
   return (
     <>
       <section className="login__container">
@@ -43,7 +47,7 @@ const Login: React.FC = () => {
             <div className="form__input">
               <div className="form__input-box">
                 <p className="form__input--label">Email</p>
-                <Input.Text
+                <Input.Text<LoginRequestForm>
                   type="text"
                   inputSize="large"
                   mode="primary"
@@ -59,7 +63,7 @@ const Login: React.FC = () => {
               </div>
               <div className="form__input-box">
                 <p className="form__input--label">Password</p>
-                <Input.Text
+                <Input.Text<LoginRequestForm>
                   type="password"
                   inputSize="large"
                   mode="primary"
@@ -76,7 +80,7 @@ const Login: React.FC = () => {
             </div>
             <div className="form__input-options">
               <div className="form__input-checkbox--remember">
-                <Input.Checkbox
+                <Input.Checkbox<LoginRequestForm>
                   value="auto_login"
                   description="자동 로그인"
                   label="isAutoLogin"
@@ -95,9 +99,12 @@ const Login: React.FC = () => {
                 type="submit"
                 buttonType="primary"
               />
-              <Link to="/signup">
-                <Button label="회원 가입" type="button" buttonType="default" />
-              </Link>
+              <Button
+                label="회원 가입"
+                type="button"
+                buttonType="default"
+                onClick={handleClickRoute}
+              />
             </div>
           </form>
         </article>

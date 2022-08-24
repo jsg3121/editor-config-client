@@ -7,7 +7,7 @@ interface TextProps<T> {
   disabled?: boolean
   value?: string
   label: Path<T>
-  register: UseFormRegister<T>
+  register: UseFormRegister<T> | (() => void)
   required: boolean
 }
 
