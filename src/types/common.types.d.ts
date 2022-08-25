@@ -71,6 +71,11 @@ declare global {
       name: string
     }
   }
+
+  type ValidCheckForm = {
+    type: string
+    value: string
+  }
 }
 
 export default {}

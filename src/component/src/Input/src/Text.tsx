@@ -1,4 +1,5 @@
 import { Path, UseFormRegister } from 'react-hook-form'
+import { useCallback } from 'react'
 
 interface TextProps<T> {
   type: 'text' | 'password'
@@ -7,8 +8,9 @@ interface TextProps<T> {
   disabled?: boolean
   value?: string
   label: Path<T>
-  register: UseFormRegister<T> | (() => void)
   required: boolean
+  register: UseFormRegister<T> | (() => void)
+  onChange?: (val: string, type: Path<T> | string) => void
 }
 
 export const Text = <T extends unknown>(props: TextProps<T>) => {
@@ -19,9 +21,16 @@ export const Text = <T extends unknown>(props: TextProps<T>) => {
     inputSize,
     disabled = false,
     label,
-    register,
     required,
+    register,
+    onChange,
   } = props
+
+  const handleChange = useCallback((e: { target: { value: string } }) => {
+    if (onChange) {
+      onChange(e.target.value, label)
+    }
+  }, [])
 
   return (
     <input
@@ -30,6 +39,7 @@ export const Text = <T extends unknown>(props: TextProps<T>) => {
       disabled={disabled}
       defaultValue={value}
       {...register(label, { required })}
+      onChange={handleChange}
     />
   )
 }

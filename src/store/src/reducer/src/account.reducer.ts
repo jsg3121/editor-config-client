@@ -96,6 +96,9 @@ const accountReducer = createReducer<AccountStateTypes>(
           draft.refreshTokenExp = ''
         })
       })
+      .addCase(accountActions.validCheck, (store) => {
+        return
+      })
       .addMatcher(
         isAnyOf(
           accountActions.login.pending,

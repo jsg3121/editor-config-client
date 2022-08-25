@@ -16,4 +16,8 @@ export const logout = createAsyncThunk<LogoutResult, LogoutRequestForm>(
   AccountService.logout
 )
 
+export const validCheck = createAction<ValidCheckForm, '@@ACCOUNT/VALIDCHECK'>(
+  '@@ACCOUNT/VALIDCHECK'
+)
+
 export const clear = createAction<void, '@@ACCOUNT/CLEAR'>('@@ACCOUNT/CLEAR')

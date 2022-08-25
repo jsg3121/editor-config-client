@@ -22,6 +22,19 @@ const Template: ComponentStory<typeof ButtonComponent> = (props) => {
 export const Primary = Template.bind({})
 Primary.args = {
   label: 'Button',
+  buttonType: 'primary',
+}
+
+export const Default = Template.bind({})
+Default.args = {
+  label: 'Button',
+  buttonType: 'default',
+}
+
+export const Danger = Template.bind({})
+Danger.args = {
+  label: 'Button',
+  buttonType: 'danger',
 }
 
 export const Loading = Template.bind({})

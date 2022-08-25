@@ -1,7 +1,6 @@
 import isEqual from 'fast-deep-equal'
 import React from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import { Link } from 'react-router-dom'
 import { Button, Input, Modal } from '../../../../component'
 import { Actions, useDispatch, useSelector } from '../../../../store'
 import '../../../../style/login.scss'
@@ -31,6 +30,10 @@ const SignUp: React.FC = () => {
     dispatch(Actions.routerActions.push('/login'))
   }, [])
 
+  const handleChange = React.useCallback((value: string, type: string) => {
+    dispatch(Actions.account.validCheck({ type, value }))
+  }, [])
+
   return (
     <>
       <section className="login__container">
@@ -46,6 +49,7 @@ const SignUp: React.FC = () => {
                   mode="primary"
                   label="email"
                   register={register}
+                  onChange={handleChange}
                   required
                 />
                 {errors.email && (
@@ -62,6 +66,7 @@ const SignUp: React.FC = () => {
                   mode="primary"
                   label="name"
                   register={register}
+                  onChange={handleChange}
                   required
                 />
                 {errors.email && (

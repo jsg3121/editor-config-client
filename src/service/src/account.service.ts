@@ -40,8 +40,21 @@ const logout = async (form: LogoutRequestForm) => {
     .then((res) => res.data)
 }
 
+const validCheck = async (form: ValidCheckForm) => {
+  return await http
+    .request({
+      url: `http://localhost:4000/api/account/valid/${form.type}`,
+      method: 'POST',
+      data: { email: form.value },
+    })
+    .then((res) => {
+      return res.data
+    })
+}
+
 export const AccountService = {
   login,
   logout,
   signup,
+  validCheck,
 }
