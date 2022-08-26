@@ -12,29 +12,31 @@ const LOCAL_REFRESH_NAME = 'editor_config_refresh_tk'
  */
 const encrypToken = (responseData: LoginResult) => {
   const { data } = responseData
-  localStorage.setItem(
-    LOCAL_ACCESS_NAME,
-    CryptoJs.AES.encrypt(
-      `{
+  if (data.accessToken && data.refreshToken) {
+    localStorage.setItem(
+      LOCAL_ACCESS_NAME,
+      CryptoJs.AES.encrypt(
+        `{
         "date":"${Date.now()}",
         "accessToken":"${data.accessToken}",    
         "accessTokenExp":"${data.accessTokenExp}"
        }`,
-      CRYPTO_SECRET_KEY
-    ).toString()
-  )
+        CRYPTO_SECRET_KEY
+      ).toString()
+    )
 
-  localStorage.setItem(
-    LOCAL_REFRESH_NAME,
-    CryptoJs.AES.encrypt(
-      `{
+    localStorage.setItem(
+      LOCAL_REFRESH_NAME,
+      CryptoJs.AES.encrypt(
+        `{
         "date":"${Date.now()}",
         "refreshToken":"${data.refreshToken}",    
         "refreshTokenExp":"${data.refreshTokenExp}"
        }`,
-      CRYPTO_SECRET_KEY
-    ).toString()
-  )
+        CRYPTO_SECRET_KEY
+      ).toString()
+    )
+  }
 }
 
 /**

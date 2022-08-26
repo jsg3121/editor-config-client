@@ -1,5 +1,5 @@
 .input-text__size--large {
-  @apply w-full h-8 p-2 border border-solid box-border rounded-md transition-colors;
+  @apply w-full h-10 p-2 border border-solid box-border rounded-md transition-colors;
 
   &:disabled {
     &:hover {
@@ -9,7 +9,7 @@
 }
 
 .input-text__size--medium {
-  @apply w-2/4  h-8 p-2 border box-border border-solid rounded-md transition-colors;
+  @apply w-2/4  h-9 p-2 border box-border border-solid rounded-md transition-colors;
 
   &:disabled {
     &:hover {
@@ -101,7 +101,7 @@
 }
 
 .input-checkbox__label {
-  @apply text-sm ml-1 font-medium text-primary-500 flex items-center;
+  @apply text-sm ml-1 font-medium text-primary-500 hover:text-primary-700  flex items-center;
 
   div {
     @apply w-4 h-4 relative mr-2 border-solid border-gray-300 border-[2px] rounded box-content;
@@ -205,5 +205,37 @@
 }
 
 .button {
-  @apply w-full h-12 bg-primary-600 text-gray-200 font-bold rounded-lg shadow-primary-800 shadow-sm hover:bg-primary-700 active:bg-primary-800;
+  @apply w-full h-12 font-bold rounded-lg  disabled:bg-gray-500 disabled:text-gray-300;
+}
+
+.button--default {
+  @apply bg-gray-100  text-gray-800 shadow-gray-200 shadow-sm hover:bg-gray-200 active:bg-gray-300 border-gray-300 border-2;
+}
+
+.button--danger {
+  @apply bg-error-500  text-gray-200 shadow-gray-300 shadow-sm hover:bg-error-600 active:bg-error-700;
+}
+
+.button--primary {
+  @apply bg-primary-600  text-gray-200 shadow-primary-800 shadow-sm hover:bg-primary-700 active:bg-primary-800;
+}
+
+.modal {
+  @apply w-screen h-screen fixed z-50 top-0 left-0;
+}
+
+.modal__dim {
+  @apply w-full h-full bg-gray-700/50 flex items-center justify-center;
+}
+
+.modal__container {
+  @apply w-96 h-auto bg-gray-100 rounded-lg p-7 flex flex-col justify-between;
+}
+
+.modal__container--text {
+  @apply w-full h-12 mb-8 text-center;
+
+  p {
+    @apply text-xl font-semibold;
+  }
 }

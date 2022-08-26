@@ -1,13 +1,25 @@
 .login__container {
-  @apply w-screen h-screen flex items-center justify-center;
+  @apply w-screen h-screen flex items-center justify-between;
 }
 
 .login__container--form {
-  @apply w-1/3 h-auto;
+  @apply w-2/5 h-full p-20 flex-shrink-0 flex flex-col justify-center;
 }
 
 .form__title {
-  @apply text-6xl text-center w-full mb-8 font-bold text-primary-600;
+  @apply w-full text-6xl text-left mb-6 font-bold text-primary-600;
+
+  span {
+    @apply text-primary-300;
+  }
+}
+
+.form__title-sub {
+  @apply w-full text-base text-left mb-4 font-bold text-primary-300;
+}
+
+.form__container {
+  @apply w-4/5 mt-10;
 }
 
 .form__input {
@@ -27,5 +39,24 @@
 }
 
 .form__input-options {
-  @apply flex items-center mb-4 w-full justify-between;
+  @apply flex items-center my-8 w-full justify-between;
+}
+
+.form__link--foget-password {
+  p {
+    @apply text-sm text-gray-400;
+  }
+}
+
+.form__button {
+  @apply w-full flex items-center justify-between;
+
+  & > button,
+  & > a {
+    @apply w-52;
+  }
+}
+
+.login__background {
+  @apply w-full h-full bg-primary-500;
 }

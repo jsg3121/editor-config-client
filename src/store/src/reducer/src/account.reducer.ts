@@ -13,6 +13,7 @@ export type AccountStateTypes = {
   accessTokenExp: string
   refreshToken: string
   refreshTokenExp: string
+  isError?: string
 }
 
 const accountState: AccountStateTypes = {
@@ -45,10 +46,10 @@ const accountReducer = createReducer<AccountStateTypes>(
           } else {
             draft.isLoading = false
             draft.isLogin = payload.data.isLogin
+            draft.isError = payload.description
           }
         })
       })
-
       .addCase(tokenActions.tokenCheck.fulfilled, (store, { payload }) => {
         const [access, refresh] = TokenService.decryptToken()
 
@@ -77,11 +78,30 @@ const accountReducer = createReducer<AccountStateTypes>(
           draft.refreshTokenExp = ''
         })
       })
+      .addCase(accountActions.signup.fulfilled, (store) => {
+        return produce(store, (draft) => {
+          draft.isLoading = false
+        })
+      })
+      .addCase(accountActions.clear, (store) => {
+        return produce(store, (draft) => {
+          draft.isError = undefined
+          draft.isLoading = false
+          draft.isLogin = false
+          draft.email = ''
+          draft.name = ''
+          draft.accessToken = ''
+          draft.accessTokenExp = ''
+          draft.refreshToken = ''
+          draft.refreshTokenExp = ''
+        })
+      })
       .addMatcher(
         isAnyOf(
           accountActions.login.pending,
           tokenActions.tokenCheck.pending,
-          accountActions.logout.pending
+          accountActions.logout.pending,
+          accountActions.signup.pending
         ),
         (store) => {
           return produce(store, (draft) => {
@@ -93,7 +113,8 @@ const accountReducer = createReducer<AccountStateTypes>(
         isAnyOf(
           accountActions.login.rejected,
           tokenActions.tokenCheck.rejected,
-          accountActions.logout.rejected
+          accountActions.logout.rejected,
+          accountActions.signup.rejected
         ),
         (store) => {
           return produce(store, (draft) => {

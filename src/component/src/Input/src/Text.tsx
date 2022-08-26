@@ -1,19 +1,20 @@
-import React from 'react'
-import isEqual from 'fast-deep-equal'
+import React, { useCallback } from 'react'
 import { Path, UseFormRegister } from 'react-hook-form'
+import isEqual from 'fast-deep-equal'
 
-interface TextProps {
+interface TextProps<T> {
   type: 'text' | 'password'
   mode: 'edit' | 'primary' | 'error' | 'success'
   inputSize: 'large' | 'medium' | 'small'
+  label: Path<T>
+  required: boolean
   disabled?: boolean
   value?: string
-  label: Path<LoginRequestForm>
-  register: UseFormRegister<LoginRequestForm> | (() => void)
-  required: boolean
+  register: UseFormRegister<T> | (() => void)
+  onChange?: (val: string) => void
 }
 
-const Text: React.FC<TextProps> = (props) => {
+export const Text = <T extends unknown>(props: TextProps<T>) => {
   const {
     type,
     value,
@@ -21,9 +22,16 @@ const Text: React.FC<TextProps> = (props) => {
     inputSize,
     disabled = false,
     label,
-    register,
     required,
+    register,
+    onChange,
   } = props
+
+  const handleChange = useCallback((e: { target: { value: string } }) => {
+    if (onChange) {
+      onChange(e.target.value)
+    }
+  }, [])
 
   return (
     <input
@@ -32,8 +40,7 @@ const Text: React.FC<TextProps> = (props) => {
       disabled={disabled}
       defaultValue={value}
       {...register(label, { required })}
+      onChange={handleChange}
     />
   )
 }
-
-export default React.memo(Text, isEqual)

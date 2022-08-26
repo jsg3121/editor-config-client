@@ -1,4 +1,6 @@
-export { Input } from './src/Input'
+export { Input } from './src/input'
 export { Select } from './src/select'
 export { Switch } from './src/switch'
 export { Button } from './src/button'
+export { Modal } from './src/modal'
+export { Form } from './src/form'

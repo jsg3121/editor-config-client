@@ -36,6 +36,19 @@ declare global {
     }
   }
 
+  type SignUpRequestForm = {
+    email: string
+    name: string
+    password: string
+  }
+
+  type SignUpResult = {
+    status: number
+    description: string
+  }
+
+  type LogoutRequestForm = string
+
   type LogoutResult = {
     isLogin: boolean
   }
@@ -57,6 +70,11 @@ declare global {
       email: string
       name: string
     }
+  }
+
+  type ValidCheckForm = {
+    type: string
+    value: string
   }
 }
 
