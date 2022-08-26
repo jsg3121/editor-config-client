@@ -6,12 +6,12 @@ interface TextProps<T> {
   type: 'text' | 'password'
   mode: 'edit' | 'primary' | 'error' | 'success'
   inputSize: 'large' | 'medium' | 'small'
-  disabled?: boolean
-  value?: string
   label: Path<T>
   required: boolean
+  disabled?: boolean
+  value?: string
   register: UseFormRegister<T> | (() => void)
-  onChange?: (val: string, type: Path<T> | string) => void
+  onChange?: (val: string) => void
 }
 
 export const Text = <T extends unknown>(props: TextProps<T>) => {
@@ -29,7 +29,7 @@ export const Text = <T extends unknown>(props: TextProps<T>) => {
 
   const handleChange = useCallback((e: { target: { value: string } }) => {
     if (onChange) {
-      onChange(e.target.value, label)
+      onChange(e.target.value)
     }
   }, [])
 

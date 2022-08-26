@@ -1,15 +1,19 @@
 import { useEffect, useState } from 'react'
-import { Dispatch, useDispatch } from '../../store'
 
-type DebounceType = (str: string, type: string) => void
+type DebounceType = (str: string) => void
 
 type UseDebounce = () => [string, DebounceType]
 
+/**
+ * info : form 입력값 debounce
+ * @author 장선규 jsg3121
+ * @returns [마지막 문자열, debounce 함수 ]
+ */
 const useDebounce: UseDebounce = () => {
   const [value, setValue] = useState<string>('')
   const [keyword, setKeyword] = useState<string>('')
 
-  const debounce: DebounceType = (str, type) => {
+  const debounce: DebounceType = (str) => {
     setValue(str)
   }
 

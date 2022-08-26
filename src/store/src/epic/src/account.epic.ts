@@ -26,15 +26,3 @@ export const signupEpic: Epic = (action$, _) => {
     })
   )
 }
-
-export const validCheck: Epic = (action$, _) => {
-  return action$.pipe(
-    ofType('@@ACCOUNT/VALIDCHECK'),
-    debounceTime(1000),
-    map(({ payload }) => {
-      return {
-        type: '',
-      }
-    })
-  )
-}
