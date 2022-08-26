@@ -1,5 +1,6 @@
+import React, { useCallback } from 'react'
 import { Path, UseFormRegister } from 'react-hook-form'
-import { useCallback } from 'react'
+import isEqual from 'fast-deep-equal'
 
 interface TextProps<T> {
   type: 'text' | 'password'

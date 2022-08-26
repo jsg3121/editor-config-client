@@ -1,6 +1,6 @@
 import { Epic, ofType } from 'redux-observable'
-import { debounceTime, filter, map } from 'rxjs/operators'
-import { AccountService, TokenService } from '../../../../service'
+import { debounceTime, map } from 'rxjs/operators'
+import { TokenService } from '../../../../service'
 
 export const loginEpic: Epic = (action$, _) => {
   return action$.pipe(
@@ -32,7 +32,6 @@ export const validCheck: Epic = (action$, _) => {
     ofType('@@ACCOUNT/VALIDCHECK'),
     debounceTime(1000),
     map(({ payload }) => {
-      AccountService.validCheck(payload)
       return {
         type: '',
       }

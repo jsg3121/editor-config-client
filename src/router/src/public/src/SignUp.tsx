@@ -2,6 +2,7 @@ import isEqual from 'fast-deep-equal'
 import React from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { Button, Input, Modal } from '../../../../component'
+import { useDebounce } from '../../../../hook'
 import { Actions, useDispatch, useSelector } from '../../../../store'
 import '../../../../style/login.scss'
 
@@ -14,6 +15,8 @@ const SignUp: React.FC = () => {
 
   const { isLoading, isError } = useSelector((store) => store.account)
   const dispatch = useDispatch()
+
+  const [keyword, debounce] = useDebounce()
 
   const onSubmit: SubmitHandler<SignUpRequestForm> = React.useCallback(
     (data) => {
@@ -30,9 +33,13 @@ const SignUp: React.FC = () => {
     dispatch(Actions.routerActions.push('/login'))
   }, [])
 
-  const handleChange = React.useCallback((value: string, type: string) => {
-    dispatch(Actions.account.validCheck({ type, value }))
+  const handleChange = React.useCallback((str: string, type: string) => {
+    debounce(str, type)
   }, [])
+
+  React.useEffect(() => {
+    console.log(keyword)
+  }, [keyword])
 
   return (
     <>
