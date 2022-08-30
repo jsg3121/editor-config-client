@@ -23,7 +23,6 @@ const signup = async (form: SignUpRequestForm): Promise<SignUpResult> => {
       data: form,
     })
     .then((res) => {
-      console.log(res.data)
       return res.data
     })
 }
@@ -45,10 +44,12 @@ const validCheck = async (form: ValidCheckForm) => {
     .request({
       url: `http://localhost:4000/api/account/valid/${form.type}`,
       method: 'POST',
-      data: { email: form.value },
+      data: { [form.type]: form.value },
     })
     .then((res) => {
-      return res.data
+      return {
+        [form.type]: res.data,
+      }
     })
 }
 

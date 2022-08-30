@@ -1,32 +1,43 @@
+import { useMutation } from '@tanstack/react-query'
 import isEqual from 'fast-deep-equal'
 import React from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
+import { formMode } from '../../../../common'
 import { Form, Modal } from '../../../../component'
 import { FormContainer } from '../../../../container'
+import { AccountService } from '../../../../service'
 import { Actions, useDispatch, useSelector } from '../../../../store'
 import '../../../../style/login.scss'
 
 const SignUp: React.FC = () => {
+  const [formData, setFormData] = React.useState<any>({})
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<SignUpRequestForm>()
-
-  const { isError } = useSelector((store) => store.account)
+  const { isModal } = useSelector((store) => store.common)
   const dispatch = useDispatch()
+  const { mutate, data = {} } = useMutation(AccountService.validCheck, {})
 
-  const handleClickModal = React.useCallback(() => {
-    dispatch(Actions.account.clear())
+  const handleClickModal = React.useCallback((type?: string) => {
+    dispatch(Actions.common.modalClose())
+    if (type === 'primary') {
+      dispatch(Actions.routerActions.replace('/login'))
+    }
   }, [])
 
   const onSubmit: SubmitHandler<SignUpRequestForm> = React.useCallback(
     (data) => {
-      console.log(data)
-      // dispatch(Actions.account.signup(data))
+      dispatch(Actions.account.signup(data))
     },
     []
   )
+
+  const handleValid = React.useCallback((value: string, type: string) => {
+    mutate({ type, value })
+  }, [])
 
   return (
     <>
@@ -35,29 +46,26 @@ const SignUp: React.FC = () => {
           <h1 className="form__title">회원 가입</h1>
           <FormContainer onSubmit={handleSubmit(onSubmit)}>
             <Form.Item
-              errors={errors.email ? true : false}
               name="Email"
               type="text"
               inputSize="large"
-              mode={errors.email ? 'error' : 'primary'}
+              mode={formMode(data.email || errors.email)}
               label="email"
               register={register}
-              // onValid={handleValid}
+              onValid={handleValid}
               required
             />
             <Form.Item
-              errors={errors.name ? true : false}
               name="Name"
               type="text"
               inputSize="large"
-              mode={errors.name ? 'error' : 'primary'}
+              mode={formMode(data.name || errors.name)}
               label="name"
               register={register}
-              // onValid={handleValid}
+              onValid={handleValid}
               required
             />
             <Form.Item
-              errors={errors.password ? true : false}
               name="Password"
               type="password"
               inputSize="large"
@@ -70,7 +78,13 @@ const SignUp: React.FC = () => {
         </article>
         <div className="login__background"></div>
       </section>
-      {isError && <Modal description={isError} onClick={handleClickModal} />}
+      {isModal.isOpen && (
+        <Modal
+          description={isModal.description}
+          type={isModal.type}
+          onClick={handleClickModal}
+        />
+      )}
     </>
   )
 }

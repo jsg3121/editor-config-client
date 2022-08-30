@@ -8,7 +8,6 @@ interface FormItemProps<T> {
   mode: 'edit' | 'primary' | 'error' | 'success'
   inputSize: 'large' | 'medium' | 'small'
   name: string
-  errors: boolean
   label: Path<T>
   required: boolean
   register: UseFormRegister<T>
@@ -16,7 +15,7 @@ interface FormItemProps<T> {
 }
 
 const FormItem = <T extends unknown>(props: FormItemProps<T>) => {
-  const { errors, onValid, name, mode, label, ...rest } = props
+  const { onValid, name, mode, label, ...rest } = props
   const [keyword, debounce] = useDebounce()
 
   const handleChange = React.useCallback((str: string) => {
@@ -35,7 +34,7 @@ const FormItem = <T extends unknown>(props: FormItemProps<T>) => {
         {name}
       </p>
       <Input.Text onChange={handleChange} label={label} mode={mode} {...rest} />
-      {errors && (
+      {mode === 'error' && (
         <span className="form__input--error">
           입력 형식이 올바르지 않습니다
         </span>

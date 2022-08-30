@@ -18,13 +18,13 @@ const FormContainer = <T extends unknown>(props: FormContainerProps<T>) => {
     dispatch(Actions.routerActions.push('/login'))
   }, [])
 
-  const onSubmitt = React.useCallback((e: React.FormEvent) => {
+  const handleSubmit = React.useCallback((e: React.FormEvent) => {
     onSubmit(e)
   }, [])
 
   return (
     <>
-      <form className="form__container" onSubmit={onSubmitt}>
+      <form className="form__container" onSubmit={handleSubmit}>
         <div className="form__input">{children}</div>
         <div className="form__button">
           <Button
