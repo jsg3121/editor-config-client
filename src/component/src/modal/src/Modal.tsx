@@ -3,15 +3,16 @@ import isEqual from 'fast-deep-equal'
 import { Button } from '../../button'
 
 interface ModalProps {
-  onClick: () => void
-  description: string
+  onClick: (type?: string) => void
+  description?: string
+  type?: 'danger' | 'default' | 'primary'
 }
 
 const Modal: React.FC<ModalProps> = (props) => {
-  const { onClick, description } = props
+  const { onClick, description, type = 'default' } = props
 
   const handleClick = React.useCallback(() => {
-    onClick()
+    onClick(type)
   }, [])
 
   return (
@@ -21,7 +22,7 @@ const Modal: React.FC<ModalProps> = (props) => {
           <div className="modal__container--text">
             <p>{description}</p>
           </div>
-          <Button label="확인" onClick={handleClick} buttonType="danger" />
+          <Button label="확인" onClick={handleClick} buttonType={type} />
         </div>
       </article>
     </section>

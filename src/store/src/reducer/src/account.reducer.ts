@@ -3,7 +3,7 @@ import produce from 'immer'
 import { TokenService } from '../../../../service'
 import { accountActions, tokenActions } from '../../action'
 
-export type AccountStateTypes = {
+type AccountStateTypes = {
   isLoading: boolean
   isLogin: boolean
   email: User['email']
