@@ -2,16 +2,22 @@ import { useMutation } from '@tanstack/react-query'
 import isEqual from 'fast-deep-equal'
 import React from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import { formMode } from '../../../../common'
+import { formMode, RegExp } from '../../../../common'
 import { Form, Modal } from '../../../../component'
 import { FormContainer } from '../../../../container'
 import { AccountService } from '../../../../service'
 import { Actions, useDispatch, useSelector } from '../../../../store'
 import '../../../../style/login.scss'
 
-const SignUp: React.FC = () => {
-  const [formData, setFormData] = React.useState<any>({})
+interface FormDataState {
+  [T: string]: {
+    status: number
+    description?: string
+  }
+}
 
+const SignUp: React.FC = () => {
+  const [formData, setFormData] = React.useState<FormDataState>({})
   const {
     register,
     handleSubmit,
@@ -19,7 +25,11 @@ const SignUp: React.FC = () => {
   } = useForm<SignUpRequestForm>()
   const { isModal } = useSelector((store) => store.common)
   const dispatch = useDispatch()
-  const { mutate, data = {} } = useMutation(AccountService.validCheck, {})
+  const { mutate } = useMutation(AccountService.validCheck, {
+    onSuccess(data) {
+      setFormData(() => ({ ...formData, ...data }))
+    },
+  })
 
   const handleClickModal = React.useCallback((type?: string) => {
     dispatch(Actions.common.modalClose())
@@ -49,27 +59,33 @@ const SignUp: React.FC = () => {
               name="Email"
               type="text"
               inputSize="large"
-              mode={formMode(data.email || errors.email)}
+              mode={formMode(formData.email || errors.email)}
               label="email"
               register={register}
               onValid={handleValid}
+              pattern={{
+                rule: RegExp.email,
+                description: '올바른 이메일 형식이 아닙니다',
+              }}
               required
+              isDebounce
             />
             <Form.Item
               name="Name"
               type="text"
               inputSize="large"
-              mode={formMode(data.name || errors.name)}
+              mode={formMode(formData.name || errors.name)}
               label="name"
               register={register}
               onValid={handleValid}
               required
+              isDebounce
             />
             <Form.Item
               name="Password"
               type="password"
               inputSize="large"
-              mode={errors.password ? 'error' : 'primary'}
+              mode={errors.password ? { type: 'error' } : { type: 'primary' }}
               label="password"
               register={register}
               required

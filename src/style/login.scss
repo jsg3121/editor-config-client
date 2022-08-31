@@ -38,6 +38,14 @@
   @apply text-error-400 text-sm;
 }
 
+.form__input--success {
+  @apply text-success-600 text-sm;
+}
+
+.form__input--primary {
+  @apply text-primary-600 text-sm;
+}
+
 .form__input-options {
   @apply flex items-center my-8 w-full justify-between;
 }

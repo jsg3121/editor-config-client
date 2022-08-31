@@ -30,18 +30,22 @@
 
 .input-text__mode--primary {
   @apply border-primary-500 text-primary-500 hover:border-2 focus:border-2 focus:ring-primary-500 focus:shadow-md focus:shadow-primary-100 focus:outline-none;
+  -webkit-text-fill-color: rgb(102 103 171 / var(--tw-text-opacity));
 }
 
 .input-text__mode--edit {
   @apply border-edit-500 text-edit-500 hover:border-2 focus:border-2 focus:ring-edit-500 focus:shadow-md focus:shadow-edit-100 focus:outline-none;
+  -webkit-text-fill-color: rgb(0 103 163 / var(--tw-text-opacity));
 }
 
 .input-text__mode--error {
   @apply border-error-500 text-error-500 hover:border-2 focus:border-2 focus:ring-error-500 focus:shadow-md focus:shadow-error-100 focus:outline-none;
+  -webkit-text-fill-color: rgb(217 73 61 / var(--tw-text-opacity));
 }
 
 .input-text__mode--success {
   @apply border-success-600 text-success-600 hover:border-2 focus:border-2 focus:ring-success-600 focus:shadow-md focus:shadow-success-100 focus:outline-none;
+  -webkit-text-fill-color: rgb(122 235 129 / var(--tw-text-opacity));
 }
 
 .input-checkbox {

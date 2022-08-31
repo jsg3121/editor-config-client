@@ -40,6 +40,15 @@ const logout = async (form: LogoutRequestForm) => {
 }
 
 const validCheck = async (form: ValidCheckForm) => {
+  if (form.value === '') {
+    return {
+      [form.type]: {
+        status: 400,
+        description: '필수 입력사항 입니다',
+      },
+    }
+  }
+
   return await http
     .request({
       url: `http://localhost:4000/api/account/valid/${form.type}`,
