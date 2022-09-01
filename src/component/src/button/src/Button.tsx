@@ -5,6 +5,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   label: string
   onClick?: () => void
   disabled?: boolean
+  isLoading?: boolean
   buttonType: 'primary' | 'danger' | 'default'
 }
 
@@ -30,7 +31,7 @@ const Loading = () => {
 }
 
 const Button: React.FC<ButtonProps> = (props) => {
-  const { label, onClick, disabled, type, buttonType } = props
+  const { label, onClick, disabled, isLoading, type, buttonType } = props
 
   const handleClick = React.useCallback(() => {
     if (onClick) {
@@ -40,12 +41,12 @@ const Button: React.FC<ButtonProps> = (props) => {
 
   return (
     <button
-      className={['button', `button--${buttonType}`].join(' ')}
+      className={`button button--${buttonType}`}
       onClick={handleClick}
       disabled={disabled}
       type={type}
     >
-      {disabled && Loading()}
+      {isLoading && Loading()}
       {label}
     </button>
   )

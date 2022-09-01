@@ -6,6 +6,7 @@ import '../../style/login.scss'
 interface FormContainerProps<T> {
   children: React.ReactNode
   onSubmit: (event: React.FormEvent) => void
+  onActive?: () => void
 }
 
 const FormContainer = <T extends unknown>(props: FormContainerProps<T>) => {
@@ -29,7 +30,7 @@ const FormContainer = <T extends unknown>(props: FormContainerProps<T>) => {
         <div className="form__button">
           <Button
             label="가입하기"
-            disabled={isLoading}
+            isLoading={isLoading}
             type="submit"
             buttonType="primary"
           />

@@ -1,10 +1,7 @@
-type UseFormModeType =
-  | {
-      status: number
-      description?: string
-    }
-  | boolean
-  | undefined
+type UseFormModeType = {
+  status: number
+  description?: string
+}
 
 type FormModeType = (form: UseFormModeType) => {
   type: 'edit' | 'primary' | 'error' | 'success'

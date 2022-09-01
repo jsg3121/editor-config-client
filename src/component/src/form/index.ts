@@ -1,5 +1,4 @@
-import { default as Item } from './src/FormItem'
-
+import { default as Notice } from './src/Notice'
 export const Form = {
-  Item,
+  Notice,
 }

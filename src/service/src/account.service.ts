@@ -39,13 +39,49 @@ const logout = async (form: LogoutRequestForm) => {
     .then((res) => res.data)
 }
 
-const validCheck = async (form: ValidCheckForm) => {
+const validCheckEmail = async (value: string) => {
+  if (value === '') {
+    return {
+      status: 400,
+      description: '필수 입력사항 입니다',
+    }
+  }
+
+  return await http
+    .request({
+      url: `http://localhost:4000/api/account/valid/email`,
+      method: 'POST',
+      data: { email: value },
+    })
+    .then((res) => {
+      return res.data
+    })
+}
+
+const validCheckName = async (value: string) => {
+  if (value === '') {
+    return {
+      status: 400,
+      description: '필수 입력사항 입니다',
+    }
+  }
+
+  return await http
+    .request({
+      url: `http://localhost:4000/api/account/valid/name`,
+      method: 'POST',
+      data: { name: value },
+    })
+    .then((res) => {
+      return res.data
+    })
+}
+
+const validCheck = async (form: { value: string; type: string }) => {
   if (form.value === '') {
     return {
-      [form.type]: {
-        status: 400,
-        description: '필수 입력사항 입니다',
-      },
+      status: 400,
+      description: '필수 입력사항 입니다',
     }
   }
 
@@ -56,9 +92,7 @@ const validCheck = async (form: ValidCheckForm) => {
       data: { [form.type]: form.value },
     })
     .then((res) => {
-      return {
-        [form.type]: res.data,
-      }
+      return res.data
     })
 }
 
@@ -66,5 +100,7 @@ export const AccountService = {
   login,
   logout,
   signup,
+  validCheckEmail,
+  validCheckName,
   validCheck,
 }
