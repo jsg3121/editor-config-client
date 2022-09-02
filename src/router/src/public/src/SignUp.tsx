@@ -25,7 +25,7 @@ const SignUp: React.FC = () => {
 
   const onSubmit: SubmitHandler<SignUpRequestForm> = React.useCallback(
     (data) => {
-      // dispatch(Actions.account.signup(data))
+      dispatch(Actions.account.signup(data))
     },
     []
   )
@@ -45,6 +45,7 @@ const SignUp: React.FC = () => {
                 rule: RegExp.email,
                 description: '올바른 이메일 형식이 아닙니다',
               }}
+              errors={errors.email ? true : false}
               register={register}
               required
               isDebounce
@@ -54,6 +55,7 @@ const SignUp: React.FC = () => {
               name="Name"
               label="name"
               inputSize="large"
+              errors={errors.name ? true : false}
               register={register}
               required
               isDebounce
@@ -68,6 +70,7 @@ const SignUp: React.FC = () => {
                 description:
                   '6자 이상의 영문 대,소문자, 숫자, 특수문자 조합으로 생성해주세요',
               }}
+              errors={errors.password ? true : false}
               register={register}
               required
             />

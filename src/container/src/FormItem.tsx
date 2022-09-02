@@ -13,6 +13,7 @@ interface FormItemProps<T> {
   name: string
   label: Path<T>
   required: boolean
+  errors?: boolean
   isDebounce?: boolean
   pattern?: {
     rule: RegExp
@@ -28,7 +29,7 @@ interface Mode {
 }
 
 const FormItem = <T extends unknown>(props: FormItemProps<T>) => {
-  const { onValid, name, isDebounce, pattern, label, ...rest } = props
+  const { onValid, name, isDebounce, errors, pattern, label, ...rest } = props
   const [inputStatus, setInputStatus] = React.useState<Mode>({
     type: 'primary',
   })
@@ -58,14 +59,22 @@ const FormItem = <T extends unknown>(props: FormItemProps<T>) => {
   }, [])
 
   React.useEffect(() => {
-    if (!pattern) {
-      mutate({ value: keyword, type: label })
-    } else {
-      if (pattern.rule.test(keyword)) {
+    if (keyword !== '') {
+      if (!pattern) {
         mutate({ value: keyword, type: label })
+      } else {
+        if (pattern.rule.test(keyword)) {
+          mutate({ value: keyword, type: label })
+        }
       }
     }
   }, [keyword])
+
+  React.useEffect(() => {
+    if (errors) {
+      setInputStatus(formMode(errors))
+    }
+  }, [errors])
 
   return (
     <div className={`form__input-box input__status--${inputStatus.type}`}>

@@ -83,6 +83,11 @@ const accountReducer = createReducer<AccountStateTypes>(
           draft.isLoading = false
         })
       })
+      .addCase(accountActions.signup.rejected, (store) => {
+        return produce(store, (draft) => {
+          draft.isLoading = false
+        })
+      })
       .addCase(accountActions.clear, (store) => {
         return produce(store, (draft) => {
           draft.isError = undefined
@@ -113,8 +118,7 @@ const accountReducer = createReducer<AccountStateTypes>(
         isAnyOf(
           accountActions.login.rejected,
           tokenActions.tokenCheck.rejected,
-          accountActions.logout.rejected,
-          accountActions.signup.rejected
+          accountActions.logout.rejected
         ),
         (store) => {
           return produce(store, (draft) => {
