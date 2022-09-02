@@ -1,17 +1,13 @@
-import { useMutation } from '@tanstack/react-query'
 import isEqual from 'fast-deep-equal'
 import React from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import { formMode } from '../../../../common'
-import { Form, Modal } from '../../../../component'
-import { FormContainer } from '../../../../container'
-import { AccountService } from '../../../../service'
+import { RegExp } from '../../../../common'
+import { Modal } from '../../../../component'
+import { FormContainer, FormItem } from '../../../../container'
 import { Actions, useDispatch, useSelector } from '../../../../store'
 import '../../../../style/login.scss'
 
 const SignUp: React.FC = () => {
-  const [formData, setFormData] = React.useState<any>({})
-
   const {
     register,
     handleSubmit,
@@ -19,7 +15,6 @@ const SignUp: React.FC = () => {
   } = useForm<SignUpRequestForm>()
   const { isModal } = useSelector((store) => store.common)
   const dispatch = useDispatch()
-  const { mutate, data = {} } = useMutation(AccountService.validCheck, {})
 
   const handleClickModal = React.useCallback((type?: string) => {
     dispatch(Actions.common.modalClose())
@@ -35,42 +30,47 @@ const SignUp: React.FC = () => {
     []
   )
 
-  const handleValid = React.useCallback((value: string, type: string) => {
-    mutate({ type, value })
-  }, [])
-
   return (
     <>
       <section className="login__container">
         <article className="login__container--form">
           <h1 className="form__title">회원 가입</h1>
           <FormContainer onSubmit={handleSubmit(onSubmit)}>
-            <Form.Item
+            <FormItem
+              type="text"
               name="Email"
-              type="text"
-              inputSize="large"
-              mode={formMode(data.email || errors.email)}
               label="email"
+              inputSize="large"
+              pattern={{
+                rule: RegExp.email,
+                description: '올바른 이메일 형식이 아닙니다',
+              }}
+              errors={errors.email ? true : false}
               register={register}
-              onValid={handleValid}
               required
+              isDebounce
             />
-            <Form.Item
-              name="Name"
+            <FormItem
               type="text"
-              inputSize="large"
-              mode={formMode(data.name || errors.name)}
+              name="Name"
               label="name"
-              register={register}
-              onValid={handleValid}
-              required
-            />
-            <Form.Item
-              name="Password"
-              type="password"
               inputSize="large"
-              mode={errors.password ? 'error' : 'primary'}
+              errors={errors.name ? true : false}
+              register={register}
+              required
+              isDebounce
+            />
+            <FormItem
+              type="password"
+              name="Password"
               label="password"
+              inputSize="large"
+              pattern={{
+                rule: RegExp.password,
+                description:
+                  '6자 이상의 영문 대,소문자, 숫자, 특수문자 조합으로 생성해주세요',
+              }}
+              errors={errors.password ? true : false}
               register={register}
               required
             />

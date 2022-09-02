@@ -1,17 +1,26 @@
 type UseFormModeType =
   | {
-      type: string
       status: number
+      description?: string
     }
   | boolean
 
-export const formMode = (value: UseFormModeType) => {
+type FormModeType = (form: UseFormModeType) => {
+  type: 'edit' | 'primary' | 'error' | 'success'
+  description?: string
+}
+
+export const formMode: FormModeType = (value) => {
   if (typeof value === 'boolean') {
-    return value ? 'error' : 'primary'
+    return value
+      ? { type: 'error', description: '입력 형식이 올바르지 않습니다' }
+      : { type: 'primary' }
   } else {
     if (!value) {
-      return 'primary'
+      return { type: 'primary' }
     }
-    return value.status === 200 ? 'success' : 'error'
+    return value.status === 200
+      ? { type: 'success', description: value.description }
+      : { type: 'error', description: value.description }
   }
 }

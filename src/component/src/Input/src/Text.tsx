@@ -7,6 +7,10 @@ interface TextProps<T> {
   inputSize: 'large' | 'medium' | 'small'
   label: Path<T>
   required: boolean
+  pattern?: {
+    rule: RegExp
+    description: string
+  }
   disabled?: boolean
   value?: string
   register: UseFormRegister<T> | (() => void)
@@ -20,10 +24,11 @@ export const Text = <T extends unknown>(props: TextProps<T>) => {
     mode,
     inputSize,
     disabled = false,
-    label,
-    required,
-    register,
     onChange,
+    required,
+    label,
+    register,
+    pattern,
   } = props
 
   const handleChange = useCallback((e: { target: { value: string } }) => {
@@ -38,7 +43,7 @@ export const Text = <T extends unknown>(props: TextProps<T>) => {
       className={`input-text__mode--${mode} input-text__size--${inputSize}`}
       disabled={disabled}
       defaultValue={value}
-      {...register(label, { required })}
+      {...register(label, { required, pattern: pattern?.rule })}
       onChange={handleChange}
     />
   )

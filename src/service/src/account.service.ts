@@ -1,4 +1,5 @@
 import http from 'axios'
+import { RegExp } from '../../common'
 
 const login = async (form: LoginRequestForm): Promise<LoginResult> => {
   return await http
@@ -16,6 +17,12 @@ const login = async (form: LoginRequestForm): Promise<LoginResult> => {
 }
 
 const signup = async (form: SignUpRequestForm): Promise<SignUpResult> => {
+  const { email, password } = form
+
+  if (!RegExp.email.test(email) || !RegExp.password.test(password)) {
+    throw new Error()
+  }
+
   return await http
     .request({
       url: 'http://localhost:4000/api/account/signup',
@@ -39,7 +46,14 @@ const logout = async (form: LogoutRequestForm) => {
     .then((res) => res.data)
 }
 
-const validCheck = async (form: ValidCheckForm) => {
+const validCheck = async (form: { value: string; type: string }) => {
+  if (form.value === '') {
+    return {
+      status: 400,
+      description: '필수 입력사항 입니다',
+    }
+  }
+
   return await http
     .request({
       url: `http://localhost:4000/api/account/valid/${form.type}`,
@@ -47,9 +61,7 @@ const validCheck = async (form: ValidCheckForm) => {
       data: { [form.type]: form.value },
     })
     .then((res) => {
-      return {
-        [form.type]: res.data,
-      }
+      return res.data
     })
 }
 

@@ -30,18 +30,22 @@
 
 .input-text__mode--primary {
   @apply border-primary-500 text-primary-500 hover:border-2 focus:border-2 focus:ring-primary-500 focus:shadow-md focus:shadow-primary-100 focus:outline-none;
+  -webkit-text-fill-color: rgb(102 103 171 / var(--tw-text-opacity));
 }
 
 .input-text__mode--edit {
   @apply border-edit-500 text-edit-500 hover:border-2 focus:border-2 focus:ring-edit-500 focus:shadow-md focus:shadow-edit-100 focus:outline-none;
+  -webkit-text-fill-color: rgb(0 103 163 / var(--tw-text-opacity));
 }
 
 .input-text__mode--error {
   @apply border-error-500 text-error-500 hover:border-2 focus:border-2 focus:ring-error-500 focus:shadow-md focus:shadow-error-100 focus:outline-none;
+  -webkit-text-fill-color: rgb(217 73 61 / var(--tw-text-opacity));
 }
 
 .input-text__mode--success {
   @apply border-success-600 text-success-600 hover:border-2 focus:border-2 focus:ring-success-600 focus:shadow-md focus:shadow-success-100 focus:outline-none;
+  -webkit-text-fill-color: rgb(102 192 107 / var(--tw-text-opacity));
 }
 
 .input-checkbox {
@@ -205,19 +209,19 @@
 }
 
 .button {
-  @apply w-full h-12 font-bold rounded-lg  disabled:bg-gray-500 disabled:text-gray-300;
+  @apply w-full h-12 font-bold rounded-lg;
 }
 
 .button--default {
-  @apply bg-gray-100  text-gray-800 shadow-gray-200 shadow-sm hover:bg-gray-200 active:bg-gray-300 border-gray-300 border-2;
+  @apply bg-gray-100  text-gray-800 shadow-gray-200 shadow-sm hover:bg-gray-200 active:bg-gray-300 border-gray-300 border-2  disabled:bg-gray-500 disabled:text-gray-300;
 }
 
 .button--danger {
-  @apply bg-error-500  text-gray-200 shadow-gray-300 shadow-sm hover:bg-error-600 active:bg-error-700;
+  @apply bg-error-500  text-gray-200 shadow-gray-300 shadow-sm hover:bg-error-600 active:bg-error-700  disabled:bg-gray-500 disabled:text-gray-300;
 }
 
 .button--primary {
-  @apply bg-primary-600  text-gray-200 shadow-primary-800 shadow-sm hover:bg-primary-700 active:bg-primary-800;
+  @apply bg-primary-600  text-gray-200 shadow-primary-800 shadow-sm hover:bg-primary-700 active:bg-primary-800  disabled:bg-gray-500 disabled:text-gray-300;
 }
 
 .modal {

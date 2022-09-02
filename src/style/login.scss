@@ -34,8 +34,28 @@
   @apply text-primary-400;
 }
 
-.form__input--error {
-  @apply text-error-400 text-sm;
+.input__status--error {
+  p,
+  input[type='text'],
+  input[type='password'] {
+    @apply text-error-400 text-sm;
+  }
+}
+
+.input__status--success {
+  p,
+  input[type='text'],
+  input[type='password'] {
+    @apply text-success-600 text-sm;
+  }
+}
+
+.input__status--primary {
+  p,
+  input[type='text'],
+  input[type='password'] {
+    @apply text-primary-600 text-sm;
+  }
 }
 
 .form__input-options {
