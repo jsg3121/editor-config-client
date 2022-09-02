@@ -1,11 +1,10 @@
+import { useMutation } from '@tanstack/react-query'
 import React from 'react'
 import { Path, UseFormRegister } from 'react-hook-form'
-import { useDebounce } from '../../hook'
-import { Input } from '../../component/src/input'
-import Notice from '../../component/src/form/src/Notice'
-import { useMutation } from '@tanstack/react-query'
-import { AccountService } from '../../service'
-import { formMode } from '../../common'
+import { formMode } from '../../../../common'
+import { Form, Input } from '../../../../component'
+import { useDebounce } from '../../../../hook'
+import { AccountService } from '../../../../service'
 
 interface FormItemProps<T> {
   type: 'text' | 'password'
@@ -85,7 +84,7 @@ const FormItem = <T extends unknown>(props: FormItemProps<T>) => {
         mode={inputStatus.type}
         {...rest}
       />
-      <Notice mode={inputStatus} />
+      <Form.Notice mode={inputStatus} />
     </div>
   )
 }

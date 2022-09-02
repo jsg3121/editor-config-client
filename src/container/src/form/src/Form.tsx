@@ -1,7 +1,7 @@
 import React from 'react'
-import { Button } from '../../component'
-import { Actions, useDispatch, useSelector } from '../../store'
-import '../../style/login.scss'
+import { Button } from '../../../../component'
+import { Actions, useDispatch, useSelector } from '../../../../store'
+import '../../../../style/login.scss'
 
 interface FormContainerProps<T> {
   children: React.ReactNode
