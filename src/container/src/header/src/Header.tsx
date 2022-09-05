@@ -1,8 +1,9 @@
-import React from 'react'
 import isEqual from 'fast-deep-equal'
-import '../../../../style/header.scss'
-import { Button } from '../../../../component'
+import React from 'react'
+import { ReactComponent as ProfileIcon } from '../../../../assets/images/profile.svg'
+import { Button, Dropdown } from '../../../../component'
 import { Actions, useDispatch, useSelector } from '../../../../store'
+import '../../../../style/header.scss'
 
 const Header: React.FC = () => {
   const { name, accessToken } = useSelector((store) => store.account)
@@ -13,6 +14,19 @@ const Header: React.FC = () => {
     dispatch(Actions.account.logout(accessToken))
   }, [])
 
+  const profile = React.useMemo(() => {
+    return (
+      <button className="profile__icon">
+        <picture>
+          <figure>
+            <ProfileIcon width={20} height={20} />
+          </figure>
+        </picture>
+        <h2 className="profile__text">{name}</h2>
+      </button>
+    )
+  }, [])
+
   return (
     <header className="header">
       <div className="header__logo">
@@ -21,15 +35,23 @@ const Header: React.FC = () => {
         </h1>
       </div>
       <div className="header__profile">
-        <button>
-          <picture>
-            <figure>
-              <img src="" alt="" />
-            </figure>
-          </picture>
-          <h2 className="profile__text">{name}</h2>
-        </button>
-        <Button label="로그아웃" onClick={handleClick} buttonType="default" />
+        <Dropdown
+          options={[
+            {
+              key: 'logout',
+              label: (
+                <Button
+                  label="로그아웃"
+                  onClick={handleClick}
+                  buttonType="default"
+                  size="small"
+                />
+              ),
+            },
+          ]}
+        >
+          {profile}
+        </Dropdown>
       </div>
     </header>
   )

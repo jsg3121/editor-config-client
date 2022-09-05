@@ -7,6 +7,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   disabled?: boolean
   isLoading?: boolean
   buttonType: 'primary' | 'danger' | 'default'
+  size?: 'extra-small' | 'small' | 'medium' | 'large'
 }
 
 const Loading = () => {
@@ -31,7 +32,15 @@ const Loading = () => {
 }
 
 const Button: React.FC<ButtonProps> = (props) => {
-  const { label, onClick, disabled, isLoading, type, buttonType } = props
+  const {
+    label,
+    onClick,
+    disabled,
+    isLoading,
+    type,
+    buttonType,
+    size = 'medium',
+  } = props
 
   const handleClick = React.useCallback(() => {
     if (onClick) {
@@ -41,7 +50,7 @@ const Button: React.FC<ButtonProps> = (props) => {
 
   return (
     <button
-      className={`button button--${buttonType}`}
+      className={`button button__type--${buttonType} button__size--${size}`}
       onClick={handleClick}
       disabled={disabled}
       type={type}
