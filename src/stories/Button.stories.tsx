@@ -10,6 +10,14 @@ export default {
         disable: true,
       },
     },
+    isLoading: {
+      type: 'boolean',
+      defaultValue: false,
+    },
+    disabled: {
+      type: 'boolean',
+      defaultValue: false,
+    },
   },
 } as ComponentMeta<typeof ButtonComponent>
 
@@ -40,5 +48,7 @@ Danger.args = {
 export const Loading = Template.bind({})
 Loading.args = {
   label: 'Button',
+  buttonType: 'primary',
+  isLoading: true,
   disabled: true,
 }

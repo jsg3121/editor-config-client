@@ -1,9 +1,11 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react'
-import { Modal as ModalComponent } from '../component'
+import { Modal } from '../component'
+import '../index.css'
+import '../style/component.scss'
 
 export default {
   title: 'Modal/Modal',
-  component: ModalComponent,
+  component: Modal,
   argTypes: {
     onClick: {
       table: {
@@ -11,13 +13,26 @@ export default {
       },
     },
   },
-} as ComponentMeta<typeof ModalComponent>
+} as ComponentMeta<typeof Modal>
 
-const Template: ComponentStory<typeof ModalComponent> = (props) => {
-  return <ModalComponent {...props} />
+const Template: ComponentStory<typeof Modal> = (props) => {
+  return <Modal {...props} />
 }
 
-export const Modal = Template.bind({})
-Modal.args = {
+export const Primary = Template.bind({})
+Primary.args = {
+  type: 'primary',
   description: 'Description',
+}
+
+export const Default = Template.bind({})
+Default.args = {
+  type: 'default',
+  description: 'Default Description',
+}
+
+export const Danger = Template.bind({})
+Danger.args = {
+  type: 'danger',
+  description: 'Danger Description',
 }

@@ -31,6 +31,20 @@ export default {
         disable: true,
       },
     },
+    required: {
+      table: {
+        disable: true,
+      },
+    },
+    pattern: {
+      table: {
+        disable: true,
+      },
+    },
+    disabled: {
+      type: 'boolean',
+      defaultValue: false,
+    },
   },
 } as ComponentMeta<typeof Input.Text>
 

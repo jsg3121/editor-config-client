@@ -17,6 +17,19 @@ export default {
         disable: true,
       },
     },
+    register: {
+      table: {
+        disable: true,
+      },
+    },
+    description: {
+      type: 'string',
+      defaultValue: 'checkbox',
+    },
+    required: {
+      type: 'boolean',
+      defaultValue: false,
+    },
   },
 } as ComponentMeta<typeof Input.Checkbox>
 
@@ -28,9 +41,18 @@ const Template: ComponentStory<typeof Input.Checkbox> = (props) => {
   return <Input.Checkbox register={handleRegister} {...rest} />
 }
 
-export const Checkbox = Template.bind({})
-Checkbox.args = {
+export const Checked = Template.bind({})
+Checked.args = {
   checked: true,
   disabled: false,
   value: 'Checkbox',
+  description: 'checkbox description',
+}
+
+export const Unchecked = Template.bind({})
+Unchecked.args = {
+  checked: false,
+  disabled: false,
+  value: 'Checkbox',
+  description: 'checkbox description',
 }
