@@ -1,12 +1,12 @@
 .header {
-  @apply absolute top-0 left-0 w-full flex items-center justify-between px-6 py-2 bg-gradient-to-r from-primary-100 to-primary-200;
+  @apply absolute top-0 left-0 w-full h-14 flex items-center justify-between px-6 py-2 bg-gradient-to-b from-primary-300 to-primary-400;
 }
 
 .header__logo {
   @apply w-44 text-center;
 
   h1 {
-    @apply text-2xl font-bold text-primary-400;
+    @apply text-2xl font-bold text-primary-100;
 
     span {
       @apply text-primary-600;
@@ -22,7 +22,7 @@
   @apply flex items-center;
 
   picture {
-    @apply rounded-full border border-primary-400 p-2 mr-2;
+    @apply rounded-full border border-primary-100 p-2 mr-2;
   }
 }
 

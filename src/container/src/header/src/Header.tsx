@@ -19,7 +19,7 @@ const Header: React.FC = () => {
       <button className="profile__icon">
         <picture>
           <figure>
-            <ProfileIcon width={20} height={20} />
+            <ProfileIcon width={20} height={20} fill="#dddddd" />
           </figure>
         </picture>
         <h2 className="profile__text">{name}</h2>
