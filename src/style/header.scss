@@ -1,5 +1,5 @@
 .header {
-  @apply absolute top-0 left-0 w-full h-14 flex items-center justify-between px-6 py-2 bg-gradient-to-b from-primary-300 to-primary-400;
+  @apply fixed top-0 left-0 w-full h-14 flex items-center justify-between px-6 py-2 bg-primary-600 z-50;
 }
 
 .header__logo {
@@ -27,5 +27,5 @@
 }
 
 .profile__text {
-  @apply text-gray-900 font-semibold;
+  @apply text-gray-200 font-semibold;
 }

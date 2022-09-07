@@ -19,13 +19,14 @@ const SNBItems: React.FC<SNBItemsProps> = (props) => {
     }
   }, [])
 
-  const handleRoute = React.useCallback((val: string) => {
-    return () => {
-      if (onRoute) {
-        onRoute(val)
+  const handleRoute = React.useCallback(
+    (e: React.MouseEvent<HTMLLIElement>) => {
+      if (onRoute && e.currentTarget.dataset.route) {
+        onRoute(e.currentTarget.dataset.route)
       }
-    }
-  }, [])
+    },
+    []
+  )
 
   return (
     <>
@@ -41,7 +42,8 @@ const SNBItems: React.FC<SNBItemsProps> = (props) => {
                 <li
                   className="munu__sub--content"
                   key={index}
-                  onClick={handleRoute(item.url)}
+                  onClick={handleRoute}
+                  data-route={item.url}
                 >
                   <p>{item.label}</p>
                 </li>

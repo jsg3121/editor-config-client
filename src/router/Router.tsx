@@ -1,6 +1,7 @@
 import isEqual from 'fast-deep-equal'
 import React from 'react'
 import { Redirect, Route, Switch } from 'react-router-dom'
+import { Header } from '../container'
 import { Actions, useDispatch, useSelector } from '../store'
 import { Main } from './src/private'
 import { Login, SignUp } from './src/public'
@@ -22,14 +23,26 @@ const Router: React.FC = () => {
   return (
     <>
       {isLogin && (
-        <Switch>
-          <Route exact path="/board">
-            <Main />
-          </Route>
-          <Route>
-            <Redirect to={{ pathname: '/board' }} />
-          </Route>
-        </Switch>
+        <>
+          <Header />
+          <Switch>
+            <Route exact path="/board">
+              <Main />
+            </Route>
+            <Route exact path="/mypage">
+              <Main />
+            </Route>
+            <Route exact path="/edit">
+              <Main />
+            </Route>
+            <Route exact path="/setting">
+              <Main />
+            </Route>
+            <Route path="*">
+              <Redirect to={{ pathname: '/board' }} />
+            </Route>
+          </Switch>
+        </>
       )}
       {!isLogin && (
         <Switch>

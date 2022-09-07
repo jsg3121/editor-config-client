@@ -1,5 +1,5 @@
 .snb {
-  @apply w-60 h-screen bg-gradient-to-b from-primary-500 to-primary-600;
+  @apply w-60 h-full bg-gradient-to-b from-primary-700 to-primary-800 relative;
 }
 
 .menu__sub--item {
@@ -18,5 +18,13 @@
 
   p {
     @apply w-full h-full text-base text-gray-200;
+  }
+}
+
+.snb__footer {
+  @apply w-full h-16 absolute bottom-0 text-gray-100 flex justify-center;
+
+  h1 {
+    @apply text-2xl self-center;
   }
 }

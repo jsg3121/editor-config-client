@@ -2,10 +2,13 @@ import React from 'react'
 import isEqual from 'fast-deep-equal'
 import '../../../../style/snb.scss'
 import { SNBItem } from '../../../../component/src/SNB'
+import { Actions, useDispatch } from '../../../../store'
 
 const SNB: React.FC = () => {
+  const dispatch = useDispatch()
+
   const handleRoute = React.useCallback((route: string) => {
-    console.log(route)
+    // dispatch(Actions.routerActions.push(route))
   }, [])
 
   return (
@@ -34,6 +37,9 @@ const SNB: React.FC = () => {
           />
           <SNBItem label="label set" />
         </ul>
+      </div>
+      <div className="snb__footer">
+        <h1>Footer</h1>
       </div>
     </div>
   )
