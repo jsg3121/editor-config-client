@@ -14,7 +14,7 @@ const Switch: React.FC<SwitchProps> = (props) => {
     (e: { target: { checked: boolean } }) => {
       onChange(e.target.checked)
     },
-    []
+    [onChange]
   )
 
   return (

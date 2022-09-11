@@ -8,12 +8,9 @@ declare global {
   }
 
   type SettingList = {
-    id: number
-    userId: number
+    configName: string
     configType: string
     configDetail: string
-    createAt: Date
-    updateAt: Date
   }
 
   interface LoginRequestForm {

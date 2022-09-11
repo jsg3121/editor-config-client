@@ -164,7 +164,7 @@
 }
 
 .select__option {
-  @apply border-primary-400 w-full border-2 absolute top-8 rounded-b-md max-h-40 overflow-y-auto;
+  @apply border-primary-400 w-full border-2 absolute top-8 rounded-b-md max-h-40 overflow-y-auto bg-gray-100 z-10;
 }
 
 .select__option--item {

@@ -1,5 +1,5 @@
-import React from 'react'
 import isEqual from 'fast-deep-equal'
+import React from 'react'
 import SelectOption from './SelectOption'
 
 interface SelectProps {
@@ -25,11 +25,14 @@ const Select: React.FC<SelectProps> = (props) => {
     setIsSelect((isSelect) => !isSelect)
   }, [])
 
-  const handleSelect = React.useCallback((val: string) => {
-    setSelectVal(val)
-    setIsSelect(false)
-    onSelect(val)
-  }, [])
+  const handleSelect = React.useCallback(
+    (val: string) => {
+      setSelectVal(val)
+      setIsSelect(false)
+      onSelect(val)
+    },
+    [onSelect]
+  )
 
   return (
     <div className={['select', disabled ? 'select--disabled' : ''].join(' ')}>

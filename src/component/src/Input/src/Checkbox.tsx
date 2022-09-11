@@ -1,8 +1,6 @@
-import React from 'react'
-import isEqual from 'fast-deep-equal'
-import { Path, UseFormRegister } from 'react-hook-form'
+import { FieldValues, Path, UseFormRegister } from 'react-hook-form'
 
-interface ChekboxProps<T> {
+interface ChekboxProps<T extends FieldValues> {
   description: string
   label: Path<T>
   value: string
@@ -19,7 +17,7 @@ const CheckSVG = () => (
   </svg>
 )
 
-export const Checkbox = <T extends unknown>(props: ChekboxProps<T>) => {
+export const Checkbox = <T extends FieldValues>(props: ChekboxProps<T>) => {
   const {
     value,
     label,

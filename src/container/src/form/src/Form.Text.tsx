@@ -11,7 +11,7 @@ interface FormItemProps<T extends FieldValues> {
   inputSize: 'large' | 'medium' | 'small'
   name: string
   label: Path<T>
-  required: boolean
+  required?: boolean
   errors?: boolean
   isDebounce?: boolean
   pattern?: {

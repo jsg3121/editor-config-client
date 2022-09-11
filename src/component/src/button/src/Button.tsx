@@ -1,7 +1,8 @@
 import isEqual from 'fast-deep-equal'
 import React from 'react'
 
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface ButtonProps
+  extends Pick<React.ButtonHTMLAttributes<HTMLButtonElement>, 'type'> {
   label: string
   onClick?: () => void
   disabled?: boolean

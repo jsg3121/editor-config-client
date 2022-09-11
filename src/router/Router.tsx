@@ -3,7 +3,7 @@ import React from 'react'
 import { Redirect, Route, Switch } from 'react-router-dom'
 import { Header } from '../container'
 import { Actions, useDispatch, useSelector } from '../store'
-import { Main } from './src/private'
+import { AddSetting, Main } from './src/private'
 import { Login, SignUp } from './src/public'
 
 const Router: React.FC = () => {
@@ -18,7 +18,7 @@ const Router: React.FC = () => {
     if (requestData.accessToken !== '' && requestData.refreshToken !== '') {
       dispatch(Actions.token.tokenCheck(requestData))
     }
-  }, [])
+  }, [dispatch])
 
   return (
     <>
@@ -35,8 +35,8 @@ const Router: React.FC = () => {
             <Route exact path="/edit">
               <Main />
             </Route>
-            <Route exact path="/setting">
-              <Main />
+            <Route exact path="/setting/add">
+              <AddSetting />
             </Route>
             <Route path="*">
               <Redirect to={{ pathname: '/board' }} />

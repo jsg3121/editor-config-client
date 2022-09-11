@@ -17,7 +17,7 @@ const SNBItems: React.FC<SNBItemsProps> = (props) => {
     if (subItems) {
       setIsSub((isSub) => !isSub)
     }
-  }, [])
+  }, [subItems])
 
   const handleRoute = React.useCallback(
     (e: React.MouseEvent<HTMLLIElement>) => {
@@ -25,7 +25,7 @@ const SNBItems: React.FC<SNBItemsProps> = (props) => {
         onRoute(e.currentTarget.dataset.route)
       }
     },
-    []
+    [onRoute]
   )
 
   return (

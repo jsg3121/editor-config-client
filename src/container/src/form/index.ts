@@ -1,2 +1,9 @@
-export { default as FormContainer } from './src/Form'
-export { default as FormItem } from './src/FormItem'
+import Text from './src/Form.Text'
+import Select from './src/Form.Select'
+
+export const FormItem = {
+  Text,
+  Select,
+}
+
+export { default as Form } from './src/Form'

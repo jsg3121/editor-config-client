@@ -19,16 +19,16 @@ const Login: React.FC = () => {
     (data) => {
       dispatch(Actions.account.login(data))
     },
-    []
+    [dispatch]
   )
 
   const handleClickModal = React.useCallback(() => {
     dispatch(Actions.account.clear())
-  }, [])
+  }, [dispatch])
 
   const handleClickRoute = React.useCallback(() => {
     dispatch(Actions.routerActions.push('/signup'))
-  }, [])
+  }, [dispatch])
 
   return (
     <>

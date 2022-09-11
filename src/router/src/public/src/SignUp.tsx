@@ -3,7 +3,7 @@ import React from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { RegExp } from '../../../../common'
 import { Modal } from '../../../../component'
-import { FormContainer, FormItem } from '../../../../container'
+import { Form, FormItem } from '../../../../container'
 import { Actions, useDispatch, useSelector } from '../../../../store'
 import '../../../../style/login.scss'
 
@@ -38,8 +38,8 @@ const SignUp: React.FC = () => {
       <section className="login__container">
         <article className="login__container--form">
           <h1 className="form__title">회원 가입</h1>
-          <FormContainer onSubmit={handleSubmit(onSubmit)}>
-            <FormItem
+          <Form onSubmit={handleSubmit(onSubmit)}>
+            <FormItem.Text
               type="text"
               name="Email"
               label="email"
@@ -53,7 +53,7 @@ const SignUp: React.FC = () => {
               required
               isDebounce
             />
-            <FormItem
+            <FormItem.Text
               type="text"
               name="Name"
               label="name"
@@ -63,7 +63,7 @@ const SignUp: React.FC = () => {
               required
               isDebounce
             />
-            <FormItem
+            <FormItem.Text
               type="password"
               name="Password"
               label="password"
@@ -77,7 +77,7 @@ const SignUp: React.FC = () => {
               register={register}
               required
             />
-          </FormContainer>
+          </Form>
         </article>
         <div className="login__background"></div>
       </section>

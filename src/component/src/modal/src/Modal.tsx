@@ -13,7 +13,7 @@ const Modal: React.FC<ModalProps> = (props) => {
 
   const handleClick = React.useCallback(() => {
     onClick(type)
-  }, [])
+  }, [onClick, type])
 
   return (
     <section className="modal">

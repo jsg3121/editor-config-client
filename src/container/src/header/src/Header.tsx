@@ -12,11 +12,11 @@ const Header: React.FC = () => {
 
   const handleClickLogout = React.useCallback(() => {
     dispatch(Actions.account.logout(accessToken))
-  }, [])
+  }, [accessToken, dispatch])
 
   const handleClickMypage = React.useCallback(() => {
     dispatch(Actions.routerActions.push('/mypage'))
-  }, [])
+  }, [dispatch])
 
   return (
     <header className="header">

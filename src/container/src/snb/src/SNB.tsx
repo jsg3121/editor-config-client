@@ -1,11 +1,10 @@
-import React from 'react'
 import isEqual from 'fast-deep-equal'
-import '../../../../style/snb.scss'
+import React from 'react'
 import { SNBItem } from '../../../../component/src/SNB'
-import { Actions, useDispatch } from '../../../../store'
+import '../../../../style/snb.scss'
 
 const SNB: React.FC = () => {
-  const dispatch = useDispatch()
+  // const dispatch = useDispatch()
 
   const handleRoute = React.useCallback((route: string) => {
     // dispatch(Actions.routerActions.push(route))
