@@ -16,18 +16,21 @@ const SignUp: React.FC = () => {
   const { isModal } = useSelector((store) => store.common)
   const dispatch = useDispatch()
 
-  const handleClickModal = React.useCallback((type?: string) => {
-    dispatch(Actions.common.modalClose())
-    if (type === 'primary') {
-      dispatch(Actions.routerActions.replace('/login'))
-    }
-  }, [])
+  const handleClickModal = React.useCallback(
+    (type?: string) => {
+      dispatch(Actions.common.modalClose())
+      if (type === 'primary') {
+        dispatch(Actions.routerActions.replace('/login'))
+      }
+    },
+    [dispatch]
+  )
 
   const onSubmit: SubmitHandler<SignUpRequestForm> = React.useCallback(
     (data) => {
       dispatch(Actions.account.signup(data))
     },
-    []
+    [dispatch]
   )
 
   return (

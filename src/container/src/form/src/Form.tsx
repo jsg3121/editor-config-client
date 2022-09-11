@@ -1,15 +1,16 @@
+import isEqual from 'fast-deep-equal'
 import React from 'react'
 import { Button } from '../../../../component'
 import { Actions, useDispatch, useSelector } from '../../../../store'
 import '../../../../style/login.scss'
 
-interface FormContainerProps<T> {
+interface FormContainerProps {
   children: React.ReactNode
   onSubmit: (event: React.FormEvent) => void
   onActive?: () => void
 }
 
-const FormContainer = <T extends unknown>(props: FormContainerProps<T>) => {
+const FormContainer: React.FC<FormContainerProps> = (props) => {
   const { children, onSubmit } = props
 
   const dispatch = useDispatch()
@@ -17,11 +18,14 @@ const FormContainer = <T extends unknown>(props: FormContainerProps<T>) => {
 
   const handleClickRoute = React.useCallback(() => {
     dispatch(Actions.routerActions.push('/login'))
-  }, [])
+  }, [dispatch])
 
-  const handleSubmit = React.useCallback((e: React.FormEvent) => {
-    onSubmit(e)
-  }, [])
+  const handleSubmit = React.useCallback(
+    (e: React.FormEvent) => {
+      onSubmit(e)
+    },
+    [onSubmit]
+  )
 
   return (
     <>
@@ -46,4 +50,4 @@ const FormContainer = <T extends unknown>(props: FormContainerProps<T>) => {
   )
 }
 
-export default FormContainer
+export default React.memo(FormContainer, isEqual)

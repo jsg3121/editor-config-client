@@ -1,12 +1,12 @@
 import { useMutation } from '@tanstack/react-query'
 import React from 'react'
-import { Path, UseFormRegister } from 'react-hook-form'
+import { FieldValues, Path, UseFormRegister } from 'react-hook-form'
 import { formMode } from '../../../../common'
 import { Form, Input } from '../../../../component'
 import { useDebounce } from '../../../../hook'
 import { AccountService } from '../../../../service'
 
-interface FormItemProps<T> {
+interface FormItemProps<T extends FieldValues> {
   type: 'text' | 'password'
   inputSize: 'large' | 'medium' | 'small'
   name: string
@@ -27,7 +27,7 @@ interface Mode {
   description?: string
 }
 
-const FormItem = <T extends unknown>(props: FormItemProps<T>) => {
+const FormItem = <T extends FieldValues>(props: FormItemProps<T>) => {
   const { onValid, name, isDebounce, errors, pattern, label, ...rest } = props
   const [inputStatus, setInputStatus] = React.useState<Mode>({
     type: 'primary',
@@ -40,22 +40,25 @@ const FormItem = <T extends unknown>(props: FormItemProps<T>) => {
     },
   })
 
-  const handleChange = React.useCallback((str: string) => {
-    if (str === '') {
-      setInputStatus({ type: 'primary' })
-    } else {
-      if (pattern) {
-        if (pattern.rule.test(str) === false) {
-          setInputStatus({ type: 'error', description: pattern.description })
-        } else {
-          setInputStatus({ type: 'primary' })
+  const handleChange = React.useCallback(
+    (str: string) => {
+      if (str === '') {
+        setInputStatus({ type: 'primary' })
+      } else {
+        if (pattern) {
+          if (pattern.rule.test(str) === false) {
+            setInputStatus({ type: 'error', description: pattern.description })
+          } else {
+            setInputStatus({ type: 'primary' })
+          }
+        }
+        if (isDebounce) {
+          debounce(str)
         }
       }
-      if (isDebounce) {
-        debounce(str)
-      }
-    }
-  }, [])
+    },
+    [debounce, isDebounce, pattern]
+  )
 
   React.useEffect(() => {
     if (keyword !== '') {
@@ -67,7 +70,7 @@ const FormItem = <T extends unknown>(props: FormItemProps<T>) => {
         }
       }
     }
-  }, [keyword])
+  }, [keyword, label, mutate, pattern])
 
   React.useEffect(() => {
     if (errors) {

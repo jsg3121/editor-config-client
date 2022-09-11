@@ -46,7 +46,7 @@ const Button: React.FC<ButtonProps> = (props) => {
     if (onClick) {
       onClick()
     }
-  }, [])
+  }, [onClick])
 
   return (
     <button
