@@ -1,1 +1,2 @@
-export { default as useDebounce } from './src/debounce'
+export * from './src/debounce'
+export * from './src/useSelect'

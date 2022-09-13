@@ -5,7 +5,7 @@ import { Form, FormItem } from '../../../../container'
 import '../../../../style/setting.scss'
 
 const AddSetting: React.FC = () => {
-  const [detail, setDetail] = React.useState()
+  const [detail, setDetail] = React.useState<string>()
 
   const { register, handleSubmit, setValue } = useForm<SettingList>()
 
@@ -14,7 +14,6 @@ const AddSetting: React.FC = () => {
   }, [])
 
   const handleSelect = React.useCallback((val: string) => {
-    console.log(val)
     // setValue('configDetail', val)
     setDetail(val)
   }, [])
