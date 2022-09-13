@@ -9,7 +9,7 @@ interface FormSelectProps {
 }
 
 const FormSelect: React.FC<FormSelectProps> = (props) => {
-  const { options, onSelect } = props
+  const { label, options, onSelect } = props
 
   const handleSelect = React.useCallback(
     (value: string) => {
@@ -20,7 +20,7 @@ const FormSelect: React.FC<FormSelectProps> = (props) => {
 
   return (
     <>
-      <p></p>
+      <p className="form__input--label">{label}</p>
       <Select onSelect={handleSelect} placeholder="-" options={options} />
     </>
   )

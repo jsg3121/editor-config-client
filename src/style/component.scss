@@ -133,7 +133,7 @@
 }
 
 .select {
-  @apply w-full h-8 rounded-md border-2 border-solid border-primary-400 box-content cursor-pointer hover:border-primary-600 relative;
+  @apply w-full h-10 rounded-md border-2 border-solid border-primary-400 box-content cursor-pointer hover:border-primary-600 relative mb-5;
 }
 
 .select--disabled {
@@ -164,7 +164,7 @@
 }
 
 .select__option {
-  @apply border-primary-400 w-full border-2 absolute top-8 rounded-b-md max-h-40 overflow-y-auto bg-gray-100 z-10;
+  @apply border-primary-400 w-full border-2 absolute top-12 rounded-b-md max-h-40 overflow-y-auto bg-gray-100 z-10;
 }
 
 .select__option--item {
