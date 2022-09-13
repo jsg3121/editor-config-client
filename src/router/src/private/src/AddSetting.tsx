@@ -41,6 +41,7 @@ const AddSetting: React.FC = () => {
                     <FormItem.Select
                       label={item}
                       onSelect={handleSelect}
+                      defaultValue={data.Options[item]}
                       options={Object.keys(data.Description[item].value)}
                     />
                   </React.Fragment>
