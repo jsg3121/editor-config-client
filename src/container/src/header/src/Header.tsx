@@ -10,22 +10,13 @@ const Header: React.FC = () => {
 
   const dispatch = useDispatch()
 
-  const handleClick = React.useCallback(() => {
+  const handleClickLogout = React.useCallback(() => {
     dispatch(Actions.account.logout(accessToken))
-  }, [])
+  }, [accessToken, dispatch])
 
-  const profile = React.useMemo(() => {
-    return (
-      <button className="profile__icon">
-        <picture>
-          <figure>
-            <ProfileIcon width={20} height={20} />
-          </figure>
-        </picture>
-        <h2 className="profile__text">{name}</h2>
-      </button>
-    )
-  }, [])
+  const handleClickMypage = React.useCallback(() => {
+    dispatch(Actions.routerActions.push('/mypage'))
+  }, [dispatch])
 
   return (
     <header className="header">
@@ -38,19 +29,37 @@ const Header: React.FC = () => {
         <Dropdown
           options={[
             {
+              key: 'mypage',
+              label: (
+                <Button
+                  label="마이페이지"
+                  onClick={handleClickMypage}
+                  buttonType="primary"
+                  size="small"
+                />
+              ),
+            },
+            {
               key: 'logout',
               label: (
                 <Button
                   label="로그아웃"
-                  onClick={handleClick}
-                  buttonType="default"
+                  onClick={handleClickLogout}
+                  buttonType="danger"
                   size="small"
                 />
               ),
             },
           ]}
         >
-          {profile}
+          <button className="profile__icon">
+            <picture>
+              <figure>
+                <ProfileIcon width={20} height={20} fill="#dddddd" />
+              </figure>
+            </picture>
+            <h2 className="profile__text">{name}</h2>
+          </button>
         </Dropdown>
       </div>
     </header>

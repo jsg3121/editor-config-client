@@ -1,5 +1,6 @@
-import React from 'react'
 import isEqual from 'fast-deep-equal'
+import React from 'react'
+import { useSelect } from '../../../../hook'
 import SelectOption from './SelectOption'
 
 interface SelectProps {
@@ -18,21 +19,29 @@ const Select: React.FC<SelectProps> = (props) => {
     disabled = false,
     onSelect,
   } = props
-  const [isSelect, setIsSelect] = React.useState<boolean>(false)
   const [selectVal, setSelectVal] = React.useState<string>(value)
 
-  const handleClick = React.useCallback(() => {
-    setIsSelect((isSelect) => !isSelect)
-  }, [])
+  const optionRef = React.useRef<HTMLDivElement>(null)
+  const [isOpen, handleOpen] = useSelect(optionRef)
 
-  const handleSelect = React.useCallback((val: string) => {
-    setSelectVal(val)
-    setIsSelect(false)
-    onSelect(val)
-  }, [])
+  const handleClick = React.useCallback(() => {
+    handleOpen()
+  }, [handleOpen])
+
+  const handleSelect = React.useCallback(
+    (val: string) => {
+      setSelectVal(val)
+      handleOpen()
+      onSelect(val)
+    },
+    [handleOpen, onSelect]
+  )
 
   return (
-    <div className={['select', disabled ? 'select--disabled' : ''].join(' ')}>
+    <div
+      className={`select ${disabled ? 'select--disabled' : ''}`}
+      ref={optionRef}
+    >
       <div className="select__input" onClick={handleClick}>
         <p className="select__input--value">
           {selectVal ? selectVal : placeholder}
@@ -43,7 +52,7 @@ const Select: React.FC<SelectProps> = (props) => {
           </svg>
         </i>
       </div>
-      {isSelect && (
+      {isOpen && (
         <div className="select__option">
           <ul>
             {options.map((item, index) => {

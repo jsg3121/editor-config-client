@@ -1,12 +1,12 @@
 import { useCallback } from 'react'
-import { Path, UseFormRegister } from 'react-hook-form'
+import { FieldValues, Path, UseFormRegister } from 'react-hook-form'
 
-interface TextProps<T> {
+interface TextProps<T extends FieldValues> {
   type: 'text' | 'password'
   mode: 'edit' | 'primary' | 'error' | 'success'
   inputSize: 'large' | 'medium' | 'small'
   label: Path<T>
-  required: boolean
+  required?: boolean
   pattern?: {
     rule: RegExp
     description: string
@@ -17,7 +17,7 @@ interface TextProps<T> {
   onChange?: (val: string) => void
 }
 
-export const Text = <T extends unknown>(props: TextProps<T>) => {
+export const Text = <T extends FieldValues>(props: TextProps<T>) => {
   const {
     type,
     value,
@@ -25,17 +25,20 @@ export const Text = <T extends unknown>(props: TextProps<T>) => {
     inputSize,
     disabled = false,
     onChange,
-    required,
+    required = false,
     label,
     register,
     pattern,
   } = props
 
-  const handleChange = useCallback((e: { target: { value: string } }) => {
-    if (onChange) {
-      onChange(e.target.value)
-    }
-  }, [])
+  const handleChange = useCallback(
+    (e: { target: { value: string } }) => {
+      if (onChange) {
+        onChange(e.target.value)
+      }
+    },
+    [onChange]
+  )
 
   return (
     <input

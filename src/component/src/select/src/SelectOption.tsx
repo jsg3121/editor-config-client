@@ -11,7 +11,7 @@ const SelectOption: React.FC<SelectOptionProps> = (props) => {
 
   const handleClick = React.useCallback(() => {
     onSelect(value)
-  }, [])
+  }, [onSelect, value])
 
   return (
     <li className="select__option--item" onClick={handleClick}>

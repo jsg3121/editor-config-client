@@ -9,7 +9,7 @@ type UseDebounce = () => [string, DebounceType]
  * @author 장선규 jsg3121
  * @returns [마지막 문자열, debounce 함수 ]
  */
-const useDebounce: UseDebounce = () => {
+export const useDebounce: UseDebounce = () => {
   const [value, setValue] = useState<string>('')
   const [keyword, setKeyword] = useState<string>('')
 
@@ -26,5 +26,3 @@ const useDebounce: UseDebounce = () => {
 
   return [keyword, debounce]
 }
-
-export default useDebounce

@@ -1,1 +1,1 @@
-export { default as Main } from './src/Main'
+export { default as PrivateRoute } from './PrivateRoute'
