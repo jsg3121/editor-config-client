@@ -6,7 +6,7 @@ interface FormSelectProps {
   label: string
   options: Array<string>
   defaultValue?: string
-  onSelect: (value: string) => void
+  onSelect: (value: { label: string; value: string }) => void
 }
 
 const FormSelect: React.FC<FormSelectProps> = (props) => {
@@ -14,9 +14,9 @@ const FormSelect: React.FC<FormSelectProps> = (props) => {
 
   const handleSelect = React.useCallback(
     (value: string) => {
-      onSelect(value)
+      onSelect({ label, value })
     },
-    [onSelect]
+    [label, onSelect]
   )
 
   return (

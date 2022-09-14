@@ -2,7 +2,7 @@ import isEqual from 'fast-deep-equal'
 import React from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { RegExp } from '../../../../common'
-import { Modal } from '../../../../component'
+import { Button, Modal } from '../../../../component'
 import { Form, FormItem } from '../../../../container'
 import { Actions, useDispatch, useSelector } from '../../../../store'
 import '../../../../style/login.scss'
@@ -13,7 +13,10 @@ const SignUp: React.FC = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<SignUpRequestForm>()
+
   const { isModal } = useSelector((store) => store.common)
+  const { isLoading } = useSelector((store) => store.account)
+
   const dispatch = useDispatch()
 
   const handleClickModal = React.useCallback(
@@ -26,6 +29,10 @@ const SignUp: React.FC = () => {
     [dispatch]
   )
 
+  const handleClickRoute = React.useCallback(() => {
+    dispatch(Actions.routerActions.push('/login'))
+  }, [dispatch])
+
   const onSubmit: SubmitHandler<SignUpRequestForm> = React.useCallback(
     (data) => {
       dispatch(Actions.account.signup(data))
@@ -33,12 +40,31 @@ const SignUp: React.FC = () => {
     [dispatch]
   )
 
+  const buttons = React.useMemo(() => {
+    return (
+      <>
+        <Button
+          label="가입하기"
+          isLoading={isLoading}
+          type="submit"
+          buttonType="primary"
+        />
+        <Button
+          label="뒤로가기"
+          type="button"
+          buttonType="default"
+          onClick={handleClickRoute}
+        />
+      </>
+    )
+  }, [handleClickRoute, isLoading])
+
   return (
     <>
       <section className="login__container">
         <article className="login__container--form">
           <h1 className="form__title">회원 가입</h1>
-          <Form onSubmit={handleSubmit(onSubmit)}>
+          <Form onSubmit={handleSubmit(onSubmit)} buttons={buttons}>
             <FormItem.Text
               type="text"
               name="Email"

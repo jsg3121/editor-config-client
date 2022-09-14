@@ -1,39 +1,82 @@
 import { useQuery } from '@tanstack/react-query'
 import isEqual from 'fast-deep-equal'
+import { observer } from 'mobx-react'
 import React from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
+import { Button } from '../../../../component'
 import { Form, FormItem } from '../../../../container'
+import { useMobxStore } from '../../../../hook'
 import { ConfigInfoService } from '../../../../service'
+import { Actions, useDispatch } from '../../../../store'
 import '../../../../style/setting.scss'
 
-const AddSetting: React.FC = () => {
-  const [detail, setDetail] = React.useState<string>()
-
+const AddSetting: React.FC = observer(() => {
+  const dispatch = useDispatch()
   const { data } = useQuery([`info/config`], ConfigInfoService.getConfigInfo)
-
   const { register, handleSubmit, setValue } = useForm<SettingList>()
 
-  const onSubmit: SubmitHandler<SettingList> = React.useCallback((data) => {
-    console.log(data)
-  }, [])
+  const { config } = useMobxStore()
 
-  const handleSelect = React.useCallback((val: string) => {
-    // setValue('configDetail', val)
-    setDetail(val)
-  }, [])
+  const onSubmit: SubmitHandler<SettingList> = React.useCallback(
+    (data) => {
+      console.log(config)
+      console.log(config.configDetail)
+      console.log(data)
+    },
+    [config]
+  )
 
-  const handleChange = React.useCallback((val: boolean | string) => {
-    console.log(val)
-  }, [])
+  const handleSelect = React.useCallback(
+    (val: { label: string; value: string }) => {
+      config.changeConfig(val.label, val.value)
+    },
+    [config]
+  )
+
+  const handleChange = React.useCallback(
+    (val: { label: string; value: boolean | string }) => {
+      config.changeConfig(val.label, val.value)
+    },
+    [config]
+  )
+
+  const handleClickRoute = React.useCallback(() => {
+    dispatch(Actions.routerActions.push('/board'))
+  }, [dispatch])
+
+  const buttons = React.useMemo(() => {
+    return (
+      <>
+        <Button label="저장하기" type="submit" buttonType="primary" />
+        <Button
+          label="뒤로가기"
+          type="button"
+          buttonType="default"
+          onClick={handleClickRoute}
+        />
+      </>
+    )
+  }, [handleClickRoute])
+
+  React.useEffect(() => {
+    config.initConfig(data)
+  }, [config, data])
 
   return (
     <div className="setting">
       <div className="setting__form">
-        <Form onSubmit={handleSubmit(onSubmit)}>
+        <Form onSubmit={handleSubmit(onSubmit)} buttons={buttons}>
           <FormItem.Text
             inputSize="large"
             label="configName"
             name="저장명"
+            register={register}
+            type="text"
+          />
+          <FormItem.Text
+            inputSize="large"
+            label="configType"
+            name="파일 타입"
             register={register}
             type="text"
           />
@@ -76,6 +119,6 @@ const AddSetting: React.FC = () => {
       </div>
     </div>
   )
-}
+})
 
 export default React.memo(AddSetting, isEqual)
