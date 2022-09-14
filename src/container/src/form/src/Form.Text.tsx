@@ -19,7 +19,6 @@ interface FormItemProps<T extends FieldValues> {
     description: string
   }
   register: UseFormRegister<T>
-  onValid?: (val: string, type: string) => void
 }
 
 interface Mode {
@@ -28,7 +27,7 @@ interface Mode {
 }
 
 const FormItem = <T extends FieldValues>(props: FormItemProps<T>) => {
-  const { onValid, name, isDebounce, errors, pattern, label, ...rest } = props
+  const { name, isDebounce, errors, pattern, label, ...rest } = props
   const [inputStatus, setInputStatus] = React.useState<Mode>({
     type: 'primary',
   })

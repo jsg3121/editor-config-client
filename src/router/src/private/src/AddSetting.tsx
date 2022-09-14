@@ -22,6 +22,10 @@ const AddSetting: React.FC = () => {
     setDetail(val)
   }, [])
 
+  const handleChange = React.useCallback((val: boolean | string) => {
+    console.log(val)
+  }, [])
+
   return (
     <div className="setting">
       <div className="setting__form">
@@ -46,8 +50,26 @@ const AddSetting: React.FC = () => {
                     />
                   </React.Fragment>
                 )
+              } else if (data.Description[item].type === 'boolean') {
+                return (
+                  <React.Fragment key={index}>
+                    <FormItem.Switch
+                      label={item}
+                      onChange={handleChange}
+                      defaultValue={data.Options[item]}
+                    />
+                  </React.Fragment>
+                )
               } else {
-                return null
+                return (
+                  <React.Fragment key={index}>
+                    <FormItem.Number
+                      label={item}
+                      onChange={handleChange}
+                      defaultValue={data.Options[item]}
+                    />
+                  </React.Fragment>
+                )
               }
             })}
         </Form>

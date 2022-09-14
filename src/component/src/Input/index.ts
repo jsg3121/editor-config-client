@@ -5,3 +5,5 @@ export const Input = {
   Text,
   Checkbox,
 }
+
+export { default as Number } from './src/Number'
