@@ -6,7 +6,6 @@ interface FormContainerProps {
   children: React.ReactNode
   buttons: React.ReactNode
   onSubmit: (event: React.FormEvent) => void
-  onActive?: () => void
 }
 
 const FormContainer: React.FC<FormContainerProps> = (props) => {

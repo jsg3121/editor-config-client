@@ -1,6 +1,6 @@
 import React from 'react'
 import isEqual from 'fast-deep-equal'
-import { Number } from '../../../../component/src/input'
+import { Number } from '../../input'
 
 interface FormNumberProps {
   label: string
