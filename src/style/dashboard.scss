@@ -1,5 +1,6 @@
 .dashboard {
-  @apply grid grid-cols-3 gap-4 w-full h-full p-4;
+  @apply grid grid-cols-3 gap-4 w-full p-4;
+  height: calc(100% - 5rem);
 
   & > div {
     @apply w-full border rounded-md border-primary-500 bg-gradient-to-b from-primary-700 to-primary-900;

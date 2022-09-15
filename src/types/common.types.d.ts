@@ -10,7 +10,7 @@ declare global {
   type SettingList = {
     configName: string
     configType: string
-    configDetail: string
+    configDetail: object
   }
 
   interface LoginRequestForm {

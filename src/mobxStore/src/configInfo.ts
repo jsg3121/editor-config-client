@@ -15,8 +15,7 @@ export class ConfigStore {
 
   @action
   public changeConfig(label: keyof ConfigTypes.IDetailes, value: string) {
-    console.log(label, value)
-    this.configDetail = { [label]: value, ...this.configDetail }
+    this.configDetail = { ...this.configDetail, [label]: value }
   }
 
   @action

@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query'
+import { useMutation, useQuery } from '@tanstack/react-query'
 import isEqual from 'fast-deep-equal'
 import { observer } from 'mobx-react'
 import React from 'react'
@@ -7,23 +7,31 @@ import { Button } from '../../../../component'
 import { Form, FormItem } from '../../../../container'
 import { useMobxStore } from '../../../../hook'
 import { ConfigInfoService } from '../../../../service'
-import { Actions, useDispatch } from '../../../../store'
+import { Actions, useDispatch, useSelector } from '../../../../store'
 import '../../../../style/setting.scss'
 
 const AddSetting: React.FC = observer(() => {
+  const { id } = useSelector((store) => store.account)
   const dispatch = useDispatch()
   const { data } = useQuery([`info/config`], ConfigInfoService.getConfigInfo)
-  const { register, handleSubmit, setValue } = useForm<SettingList>()
+  const { mutate } = useMutation(ConfigInfoService.patchConfigInfo)
+  const { register, handleSubmit } = useForm<SettingList>()
 
   const { config } = useMobxStore()
 
   const onSubmit: SubmitHandler<SettingList> = React.useCallback(
     (data) => {
-      console.log(config)
-      console.log(config.configDetail)
-      console.log(data)
+      const formData = {
+        userId: id,
+        ...data,
+        configDetail: {
+          ...config.configDetail,
+        },
+      }
+
+      mutate(formData)
     },
-    [config]
+    [config, id, mutate]
   )
 
   const handleSelect = React.useCallback(
@@ -59,7 +67,9 @@ const AddSetting: React.FC = observer(() => {
   }, [handleClickRoute])
 
   React.useEffect(() => {
-    config.initConfig(data)
+    if (data) {
+      config.initConfig(data.Options)
+    }
   }, [config, data])
 
   return (

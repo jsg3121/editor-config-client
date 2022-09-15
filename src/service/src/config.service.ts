@@ -9,4 +9,17 @@ const getConfigInfo = async () => {
     .then((res) => res.data)
 }
 
-export const ConfigInfoService = { getConfigInfo }
+const patchConfigInfo = async (form: any) => {
+  return await http
+    .request({
+      url: 'http://localhost:4000/api/config/file',
+      method: 'POST',
+      data: form,
+    })
+    .then((res) => res.data)
+    .catch((err) => {
+      throw err
+    })
+}
+
+export const ConfigInfoService = { getConfigInfo, patchConfigInfo }
