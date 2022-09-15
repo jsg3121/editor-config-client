@@ -10,7 +10,7 @@ declare global {
   type SettingList = {
     configName: string
     configType: string
-    configDetail: string
+    configDetail: object
   }
 
   interface LoginRequestForm {
@@ -30,6 +30,7 @@ declare global {
       refreshTokenExp: string
       email: string
       name: string
+      id: number
     }
   }
 
@@ -66,6 +67,7 @@ declare global {
       newRefreshTokenExp?: string
       email: string
       name: string
+      id: number
     }
   }
 }

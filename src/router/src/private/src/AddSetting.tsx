@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query'
+import { useMutation, useQuery } from '@tanstack/react-query'
 import isEqual from 'fast-deep-equal'
 import { observer } from 'mobx-react'
 import React from 'react'
@@ -7,23 +7,31 @@ import { Button } from '../../../../component'
 import { Form, FormItem } from '../../../../container'
 import { useMobxStore } from '../../../../hook'
 import { ConfigInfoService } from '../../../../service'
-import { Actions, useDispatch } from '../../../../store'
+import { Actions, useDispatch, useSelector } from '../../../../store'
 import '../../../../style/setting.scss'
 
 const AddSetting: React.FC = observer(() => {
+  const { id, accessToken } = useSelector((store) => store.account)
   const dispatch = useDispatch()
   const { data } = useQuery([`info/config`], ConfigInfoService.getConfigInfo)
-  const { register, handleSubmit, setValue } = useForm<SettingList>()
+  const { mutate, isLoading } = useMutation(ConfigInfoService.patchConfigInfo)
+  const { register, handleSubmit } = useForm<SettingList>()
 
   const { config } = useMobxStore()
 
   const onSubmit: SubmitHandler<SettingList> = React.useCallback(
     (data) => {
-      console.log(config)
-      console.log(config.configDetail)
-      console.log(data)
+      const formData = {
+        userId: id,
+        ...data,
+        configDetail: {
+          ...config.configDetail,
+        },
+      }
+
+      mutate({ data: formData, token: accessToken })
     },
-    [config]
+    [accessToken, config, id, mutate]
   )
 
   const handleSelect = React.useCallback(
@@ -47,7 +55,13 @@ const AddSetting: React.FC = observer(() => {
   const buttons = React.useMemo(() => {
     return (
       <>
-        <Button label="저장하기" type="submit" buttonType="primary" />
+        <Button
+          label="저장하기"
+          type="submit"
+          buttonType="primary"
+          isLoading={isLoading}
+          disabled={isLoading}
+        />
         <Button
           label="뒤로가기"
           type="button"
@@ -56,10 +70,12 @@ const AddSetting: React.FC = observer(() => {
         />
       </>
     )
-  }, [handleClickRoute])
+  }, [handleClickRoute, isLoading])
 
   React.useEffect(() => {
-    config.initConfig(data)
+    if (data) {
+      config.initConfig(data.Options)
+    }
   }, [config, data])
 
   return (

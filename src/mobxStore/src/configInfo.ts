@@ -14,13 +14,12 @@ export class ConfigStore {
   }
 
   @action
-  public changeConfig(label: keyof ConfigTypes.IDetailes, value: string) {
-    console.log(label, value)
-    this.configDetail = { [label]: value, ...this.configDetail }
+  public changeConfig(label: string, value: string | boolean) {
+    this.configDetail = { ...this.configDetail, [label]: value }
   }
 
   @action
-  public initConfig(data: any) {
+  public initConfig(data: ConfigTypes.IDetailes) {
     this.configDetail = data
   }
 }
