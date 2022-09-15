@@ -14,11 +14,7 @@ const AddSetting: React.FC = observer(() => {
   const { id, accessToken } = useSelector((store) => store.account)
   const dispatch = useDispatch()
   const { data } = useQuery([`info/config`], ConfigInfoService.getConfigInfo)
-  const {
-    mutate,
-    isLoading,
-    data: mutateData,
-  } = useMutation(ConfigInfoService.patchConfigInfo)
+  const { mutate, isLoading } = useMutation(ConfigInfoService.patchConfigInfo)
   const { register, handleSubmit } = useForm<SettingList>()
 
   const { config } = useMobxStore()
@@ -75,10 +71,6 @@ const AddSetting: React.FC = observer(() => {
       </>
     )
   }, [handleClickRoute, isLoading])
-
-  React.useEffect(() => {
-    console.log(mutateData)
-  }, [mutateData])
 
   React.useEffect(() => {
     if (data) {
