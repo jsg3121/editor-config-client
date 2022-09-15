@@ -14,7 +14,11 @@ const patchConfigInfo = async (form: any) => {
     .request({
       url: 'http://localhost:4000/api/config/file',
       method: 'POST',
-      data: form,
+      data: form.data,
+      headers: {
+        'Content-Type': 'application/JSON',
+        authorization: `Bearer ${form.token}`,
+      },
     })
     .then((res) => res.data)
     .catch((err) => {

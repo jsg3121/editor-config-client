@@ -30,6 +30,7 @@ declare global {
       refreshTokenExp: string
       email: string
       name: string
+      id: number
     }
   }
 
@@ -66,6 +67,7 @@ declare global {
       newRefreshTokenExp?: string
       email: string
       name: string
+      id: number
     }
   }
 }

@@ -43,6 +43,7 @@ const accountReducer = createReducer<AccountStateTypes>(
             draft.refreshTokenExp = payload.data.refreshTokenExp
             draft.email = payload.data.email
             draft.name = payload.data.name
+            draft.id = payload.data.id
           } else {
             draft.isLoading = false
             draft.isLogin = payload.data.isLogin
@@ -58,6 +59,7 @@ const accountReducer = createReducer<AccountStateTypes>(
           draft.isLogin = payload.data.isLogin
           draft.email = payload.data.email
           draft.name = payload.data.name
+          draft.id = payload.data.id
           draft.accessToken = JSON.parse(access).accessToken
           draft.accessTokenExp = JSON.parse(access).accessTokenExp
           draft.refreshToken = JSON.parse(refresh).refreshToken

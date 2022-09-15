@@ -11,10 +11,14 @@ import { Actions, useDispatch, useSelector } from '../../../../store'
 import '../../../../style/setting.scss'
 
 const AddSetting: React.FC = observer(() => {
-  const { id } = useSelector((store) => store.account)
+  const { id, accessToken } = useSelector((store) => store.account)
   const dispatch = useDispatch()
   const { data } = useQuery([`info/config`], ConfigInfoService.getConfigInfo)
-  const { mutate } = useMutation(ConfigInfoService.patchConfigInfo)
+  const {
+    mutate,
+    isLoading,
+    data: mutateData,
+  } = useMutation(ConfigInfoService.patchConfigInfo)
   const { register, handleSubmit } = useForm<SettingList>()
 
   const { config } = useMobxStore()
@@ -29,9 +33,9 @@ const AddSetting: React.FC = observer(() => {
         },
       }
 
-      mutate(formData)
+      mutate({ data: formData, token: accessToken })
     },
-    [config, id, mutate]
+    [accessToken, config, id, mutate]
   )
 
   const handleSelect = React.useCallback(
@@ -55,7 +59,13 @@ const AddSetting: React.FC = observer(() => {
   const buttons = React.useMemo(() => {
     return (
       <>
-        <Button label="저장하기" type="submit" buttonType="primary" />
+        <Button
+          label="저장하기"
+          type="submit"
+          buttonType="primary"
+          isLoading={isLoading}
+          disabled={isLoading}
+        />
         <Button
           label="뒤로가기"
           type="button"
@@ -64,7 +74,11 @@ const AddSetting: React.FC = observer(() => {
         />
       </>
     )
-  }, [handleClickRoute])
+  }, [handleClickRoute, isLoading])
+
+  React.useEffect(() => {
+    console.log(mutateData)
+  }, [mutateData])
 
   React.useEffect(() => {
     if (data) {
