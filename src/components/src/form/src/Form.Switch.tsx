@@ -1,6 +1,6 @@
 import React from 'react'
 import isEqual from 'fast-deep-equal'
-import { Switch } from '../../../../component'
+import { Switch } from '../../..'
 
 interface FormSwitchProps {
   label: string

@@ -4,13 +4,13 @@ import { Number } from '../../input'
 
 interface FormNumberProps {
   label: string
-  defaultValue?: string
+  defaultValue?: number
   disabled?: boolean
   onChange: (value: { label: string; value: string }) => void
 }
 
 const FormNumber: React.FC<FormNumberProps> = (props) => {
-  const { label, defaultValue = '', disabled, onChange } = props
+  const { label, defaultValue = 0, disabled, onChange } = props
 
   const handleChange = React.useCallback(
     (value: string) => {

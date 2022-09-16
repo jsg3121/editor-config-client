@@ -1,7 +1,7 @@
 import isEqual from 'fast-deep-equal'
 import React from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import { Button, Input, Modal } from '../../../../component'
+import { Button, Input, Modal } from '../../../../components'
 import { Actions, useDispatch, useSelector } from '../../../../store'
 import '../../../../style/login.scss'
 

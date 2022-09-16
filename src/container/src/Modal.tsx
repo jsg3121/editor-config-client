@@ -1,7 +1,7 @@
 import React from 'react'
 import isEqual from 'fast-deep-equal'
 import { Actions, useDispatch, useSelector } from '../../store'
-import { Modal } from '../../component'
+import { Modal } from '../../components'
 
 const ModalContainer: React.FC = () => {
   const { isModal } = useSelector((store) => store.common)

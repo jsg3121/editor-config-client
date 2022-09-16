@@ -1,7 +1,7 @@
 import isEqual from 'fast-deep-equal'
 import React from 'react'
 import { ReactComponent as ProfileIcon } from '../../../../assets/images/profile.svg'
-import { Button, Dropdown } from '../../../../component'
+import { Button, Dropdown } from '../../../../components'
 import { Actions, useDispatch, useSelector } from '../../../../store'
 import '../../../../style/header.scss'
 

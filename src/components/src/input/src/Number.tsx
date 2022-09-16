@@ -2,7 +2,7 @@ import { ChangeEvent, memo, useCallback } from 'react'
 import isEqual from 'fast-deep-equal'
 
 interface NumberProps {
-  defaultValue: string
+  defaultValue: number
   disabled?: boolean
   onChange: (value: string) => void
 }

@@ -1,6 +1,6 @@
 import isEqual from 'fast-deep-equal'
 import React from 'react'
-import { SNBItem } from '../../../../component/src/SNB'
+import { SNBItem } from '../../../../components/src/SNB'
 import '../../../../style/snb.scss'
 
 const SNB: React.FC = () => {

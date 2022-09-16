@@ -1,7 +1,7 @@
 import React from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { RegExp } from '../../../../common'
-import { Button, Form, FormItem } from '../../../../component'
+import { Button, Form, FormItem } from '../../../../components'
 import { Actions, useDispatch, useSelector } from '../../../../store'
 
 const SignUpForm: React.FC = () => {

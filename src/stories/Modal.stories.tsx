@@ -1,5 +1,5 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react'
-import { Modal } from '../component'
+import { Modal } from '../components'
 import '../index.css'
 import '../style/component.scss'
 

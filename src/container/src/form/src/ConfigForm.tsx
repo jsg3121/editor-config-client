@@ -1,45 +1,47 @@
-import { useMutation, useQuery } from '@tanstack/react-query'
 import React from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import { Button, Form, FormItem } from '../../../../component'
-import { useMobxStore } from '../../../../hook'
-import { ConfigInfoService } from '../../../../service'
+import { selectOptions } from '../../../../common'
+import { Button, Form, FormItem } from '../../../../components'
+import { ConfigContext } from '../../../../context'
 import { Actions, useDispatch, useSelector } from '../../../../store'
 
 const ConfigForm: React.FC = () => {
+  const { data, mutate, isLoading, config } = React.useContext(ConfigContext)
+
   const { id, accessToken } = useSelector((store) => store.account)
   const dispatch = useDispatch()
-  const { data } = useQuery([`info/config`], ConfigInfoService.getConfigInfo)
-  const { mutate, isLoading } = useMutation(ConfigInfoService.patchConfigInfo)
   const { register, handleSubmit } = useForm<SettingList>()
-
-  const { config } = useMobxStore()
 
   const onSubmit: SubmitHandler<SettingList> = React.useCallback(
     (data) => {
-      const formData = {
-        userId: id,
-        ...data,
-        configDetail: {
-          ...config.configDetail,
-        },
+      if (mutate && config) {
+        const formData = {
+          userId: id,
+          ...data,
+          configDetail: {
+            ...config.configDetail,
+          },
+        }
+        mutate({ data: formData, token: accessToken })
       }
-
-      mutate({ data: formData, token: accessToken })
     },
     [accessToken, config, id, mutate]
   )
 
   const handleSelect = React.useCallback(
     (val: { label: string; value: string }) => {
-      config.changeConfig(val.label, val.value)
+      if (config) {
+        config.changeConfig(val.label, val.value)
+      }
     },
     [config]
   )
 
   const handleChange = React.useCallback(
     (val: { label: string; value: boolean | string }) => {
-      config.changeConfig(val.label, val.value)
+      if (config) {
+        config.changeConfig(val.label, val.value)
+      }
     },
     [config]
   )
@@ -68,12 +70,6 @@ const ConfigForm: React.FC = () => {
     )
   }, [handleClickRoute, isLoading])
 
-  React.useEffect(() => {
-    if (data) {
-      config.initConfig(data.Options)
-    }
-  }, [config, data])
-
   return (
     <>
       <div className="setting__form">
@@ -93,25 +89,27 @@ const ConfigForm: React.FC = () => {
             type="text"
           />
           {data &&
-            Object.keys(data.Description).map((item, index) => {
-              if (data.Description[item].type === 'select') {
+            Object.entries(data.Description).map((item, index) => {
+              const [key, value] = item
+
+              if (value.type === 'select') {
                 return (
                   <React.Fragment key={index}>
                     <FormItem.Select
-                      label={item}
+                      label={key}
                       onSelect={handleSelect}
-                      defaultValue={data.Options[item]}
-                      options={Object.keys(data.Description[item].value)}
+                      defaultValue={'-'}
+                      options={selectOptions(value.value)}
                     />
                   </React.Fragment>
                 )
-              } else if (data.Description[item].type === 'boolean') {
+              } else if (value.type === 'boolean') {
                 return (
                   <React.Fragment key={index}>
                     <FormItem.Switch
-                      label={item}
+                      label={key}
                       onChange={handleChange}
-                      defaultValue={data.Options[item]}
+                      defaultValue={false}
                     />
                   </React.Fragment>
                 )
@@ -119,9 +117,9 @@ const ConfigForm: React.FC = () => {
                 return (
                   <React.Fragment key={index}>
                     <FormItem.Number
-                      label={item}
+                      label={key}
                       onChange={handleChange}
-                      defaultValue={data.Options[item]}
+                      defaultValue={0}
                     />
                   </React.Fragment>
                 )

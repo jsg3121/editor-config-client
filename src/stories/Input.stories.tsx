@@ -1,5 +1,5 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react'
-import { Input } from '../component'
+import { Input } from '../components'
 import '../index.css'
 import '../style/component.scss'
 

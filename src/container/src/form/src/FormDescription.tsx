@@ -1,7 +1,7 @@
 import React from 'react'
 
 interface FormDescriptionProps {
-  description: string
+  description?: string
 }
 
 const FormDescription: React.FC<FormDescriptionProps> = (props) => {

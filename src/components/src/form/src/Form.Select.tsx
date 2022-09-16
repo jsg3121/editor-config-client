@@ -1,6 +1,6 @@
 import isEqual from 'fast-deep-equal'
 import React from 'react'
-import { Select } from '../../../../component'
+import { Select } from '../../..'
 
 interface FormSelectProps {
   label: string
