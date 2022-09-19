@@ -4,12 +4,17 @@ import { ConfigContext } from '../../../../context'
 interface FormDescriptionProps {}
 
 const FormDescription: React.FC<FormDescriptionProps> = () => {
-  const { description } = React.useContext(ConfigContext)
+  const { config } = React.useContext(ConfigContext)
+
+  React.useEffect(() => {
+    if (config) {
+    }
+  }, [config])
 
   return (
     <>
       <div className="setting__descript">
-        <p>{description?.desc}</p>
+        {/* <p>{description?.desc}</p>
         {description &&
           Object.entries(description.value).map((entry, index) => {
             return (
@@ -19,7 +24,7 @@ const FormDescription: React.FC<FormDescriptionProps> = () => {
                 </p>
               </React.Fragment>
             )
-          })}
+          })} */}
       </div>
     </>
   )

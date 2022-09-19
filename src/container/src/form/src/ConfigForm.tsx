@@ -13,8 +13,6 @@ const ConfigForm: React.FC = () => {
   const dispatch = useDispatch()
   const { register, handleSubmit } = useForm<SettingList>()
 
-  console.log('render')
-
   const onSubmit: SubmitHandler<SettingList> = React.useCallback(
     (data) => {
       if (mutate && config) {

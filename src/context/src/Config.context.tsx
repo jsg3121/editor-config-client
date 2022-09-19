@@ -36,33 +36,27 @@ export const ConfigContext = createContext<ContextType>({
 
 export const ConfigProvider: React.FC<ConfigProviderProps> = (props) => {
   const { children } = props
-  const [description, setDescription] = useState<ContextType['description']>()
   const { data } = useQuery([`info/config`], ConfigInfoService.getConfigInfo)
   const { mutate, isLoading } = useMutation(ConfigInfoService.patchConfigInfo)
   const { config } = useMobxStore()
 
   useEffect(() => {
     if (data) {
-      config.initConfig(data.Options)
+      config.initConfig(data)
     }
   }, [config, data])
 
   const selectDescription = useCallback(
     (val: keyof ConfigTypes.IDetailes) => {
-      if (data) {
-        const desc = data.Description[val]?.desc || ''
-        const value = data.Description[val]?.value || ''
-        setDescription({ desc, value: { ...value } })
-      }
+      config.description(val)
     },
-    [data]
+    [config]
   )
 
   const initialValue = {
     data,
     isLoading,
     config,
-    description,
     mutate,
     selectDescription,
   }
