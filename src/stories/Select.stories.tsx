@@ -1,5 +1,5 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react'
-import { Select } from '../component'
+import { Select } from '../components'
 import '../index.css'
 import '../style/component.scss'
 

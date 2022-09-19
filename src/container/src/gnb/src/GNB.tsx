@@ -1,6 +1,6 @@
 import isEqual from 'fast-deep-equal'
 import React from 'react'
-import { Button } from '../../../../component'
+import { Button } from '../../../../components'
 import { Actions, useDispatch } from '../../../../store'
 import '../../../../style/gnb.scss'
 

@@ -2,9 +2,10 @@ import { useMutation } from '@tanstack/react-query'
 import React from 'react'
 import { FieldValues, Path, UseFormRegister } from 'react-hook-form'
 import { formMode } from '../../../../common'
-import { Form, Input } from '../../../../component'
+import { Input } from '../../..'
 import { useDebounce } from '../../../../hook'
 import { AccountService } from '../../../../service'
+import Notice from './Notice'
 
 interface FormItemProps<T extends FieldValues> {
   type: 'text' | 'password'
@@ -86,7 +87,7 @@ const FormItem = <T extends FieldValues>(props: FormItemProps<T>) => {
         mode={inputStatus.type}
         {...rest}
       />
-      <Form.Notice mode={inputStatus} />
+      <Notice mode={inputStatus} />
     </div>
   )
 }

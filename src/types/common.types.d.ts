@@ -10,7 +10,7 @@ declare global {
   type SettingList = {
     configName: string
     configType: string
-    configDetail: object
+    configDetail: ConfigTypes.Idetailes
   }
 
   interface LoginRequestForm {
@@ -72,4 +72,4 @@ declare global {
   }
 }
 
-export default {}
+export {}

@@ -19,9 +19,34 @@ declare namespace ConfigTypes {
 
   interface IDetailes extends IPrettier {}
 
+  type IDescription = {
+    [key in keyof IDetailes]: {
+      desc: string
+      type: string
+      value?: {
+        [k in string]: string
+      }
+    }
+  }
+
   type RootStoreType = {
     name: string
     type: string
     detail: IDetailes
+  }
+
+  interface ConfigDataType {
+    Options: IDetailes
+    Description: IDescription
+  }
+
+  interface RequestConfigType {
+    data: {
+      userId: number
+      configName: string
+      configType: string
+      configDetail: IDetailes
+    }
+    token: string
   }
 }

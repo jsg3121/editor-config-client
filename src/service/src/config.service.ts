@@ -1,15 +1,15 @@
 import http from 'axios'
 
-const getConfigInfo = async () => {
+const getConfigInfo = async (): Promise<ConfigTypes.ConfigDataType> => {
   return await http
-    .request({
+    .request<ConfigTypes.ConfigDataType>({
       url: `http://localhost:4000/api/config/info/prettier`,
       method: 'GET',
     })
     .then((res) => res.data)
 }
 
-const patchConfigInfo = async (form: any) => {
+const patchConfigInfo = async (form: ConfigTypes.RequestConfigType) => {
   return await http
     .request({
       url: 'http://localhost:4000/api/config/file',

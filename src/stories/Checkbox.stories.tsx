@@ -1,7 +1,7 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 import '../style/component.scss'
 import '../index.css'
-import { Input } from '../component'
+import { Input } from '../components'
 
 export default {
   title: 'Input/Checkbox',
