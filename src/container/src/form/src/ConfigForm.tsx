@@ -6,11 +6,14 @@ import { ConfigContext } from '../../../../context'
 import { Actions, useDispatch, useSelector } from '../../../../store'
 
 const ConfigForm: React.FC = () => {
-  const { data, mutate, isLoading, config } = React.useContext(ConfigContext)
+  const { data, isLoading, config, mutate, selectDescription } =
+    React.useContext(ConfigContext)
 
   const { id, accessToken } = useSelector((store) => store.account)
   const dispatch = useDispatch()
   const { register, handleSubmit } = useForm<SettingList>()
+
+  console.log('render')
 
   const onSubmit: SubmitHandler<SettingList> = React.useCallback(
     (data) => {
@@ -49,6 +52,16 @@ const ConfigForm: React.FC = () => {
   const handleClickRoute = React.useCallback(() => {
     dispatch(Actions.routerActions.push('/board'))
   }, [dispatch])
+
+  const handleHover = React.useCallback(
+    (value: string) => {
+      const key = value as keyof ConfigTypes.IDetailes
+      if (selectDescription) {
+        selectDescription(key)
+      }
+    },
+    [selectDescription]
+  )
 
   const buttons = React.useMemo(() => {
     return (
@@ -91,7 +104,6 @@ const ConfigForm: React.FC = () => {
           {data &&
             Object.entries(data.Description).map((item, index) => {
               const [key, value] = item
-
               if (value.type === 'select') {
                 return (
                   <React.Fragment key={index}>
@@ -100,6 +112,7 @@ const ConfigForm: React.FC = () => {
                       onSelect={handleSelect}
                       defaultValue={'-'}
                       options={selectOptions(value.value)}
+                      onHover={handleHover}
                     />
                   </React.Fragment>
                 )
@@ -110,6 +123,7 @@ const ConfigForm: React.FC = () => {
                       label={key}
                       onChange={handleChange}
                       defaultValue={false}
+                      onHover={handleHover}
                     />
                   </React.Fragment>
                 )
@@ -120,6 +134,7 @@ const ConfigForm: React.FC = () => {
                       label={key}
                       onChange={handleChange}
                       defaultValue={0}
+                      onHover={handleHover}
                     />
                   </React.Fragment>
                 )

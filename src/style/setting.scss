@@ -1,7 +1,12 @@
 .setting {
-  @apply w-1/3 h-screen pt-14 mx-auto;
+  @apply w-1/2 h-full pt-14 mx-auto flex items-start;
 }
 
 .setting__form {
-  @apply w-4/5 h-full mx-auto;
+  @apply w-1/2 shrink-0 overflow-auto p-4;
+  height: calc(100vh - 5.5rem);
+}
+
+.setting__descript {
+  @apply w-1/2 h-full shrink-0 p-4;
 }

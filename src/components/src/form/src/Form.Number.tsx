@@ -7,10 +7,11 @@ interface FormNumberProps {
   defaultValue?: number
   disabled?: boolean
   onChange: (value: { label: string; value: string }) => void
+  onHover?: (key: string) => void
 }
 
 const FormNumber: React.FC<FormNumberProps> = (props) => {
-  const { label, defaultValue = 0, disabled, onChange } = props
+  const { label, defaultValue = 0, disabled, onChange, onHover } = props
 
   const handleChange = React.useCallback(
     (value: string) => {
@@ -19,15 +20,21 @@ const FormNumber: React.FC<FormNumberProps> = (props) => {
     [label, onChange]
   )
 
+  const hadleHover = React.useCallback(() => {
+    if (onHover) {
+      onHover(label)
+    }
+  }, [label, onHover])
+
   return (
-    <>
+    <div onMouseEnter={hadleHover}>
       <p className="form__input--label">{label}</p>
       <Number
         defaultValue={defaultValue}
         onChange={handleChange}
         disabled={disabled}
       />
-    </>
+    </div>
   )
 }
 
