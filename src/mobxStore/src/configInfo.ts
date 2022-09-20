@@ -23,7 +23,6 @@ export class ConfigStore {
 
   @action
   public initConfig(data: ConfigTypes.ConfigDataType) {
-    this.configDetail = data.Options
     this.configDescription = data.Description
   }
 
