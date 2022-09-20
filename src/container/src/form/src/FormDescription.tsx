@@ -1,22 +1,18 @@
+import { observer } from 'mobx-react'
 import React from 'react'
 import { ConfigContext } from '../../../../context'
 
 interface FormDescriptionProps {}
 
-const FormDescription: React.FC<FormDescriptionProps> = () => {
+const FormDescription: React.FC<FormDescriptionProps> = observer(() => {
   const { config } = React.useContext(ConfigContext)
-
-  React.useEffect(() => {
-    if (config) {
-    }
-  }, [config])
 
   return (
     <>
       <div className="setting__descript">
-        {/* <p>{description?.desc}</p>
-        {description &&
-          Object.entries(description.value).map((entry, index) => {
+        <p>{config?.selectDescription.desc}</p>
+        {config &&
+          Object.entries(config.selectDescription.value).map((entry, index) => {
             return (
               <React.Fragment key={index}>
                 <p>
@@ -24,10 +20,10 @@ const FormDescription: React.FC<FormDescriptionProps> = () => {
                 </p>
               </React.Fragment>
             )
-          })} */}
+          })}
       </div>
     </>
   )
-}
+})
 
 export default FormDescription

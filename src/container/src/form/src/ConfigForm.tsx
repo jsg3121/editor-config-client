@@ -1,3 +1,4 @@
+import { observer } from 'mobx-react'
 import React from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { selectOptions } from '../../../../common'
@@ -5,7 +6,7 @@ import { Button, Form, FormItem } from '../../../../components'
 import { ConfigContext } from '../../../../context'
 import { Actions, useDispatch, useSelector } from '../../../../store'
 
-const ConfigForm: React.FC = () => {
+const ConfigForm: React.FC = observer(() => {
   const { data, isLoading, config, mutate, selectDescription } =
     React.useContext(ConfigContext)
 
@@ -142,6 +143,6 @@ const ConfigForm: React.FC = () => {
       </div>
     </>
   )
-}
+})
 
 export default ConfigForm
