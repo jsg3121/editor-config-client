@@ -18,6 +18,10 @@ const Header: React.FC = () => {
     dispatch(Actions.routerActions.push('/mypage'))
   }, [dispatch])
 
+  const handleClickMain = React.useCallback(() => {
+    dispatch(Actions.routerActions.push('/board'))
+  }, [dispatch])
+
   return (
     <header className="header">
       <div className="header__logo">
@@ -58,7 +62,9 @@ const Header: React.FC = () => {
                 <ProfileIcon width={20} height={20} fill="#dddddd" />
               </figure>
             </picture>
-            <h2 className="profile__text">{name}</h2>
+            <h2 className="profile__text" onClick={handleClickMain}>
+              {name}
+            </h2>
           </button>
         </Dropdown>
       </div>

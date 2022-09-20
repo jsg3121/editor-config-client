@@ -49,4 +49,15 @@ declare namespace ConfigTypes {
     }
     token: string
   }
+
+  interface ResponseConfigList {
+    code: number
+    data: {
+      id: number
+      userId: number
+      configName: string
+      configType: string
+      configDetail: string
+    }[]
+  }
 }
