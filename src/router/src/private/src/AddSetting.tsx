@@ -1,4 +1,3 @@
-import isEqual from 'fast-deep-equal'
 import React from 'react'
 import { ConfigForm, FormDescription } from '../../../../container'
 import { ConfigProvider } from '../../../../context'
@@ -15,4 +14,4 @@ const AddSetting: React.FC = () => {
   )
 }
 
-export default React.memo(AddSetting, isEqual)
+export default AddSetting

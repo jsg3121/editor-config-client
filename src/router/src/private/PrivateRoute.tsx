@@ -2,7 +2,7 @@ import React from 'react'
 import isEqual from 'fast-deep-equal'
 import { Redirect, Route, Switch } from 'react-router-dom'
 import { Header } from '../../../container'
-import { AddSetting, Main } from './src'
+import { AddSetting, Detail, Main } from './src'
 import { MobxProvider } from '../../../mobxStore'
 
 const PrivateRoute: React.FC = () => {
@@ -13,6 +13,9 @@ const PrivateRoute: React.FC = () => {
         <Switch>
           <Route exact path="/board">
             <Main />
+          </Route>
+          <Route exact path="/detail/:id">
+            <Detail />
           </Route>
           <Route exact path="/mypage">
             <Main />
