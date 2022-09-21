@@ -42,8 +42,25 @@ const getConfigList = async (id: number, accessToken: string) => {
     })
 }
 
+const getDetailConfig = async (id: string, accessToken: string) => {
+  return await http
+    .request({
+      url: `http://localhost:4000/api/config/detail/${id}`,
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/JSON',
+        authorization: `Bearer ${accessToken}`,
+      },
+    })
+    .then((res) => res.data)
+    .catch((err) => {
+      throw err
+    })
+}
+
 export const ConfigInfoService = {
   getConfigInfo,
   patchConfigInfo,
   getConfigList,
+  getDetailConfig,
 }
