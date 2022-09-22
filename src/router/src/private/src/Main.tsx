@@ -1,4 +1,3 @@
-import isEqual from 'fast-deep-equal'
 import React from 'react'
 import { DashBoard, GNB } from '../../../../container'
 
@@ -11,4 +10,4 @@ const Main: React.FC = () => {
   )
 }
 
-export default React.memo(Main, isEqual)
+export default Main

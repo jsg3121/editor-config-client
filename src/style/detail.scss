@@ -1,0 +1,38 @@
+.detail__container {
+  @apply h-screen pt-14 bg-gradient-to-b from-primary-700 to-primary-900;
+}
+
+.detail__content {
+  @apply w-1/2 h-full mx-auto;
+}
+
+.content__info {
+  @apply h-16 w-full flex items-start flex-col justify-center mt-12;
+}
+
+.info--title,
+.info--type {
+  @apply text-base text-primary-100;
+
+  span {
+    @apply text-2xl font-bold;
+  }
+}
+
+.content__config {
+  @apply mt-16;
+}
+
+.config__list {
+  @apply w-full;
+}
+
+.config__list--item {
+  & > div {
+    @apply w-full flex items-center;
+  }
+
+  .config__item--title {
+    @apply w-64;
+  }
+}

@@ -18,9 +18,13 @@ const Header: React.FC = () => {
     dispatch(Actions.routerActions.push('/mypage'))
   }, [dispatch])
 
+  const handleClickMain = React.useCallback(() => {
+    dispatch(Actions.routerActions.push('/board'))
+  }, [dispatch])
+
   return (
     <header className="header">
-      <div className="header__logo">
+      <div className="header__logo" onClick={handleClickMain}>
         <h1>
           Editor <span>Config</span>
         </h1>
