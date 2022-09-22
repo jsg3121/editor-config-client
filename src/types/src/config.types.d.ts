@@ -60,4 +60,16 @@ declare namespace ConfigTypes {
       configDetail: string
     }[]
   }
+
+  interface ResponseDetailConfig {
+    data: {
+      id: number
+      userId: number
+      configName: string
+      configType: string
+      configDetail: string
+      createDate: string
+      updateDate: string | null
+    }
+  }
 }

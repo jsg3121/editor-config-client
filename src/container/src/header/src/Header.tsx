@@ -24,7 +24,7 @@ const Header: React.FC = () => {
 
   return (
     <header className="header">
-      <div className="header__logo">
+      <div className="header__logo" onClick={handleClickMain}>
         <h1>
           Editor <span>Config</span>
         </h1>
@@ -62,9 +62,7 @@ const Header: React.FC = () => {
                 <ProfileIcon width={20} height={20} fill="#dddddd" />
               </figure>
             </picture>
-            <h2 className="profile__text" onClick={handleClickMain}>
-              {name}
-            </h2>
+            <h2 className="profile__text">{name}</h2>
           </button>
         </Dropdown>
       </div>

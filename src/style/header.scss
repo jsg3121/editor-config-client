@@ -3,7 +3,7 @@
 }
 
 .header__logo {
-  @apply w-44 text-center;
+  @apply w-44 text-center cursor-pointer;
 
   h1 {
     @apply text-2xl font-bold text-primary-300;

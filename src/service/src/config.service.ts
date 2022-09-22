@@ -44,7 +44,7 @@ const getConfigList = async (id: number, accessToken: string) => {
 
 const getDetailConfig = async (id: string, accessToken: string) => {
   return await http
-    .request({
+    .request<ConfigTypes.ResponseDetailConfig>({
       url: `http://localhost:4000/api/config/detail/${id}`,
       method: 'GET',
       headers: {
