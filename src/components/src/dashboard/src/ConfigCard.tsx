@@ -1,6 +1,6 @@
 import React from 'react'
 import isEqual from 'fast-deep-equal'
-import { ReactComponent as PrettierIcon } from '../../../../assets/images/prettier.svg'
+import PrettierIcon from '../../../../assets/images/prettier.svg?component'
 import Image from '../../Image'
 
 interface ConfigCardProps {

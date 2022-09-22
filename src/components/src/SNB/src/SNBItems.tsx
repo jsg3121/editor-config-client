@@ -1,6 +1,6 @@
 import React from 'react'
 import isEqual from 'fast-deep-equal'
-import { ReactComponent as ArrowIcon } from '../../../../assets/images/arrow.svg'
+import ArrowIcon from '../../../../assets/images/arrow.svg?component'
 
 interface SNBItemsProps {
   label: string

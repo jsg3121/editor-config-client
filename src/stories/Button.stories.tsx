@@ -1,9 +1,9 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react'
-import { Button as ButtonComponent } from '../components'
+import { Button } from '../components'
 
 export default {
   title: 'Input/Button',
-  component: ButtonComponent,
+  component: Button,
   argTypes: {
     onClick: {
       table: {
@@ -19,12 +19,10 @@ export default {
       defaultValue: false,
     },
   },
-} as ComponentMeta<typeof ButtonComponent>
+} as ComponentMeta<typeof Button>
 
-const Template: ComponentStory<typeof ButtonComponent> = (props) => {
-  const {} = props
-
-  return <ButtonComponent {...props} />
+const Template: ComponentStory<typeof Button> = (props) => {
+  return <Button {...props} />
 }
 
 export const Primary = Template.bind({})
