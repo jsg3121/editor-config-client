@@ -1,24 +1,28 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react'
-import { Switch as SwitchComponent } from '../components'
+import { Switch } from '../components'
 
 export default {
   title: 'Input/Switch',
-  component: SwitchComponent,
+  component: Switch,
   argTypes: {
     onChange: {
       table: {
         disable: true,
       },
     },
+    switchId: {
+      defaultValue: 'switch',
+      table: {
+        disable: true,
+      },
+    },
   },
-} as ComponentMeta<typeof SwitchComponent>
+} as ComponentMeta<typeof Switch>
 
-const Template: ComponentStory<typeof SwitchComponent> = (props) => (
-  <SwitchComponent {...props} />
-)
+const Template: ComponentStory<typeof Switch> = (props) => <Switch {...props} />
 
-export const Switch = Template.bind({})
-Switch.args = {
+export const Primary = Template.bind({})
+Primary.args = {
   label: 'lebel',
   value: false,
 }

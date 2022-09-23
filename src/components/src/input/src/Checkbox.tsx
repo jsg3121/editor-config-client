@@ -30,10 +30,7 @@ export const Checkbox = <T extends FieldValues>(props: ChekboxProps<T>) => {
 
   return (
     <div
-      className={[
-        'input-checkbox',
-        disabled ? 'input-checkbox--disabled' : '',
-      ].join(' ')}
+      className={`input-checkbox ${disabled ? 'input-checkbox--disabled' : ''}`}
     >
       <input
         id={value}
