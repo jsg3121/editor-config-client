@@ -15,23 +15,6 @@
   @apply col-span-2 h-full flex flex-wrap content-start;
 }
 
-.config-list__items {
-  @apply w-24 mr-8 flex flex-col items-center cursor-pointer hover:scale-105 transition-transform;
-  filter: drop-shadow(1px 1px 2px #333333);
-
-  p {
-    @apply text-primary-100;
-  }
-
-  .config-list__items--name {
-    @apply text-lg mt-1;
-  }
-
-  .config-list__items--type {
-    @apply text-sm;
-  }
-}
-
 .dashboard__chart {
   @apply row-span-2;
 }

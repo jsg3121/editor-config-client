@@ -1,7 +1,7 @@
 import React from 'react'
 import isEqual from 'fast-deep-equal'
-import PrettierIcon from '../../../../assets/images/prettier.svg?component'
 import Image from '../../Image'
+import { PrettierIcon } from '../../../../assets'
 
 interface ConfigCardProps {
   configId: number
@@ -22,9 +22,11 @@ const ConfigCard: React.FC<ConfigCardProps> = (props) => {
 
   return (
     <div className="config-list__items" onClick={handleClick}>
-      <Image>
-        <PrettierIcon width={80} height={80} />
-      </Image>
+      {configType === 'prettier' && (
+        <Image>
+          <PrettierIcon width={80} height={80} />
+        </Image>
+      )}
       <p className="config-list__items--name">{configName}</p>
       {configType && <p className="config-list__items--type">{configType}</p>}
       {configRecently && (

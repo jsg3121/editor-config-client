@@ -285,3 +285,20 @@
     border-bottom: 0;
   }
 }
+
+.config-list__items {
+  @apply mr-8 px-2 flex flex-col items-center cursor-pointer hover:scale-105 transition-transform;
+  filter: drop-shadow(1px 1px 2px #333333);
+
+  p {
+    @apply text-primary-100;
+  }
+
+  .config-list__items--name {
+    @apply text-lg mt-1;
+  }
+
+  .config-list__items--type {
+    @apply text-sm;
+  }
+}
