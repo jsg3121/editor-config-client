@@ -13,7 +13,7 @@ interface TextProps<T extends FieldValues> {
   }
   disabled?: boolean
   value?: string
-  register: UseFormRegister<T> | (() => void)
+  register?: UseFormRegister<T> | (() => void)
   onChange?: (val: string) => void
 }
 
@@ -46,7 +46,9 @@ export const Text = <T extends FieldValues>(props: TextProps<T>) => {
       className={`input-text__mode--${mode} input-text__size--${inputSize}`}
       disabled={disabled}
       defaultValue={value}
-      {...register(label, { required, pattern: pattern?.rule })}
+      {...(register && {
+        ...register(label, { required, pattern: pattern?.rule }),
+      })}
       onChange={handleChange}
     />
   )

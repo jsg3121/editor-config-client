@@ -19,7 +19,7 @@ interface FormItemProps<T extends FieldValues> {
     rule: RegExp
     description: string
   }
-  register: UseFormRegister<T>
+  register?: UseFormRegister<T>
 }
 
 interface Mode {
