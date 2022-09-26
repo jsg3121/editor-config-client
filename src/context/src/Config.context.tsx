@@ -33,7 +33,9 @@ export const ConfigProvider: React.FC<ConfigProviderProps> = observer(
   (props) => {
     const { children } = props
     const { data } = useQuery([`info/config`], ConfigInfoService.getConfigInfo)
-    const { mutate, isLoading } = useMutation(ConfigInfoService.patchConfigInfo)
+    const { mutate, isLoading } = useMutation(
+      ConfigInfoService.createConfigInfo
+    )
     const { config } = useMobxStore()
 
     const selectDescription = useCallback(

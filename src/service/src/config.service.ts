@@ -14,11 +14,11 @@ const getConfigInfo = async (): Promise<ConfigTypes.ConfigDataType> => {
 }
 
 /**
- * info : config setting 수정 api
- * @param form 수정된 config 폼
+ * info : config setting 추가 api
+ * @param form 추가 할 config 폼
  * @returns
  */
-const patchConfigInfo = async (form: ConfigTypes.RequestConfigType) => {
+const createConfigInfo = async (form: ConfigTypes.RequestConfigType) => {
   return await http
     .request({
       url: 'http://localhost:4000/api/config/file',
@@ -79,9 +79,22 @@ const getDetailConfig = async (id: string, accessToken: string) => {
     })
 }
 
+const deleteDetailConfig = async (data: ConfigTypes.RequestDeleteConfig) => {
+  const { accessToken, id, userId } = data
+  return await http.request({
+    url: `http://localhost:4000/api/config/delete/${userId}/${id}`,
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/JSON',
+      authorization: `Bearer ${accessToken}`,
+    },
+  })
+}
+
 export const ConfigInfoService = {
   getConfigInfo,
-  patchConfigInfo,
+  createConfigInfo,
   getConfigList,
   getDetailConfig,
+  deleteDetailConfig,
 }

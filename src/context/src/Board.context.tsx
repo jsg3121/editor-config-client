@@ -1,6 +1,6 @@
-import React from 'react'
-import { observer } from 'mobx-react'
 import { useQuery } from '@tanstack/react-query'
+import { observer } from 'mobx-react'
+import React from 'react'
 import { ConfigInfoService } from '../../service'
 import { useSelector } from '../../store'
 
@@ -20,7 +20,6 @@ export const BoardProvider: React.FC<BoardContextProps> = observer((props) => {
 
   const { data: configList } = useQuery(['/api/config/file'], async () => {
     const result = await ConfigInfoService.getConfigList(id, accessToken)
-
     return result.data
   })
 

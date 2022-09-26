@@ -1,8 +1,10 @@
-import { useQuery } from '@tanstack/react-query'
+import { useMutation, useQuery } from '@tanstack/react-query'
 import React from 'react'
 import { useParams } from 'react-router-dom'
+import { Button, Modal } from '../../../../components'
+import { DetailInfo } from '../../../../container'
 import { ConfigInfoService } from '../../../../service'
-import { useSelector } from '../../../../store'
+import { Actions, useDispatch, useSelector } from '../../../../store'
 import '../../../../style/detail.scss'
 
 type RouteParams = {
@@ -21,7 +23,8 @@ type DetailType = {
 
 const Detail: React.FC = () => {
   const { id } = useParams<RouteParams>()
-  const { accessToken } = useSelector((store) => store.account)
+  const { accessToken, id: userId } = useSelector((store) => store.account)
+  const dispatch = useDispatch()
 
   const { data } = useQuery<DetailType>([`/detail/${id}`], async () => {
     const result = await ConfigInfoService.getDetailConfig(id, accessToken)
@@ -34,37 +37,42 @@ const Detail: React.FC = () => {
     }
   })
 
-  React.useEffect(() => {
-    console.log(data)
-  }, [data])
+  const { mutate, isSuccess } = useMutation(
+    ConfigInfoService.deleteDetailConfig
+  )
+
+  const handleDelete = React.useCallback(() => {
+    const confirm = window.confirm('정말 삭제하시겠습니까?')
+    if (mutate && confirm) {
+      mutate({ id, userId, accessToken })
+    }
+  }, [accessToken, id, mutate, userId])
+
+  const hadleClickRouteModal = React.useCallback(() => {
+    dispatch(Actions.routerActions.replace('/board'))
+  }, [dispatch])
 
   return (
     <section className="detail__container">
-      <article className="detail__content">
-        <div className="content__info">
-          <h1 className="info--title">
-            설정 명 : <span>{data && data.configName}</span>
-          </h1>
-          <h2 className="info--type">
-            설정 타입 : <span>{data && data.configType}</span>
-          </h2>
+      <div className="detail__button">
+        <div className="button__box">
+          <Button buttonType="primary" label="수정" size="medium" />
+          <Button
+            buttonType="danger"
+            label="설정 삭제"
+            size="medium"
+            onClick={handleDelete}
+          />
         </div>
-        <div className="content__config">
-          <ul className="config__list">
-            {data &&
-              Object.entries(data.configDetail).map((item, index) => {
-                return (
-                  <li className="config__list--item" key={index}>
-                    <div>
-                      <p className="config__item--title">{item[0]} :</p>
-                      <p className="config__item--value">{String(item[1])}</p>
-                    </div>
-                  </li>
-                )
-              })}
-          </ul>
-        </div>
-      </article>
+      </div>
+      <DetailInfo data={data} />
+      {isSuccess && (
+        <Modal
+          onClick={hadleClickRouteModal}
+          description="성공적으로 삭제 되었습니다."
+          type="primary"
+        />
+      )}
     </section>
   )
 }

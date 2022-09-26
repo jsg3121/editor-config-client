@@ -72,4 +72,10 @@ declare namespace ConfigTypes {
       updateDate: string | null
     }
   }
+
+  interface RequestDeleteConfig {
+    userId: number | string
+    id: number | string
+    accessToken: string
+  }
 }
