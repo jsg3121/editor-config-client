@@ -1,6 +1,11 @@
 import http from 'axios'
 import { RegExp } from '../../common'
 
+/**
+ * info : 로그인 요청 Api
+ * @param form 로그인 요청 폼
+ * @returns
+ */
 const login = async (form: LoginRequestForm): Promise<LoginResult> => {
   return await http
     .request<LoginResult>({
@@ -16,6 +21,11 @@ const login = async (form: LoginRequestForm): Promise<LoginResult> => {
     })
 }
 
+/**
+ * info : 회원가입 요청 api
+ * @param form 회원가입 요청 폼
+ * @returns
+ */
 const signup = async (form: SignUpRequestForm): Promise<SignUpResult> => {
   const { email, password } = form
 
@@ -34,6 +44,11 @@ const signup = async (form: SignUpRequestForm): Promise<SignUpResult> => {
     })
 }
 
+/**
+ * info : 로그아웃 api
+ * @param form 로그아웃 요청 폼
+ * @returns
+ */
 const logout = async (form: LogoutRequestForm) => {
   return await http
     .request({
@@ -46,6 +61,11 @@ const logout = async (form: LogoutRequestForm) => {
     .then((res) => res.data)
 }
 
+/**
+ * info : 회원가입 등 입력 형식에 맞추어야 할 때 DB 중복 체크 api
+ * @param form valid 체크하기 위한 문자열과 타입
+ * @returns
+ */
 const validCheck = async (form: { value: string; type: string }) => {
   if (form.value === '') {
     return {

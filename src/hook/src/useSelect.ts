@@ -4,6 +4,11 @@ type UseSelect = (
   ref: React.RefObject<HTMLDivElement> | null
 ) => [boolean, () => void]
 
+/**
+ * info : select option이 열려있는 상태에서 다른 영역을 클릭할 때 열려있는 option을 닫음
+ * @param ref 선택한 옵션의 dom ref
+ * @returns
+ */
 export const useSelect: UseSelect = (ref) => {
   const [isOpen, setIsOpen] = React.useState<boolean>(false)
 

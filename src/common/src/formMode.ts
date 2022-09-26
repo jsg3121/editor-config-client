@@ -10,6 +10,11 @@ type FormModeType = (form: UseFormModeType) => {
   description?: string
 }
 
+/**
+ * info : form 내에서 valid check를 하기 전 입력 형식 체크
+ * @param value UseFormModeType
+ * @returns type: 요청 성공 여부, description: 성공 여부에 따른 추가 내용
+ */
 export const formMode: FormModeType = (value) => {
   if (typeof value === 'boolean') {
     return value
