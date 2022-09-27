@@ -7,6 +7,7 @@ import { ConfigInfoService } from '../../service'
 
 interface ConfigProviderProps {
   children: React.ReactNode
+  data?: ConfigTypes.DetailDataType
 }
 
 type ContextType = {
@@ -18,8 +19,9 @@ type ContextType = {
     unknown
   >
   isLoading?: boolean
+  isSuccess?: boolean
   config?: ConfigStore
-  selectDescription?: (val: keyof ConfigTypes.IDetailes) => void
+  selectDescription?: (val: keyof ConfigTypes.IDetails) => void
 }
 
 export const ConfigContext = createContext<ContextType>({
@@ -33,13 +35,14 @@ export const ConfigProvider: React.FC<ConfigProviderProps> = observer(
   (props) => {
     const { children } = props
     const { data } = useQuery([`info/config`], ConfigInfoService.getConfigInfo)
-    const { mutate, isLoading } = useMutation(
-      ConfigInfoService.createConfigInfo
-    )
     const { config } = useMobxStore()
 
+    const { mutate, isLoading, isSuccess } = useMutation(
+      ConfigInfoService.createConfigInfo
+    )
+
     const selectDescription = useCallback(
-      (val: keyof ConfigTypes.IDetailes) => {
+      (val: keyof ConfigTypes.IDetails) => {
         config.description(val)
       },
       [config]
@@ -54,6 +57,7 @@ export const ConfigProvider: React.FC<ConfigProviderProps> = observer(
     const initialValue = {
       data,
       isLoading,
+      isSuccess,
       config,
       mutate,
       selectDescription,

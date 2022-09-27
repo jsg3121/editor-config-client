@@ -1,18 +1,8 @@
 import React from 'react'
 import isEqual from 'fast-deep-equal'
 
-type DetailType = {
-  configName: string
-  configType: string
-  configDetail: {
-    [key in string]: string
-  }
-  createDate: string
-  updateDate?: string
-}
-
 interface DetailInfoProps {
-  data?: DetailType
+  data?: ConfigTypes.DetailDataType
 }
 
 const DetailInfo: React.FC<DetailInfoProps> = (props) => {

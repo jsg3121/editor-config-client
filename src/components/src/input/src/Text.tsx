@@ -12,7 +12,7 @@ interface TextProps<T extends FieldValues> {
     description: string
   }
   disabled?: boolean
-  value?: string
+  defaultValue?: string
   register?: UseFormRegister<T> | (() => void)
   onChange?: (val: string) => void
 }
@@ -20,7 +20,7 @@ interface TextProps<T extends FieldValues> {
 export const Text = <T extends FieldValues>(props: TextProps<T>) => {
   const {
     type,
-    value,
+    defaultValue,
     mode,
     inputSize,
     disabled = false,
@@ -45,7 +45,7 @@ export const Text = <T extends FieldValues>(props: TextProps<T>) => {
       type={type}
       className={`input-text__mode--${mode} input-text__size--${inputSize}`}
       disabled={disabled}
-      defaultValue={value}
+      defaultValue={defaultValue}
       {...(register && {
         ...register(label, { required, pattern: pattern?.rule }),
       })}

@@ -17,10 +17,10 @@ declare namespace ConfigTypes {
     vueIndentScriptAndStyle?: boolean
   }
 
-  interface IDetailes extends IPrettier {}
+  interface IDetails extends IPrettier {}
 
   type IDescription = {
-    [key in keyof IDetailes]: {
+    [key in keyof IDetails]: {
       desc: string
       type: string
       value?: {
@@ -32,20 +32,22 @@ declare namespace ConfigTypes {
   type RootStoreType = {
     name: string
     type: string
-    detail: IDetailes
+    detail: IDetails
   }
 
   interface ConfigDataType {
-    Options: IDetailes
+    Options: IDetails
     Description: IDescription
   }
 
   interface RequestConfigType {
+    method: 'POST' | 'PATCH'
     data: {
       userId: number
       configName: string
       configType: string
-      configDetail: IDetailes
+      configDetail: IDetails
+      id?: number | string
     }
     token: string
   }
@@ -77,5 +79,21 @@ declare namespace ConfigTypes {
     userId: number | string
     id: number | string
     accessToken: string
+  }
+
+  interface RequestPatchConfig {
+    id: number | string
+    userId: number | string
+    patchData: IDetails
+  }
+
+  interface DetailDataType {
+    configName: string
+    configType: string
+    configDetail: {
+      [key in string]: string | number | boolean
+    }
+    createDate: string
+    updateDate?: string
   }
 }
