@@ -1,11 +1,11 @@
 import React from 'react'
-import { Button, Detailinfo } from '../../../../components'
+import { Button, Detailinfo, Modal } from '../../../../components'
 import { DetailContext } from '../../../../context'
 import { Actions, useDispatch } from '../../../../store'
 import '../../../../style/detail.scss'
 
 const Detail: React.FC = () => {
-  const { id, userId, data, accessToken, mutate } =
+  const { id, userId, data, accessToken, isSuccess, mutate } =
     React.useContext(DetailContext)
 
   const dispatch = useDispatch()
@@ -20,6 +20,10 @@ const Detail: React.FC = () => {
   const hadleRoutePatch = React.useCallback(() => {
     dispatch(Actions.routerActions.push(`/setting/edit/${id}`))
   }, [dispatch, id])
+
+  const hadleClickRouteModal = React.useCallback(() => {
+    dispatch(Actions.routerActions.replace('/board'))
+  }, [dispatch])
 
   return (
     <section className="detail__container">
@@ -40,6 +44,13 @@ const Detail: React.FC = () => {
         </div>
       </div>
       <Detailinfo data={data} />
+      {isSuccess && (
+        <Modal
+          onClick={hadleClickRouteModal}
+          description="성공적으로 삭제 되었습니다."
+          type="primary"
+        />
+      )}
     </section>
   )
 }

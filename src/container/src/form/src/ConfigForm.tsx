@@ -27,9 +27,11 @@ const ConfigForm: React.FC = observer(() => {
           userId,
           ...data,
           configDetail: {
+            ...config.selectDetail.configDetail,
             ...config.configDetail,
           },
         }
+
         mutate({
           data: formData,
           token: accessToken,

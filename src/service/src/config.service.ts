@@ -88,14 +88,21 @@ const getDetailConfig = async (id: string, accessToken: string) => {
  */
 const deleteDetailConfig = async (data: ConfigTypes.RequestDeleteConfig) => {
   const { accessToken, id, userId } = data
-  return await http.request({
-    url: `http://localhost:4000/api/config/delete/${userId}/${id}`,
-    method: 'DELETE',
-    headers: {
-      'Content-Type': 'application/JSON',
-      authorization: `Bearer ${accessToken}`,
-    },
-  })
+  return await http
+    .request({
+      url: `http://localhost:4000/api/config/delete/${userId}/${id}`,
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/JSON',
+        authorization: `Bearer ${accessToken}`,
+      },
+    })
+    .then((res) => {
+      return res.data
+    })
+    .catch((err) => {
+      throw err
+    })
 }
 
 const patchDetailConfig = async (form: ConfigTypes.RequestConfigType) => {

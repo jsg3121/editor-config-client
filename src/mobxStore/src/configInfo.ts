@@ -65,6 +65,7 @@ export class ConfigStore {
 
   @action
   public clear() {
+    this.configDetail = {}
     this.selectDetail = {
       configName: '',
       configType: '',
