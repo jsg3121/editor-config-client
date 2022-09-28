@@ -1,9 +1,9 @@
-import React from 'react'
 import isEqual from 'fast-deep-equal'
+import React from 'react'
 import { Redirect, Route, Switch } from 'react-router-dom'
 import { Header } from '../../../container'
-import { AddSetting, Detail, Main } from './src'
 import { MobxProvider } from '../../../mobxStore'
+import { AddSetting, DetailPage, Main } from './src'
 
 const PrivateRoute: React.FC = () => {
   return (
@@ -15,13 +15,10 @@ const PrivateRoute: React.FC = () => {
             <Main />
           </Route>
           <Route exact path="/detail/:id">
-            <Detail />
+            <DetailPage />
           </Route>
-          <Route exact path="/mypage">
-            <Main />
-          </Route>
-          <Route exact path="/edit">
-            <Main />
+          <Route exact path="/setting/edit/:id">
+            <AddSetting />
           </Route>
           <Route exact path="/setting/add">
             <AddSetting />

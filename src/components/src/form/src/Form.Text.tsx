@@ -12,6 +12,8 @@ interface FormItemProps<T extends FieldValues> {
   inputSize: 'large' | 'medium' | 'small'
   name: string
   label: Path<T>
+  defaultValue?: string
+  disabled?: boolean
   required?: boolean
   errors?: boolean
   isDebounce?: boolean
@@ -28,7 +30,16 @@ interface Mode {
 }
 
 const FormItem = <T extends FieldValues>(props: FormItemProps<T>) => {
-  const { name, isDebounce, errors, pattern, label, ...rest } = props
+  const {
+    name,
+    isDebounce,
+    errors,
+    pattern,
+    disabled,
+    label,
+    defaultValue,
+    ...rest
+  } = props
   const [inputStatus, setInputStatus] = React.useState<Mode>({
     type: 'primary',
   })
@@ -82,6 +93,8 @@ const FormItem = <T extends FieldValues>(props: FormItemProps<T>) => {
     <div className={`form__input-box input__status--${inputStatus.type}`}>
       <p className="form__input--label">{name}</p>
       <Input.Text
+        disabled={disabled}
+        defaultValue={defaultValue}
         onChange={handleChange}
         label={label}
         mode={inputStatus.type}

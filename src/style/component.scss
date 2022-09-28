@@ -233,7 +233,7 @@
 }
 
 .button__type--danger {
-  @apply bg-error-500  text-gray-200 shadow-gray-300 shadow-sm hover:bg-error-600 active:bg-error-700  disabled:bg-gray-500 disabled:text-gray-300;
+  @apply bg-error-500  text-gray-200 shadow-error-800 shadow-sm hover:bg-error-600 active:bg-error-700  disabled:bg-gray-500 disabled:text-gray-300;
 }
 
 .button__type--primary {

@@ -14,19 +14,21 @@ const getConfigInfo = async (): Promise<ConfigTypes.ConfigDataType> => {
 }
 
 /**
- * info : config setting 수정 api
- * @param form 수정된 config 폼
+ * info : config setting 추가 또는 업데이트 api
+ * @param form 추가 할 config 폼
  * @returns
  */
-const patchConfigInfo = async (form: ConfigTypes.RequestConfigType) => {
+const createConfigInfo = async (form: ConfigTypes.RequestConfigType) => {
+  const { data, method, token } = form
+
   return await http
     .request({
       url: 'http://localhost:4000/api/config/file',
-      method: 'POST',
-      data: form.data,
+      method: method,
+      data: data,
       headers: {
         'Content-Type': 'application/JSON',
-        authorization: `Bearer ${form.token}`,
+        authorization: `Bearer ${token}`,
       },
     })
     .then((res) => res.data)
@@ -79,9 +81,52 @@ const getDetailConfig = async (id: string, accessToken: string) => {
     })
 }
 
+/**
+ * info : config setting 삭제 api
+ * @param data 삭제하려는 config id, user id, token
+ * @returns
+ */
+const deleteDetailConfig = async (data: ConfigTypes.RequestDeleteConfig) => {
+  const { accessToken, id, userId } = data
+  return await http
+    .request({
+      url: `http://localhost:4000/api/config/delete/${userId}/${id}`,
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/JSON',
+        authorization: `Bearer ${accessToken}`,
+      },
+    })
+    .then((res) => {
+      return res.data
+    })
+    .catch((err) => {
+      throw err
+    })
+}
+
+const patchDetailConfig = async (form: ConfigTypes.RequestConfigType) => {
+  const { data, token } = form
+  return await http
+    .request({
+      url: 'http://localhost:4000/api/config/file',
+      method: 'PATCH',
+      data: data,
+      headers: {
+        'Content-Type': 'application/JSON',
+        authorization: `Bearer ${token}`,
+      },
+    })
+    .then((res) => res.data)
+    .catch((err) => {
+      throw err
+    })
+}
+
 export const ConfigInfoService = {
   getConfigInfo,
-  patchConfigInfo,
+  createConfigInfo,
   getConfigList,
   getDetailConfig,
+  deleteDetailConfig,
 }

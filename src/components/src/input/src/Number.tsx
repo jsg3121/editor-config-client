@@ -1,5 +1,5 @@
-import { ChangeEvent, memo, useCallback } from 'react'
 import isEqual from 'fast-deep-equal'
+import { ChangeEvent, memo, useCallback, WheelEvent } from 'react'
 
 interface NumberProps {
   defaultValue: number
@@ -19,8 +19,13 @@ const Number: React.FC<NumberProps> = (props) => {
     [onChange]
   )
 
+  const handleWheel = useCallback((e: WheelEvent<HTMLInputElement>) => {
+    e.currentTarget.blur()
+  }, [])
+
   return (
     <input
+      onWheel={handleWheel}
       type="number"
       className={`input-text__mode--primary input-text__size--large`}
       disabled={disabled}
