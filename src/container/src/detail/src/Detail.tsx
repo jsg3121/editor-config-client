@@ -1,4 +1,5 @@
 import React from 'react'
+import { fileDownload } from '../../../../common'
 import { Button, Detailinfo, Modal } from '../../../../components'
 import { DetailContext } from '../../../../context'
 import { Actions, useDispatch } from '../../../../store'
@@ -25,6 +26,12 @@ const Detail: React.FC = () => {
     dispatch(Actions.routerActions.replace('/board'))
   }, [dispatch])
 
+  const handleDownload = React.useCallback(() => {
+    if (data) {
+      fileDownload(data.configDetail)
+    }
+  }, [data])
+
   return (
     <section className="detail__container">
       <div className="detail__button">
@@ -34,6 +41,12 @@ const Detail: React.FC = () => {
             label="수정"
             size="medium"
             onClick={hadleRoutePatch}
+          />
+          <Button
+            buttonType="primary"
+            label="파일 다운로드"
+            size="medium"
+            onClick={handleDownload}
           />
           <Button
             buttonType="danger"
