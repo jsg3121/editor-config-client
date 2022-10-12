@@ -1,11 +1,11 @@
 import isEqual from 'fast-deep-equal'
 import React from 'react'
-import { ConfigCard } from '../../../../components'
+import { ConfigCard, Loading } from '../../../../components'
 import { BoardContext } from '../../../../context'
 import { Actions, useDispatch } from '../../../../store'
 
 const ConfigList: React.FC = () => {
-  const { configList } = React.useContext(BoardContext)
+  const { configList, isLoading = false } = React.useContext(BoardContext)
 
   const dispatch = useDispatch()
 
@@ -31,6 +31,7 @@ const ConfigList: React.FC = () => {
             />
           )
         })}
+      {isLoading && <Loading />}
     </article>
   )
 }

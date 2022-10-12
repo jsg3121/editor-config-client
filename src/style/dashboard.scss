@@ -3,7 +3,7 @@
   height: calc(100% - 5rem);
 
   & > article {
-    @apply w-full p-4 border rounded-md border-primary-500 bg-gradient-to-b from-primary-700 to-primary-900;
+    @apply w-full p-4 relative border rounded-md border-primary-500 bg-gradient-to-b from-primary-700 to-primary-900;
   }
 }
 
