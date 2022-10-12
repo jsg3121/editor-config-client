@@ -5,7 +5,7 @@ import { Actions, useDispatch } from '../../../../store'
 import '../../../../style/detail.scss'
 
 const Detail: React.FC = () => {
-  const { id, userId, data, accessToken, isSuccess, mutate } =
+  const { id, userId, data, accessToken, isLoading, isSuccess, mutate } =
     React.useContext(DetailContext)
 
   const dispatch = useDispatch()
@@ -43,7 +43,7 @@ const Detail: React.FC = () => {
           />
         </div>
       </div>
-      <Detailinfo data={data} />
+      <Detailinfo data={data} isLoading={isLoading} />
       {isSuccess && (
         <Modal
           onClick={hadleClickRouteModal}

@@ -1,0 +1,18 @@
+@keyframes loader-rotate {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.loading__content {
+  @apply w-12 h-12 border-4 border-gray-300 rounded-full absolute;
+
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-right-color: transparent;
+  animation: loader-rotate 1s linear infinite;
+}

@@ -20,6 +20,7 @@ type ContextType = {
   accessToken: string
   data?: ConfigTypes.DetailDataType
   isSuccess?: boolean
+  isLoading?: boolean
   mutate?: UseMutateFunction<
     any,
     unknown,
@@ -40,7 +41,7 @@ export const DetailProvider: React.FC<DetailProviderProps> = observer(
     const { id } = useParams<RouteParams>()
     const { accessToken, id: userId } = useSelector((store) => store.account)
     const { config } = useMobxStore()
-    const { data } = useQuery<ConfigTypes.DetailDataType>(
+    const { data, isLoading } = useQuery<ConfigTypes.DetailDataType>(
       [`/detail/${id}`],
       async () => {
         const result = await ConfigInfoService.getDetailConfig(id, accessToken)
@@ -70,6 +71,7 @@ export const DetailProvider: React.FC<DetailProviderProps> = observer(
       userId,
       isSuccess,
       accessToken,
+      isLoading,
       mutate,
     }
 

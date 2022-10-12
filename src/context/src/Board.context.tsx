@@ -11,6 +11,7 @@ interface BoardContextProps {
 
 type ContextType = {
   configList?: ConfigTypes.ResponseConfigList['data']
+  isLoading?: boolean
 }
 
 export const BoardContext = React.createContext<ContextType>({})
@@ -20,10 +21,13 @@ export const BoardProvider: React.FC<BoardContextProps> = observer((props) => {
   const { accessToken, id } = useSelector((store) => store.account)
   const { config } = useMobxStore()
 
-  const { data: configList } = useQuery(['/api/config/file'], async () => {
-    const result = await ConfigInfoService.getConfigList(id, accessToken)
-    return result.data
-  })
+  const { data: configList, isLoading } = useQuery(
+    ['/api/config/file'],
+    async () => {
+      const result = await ConfigInfoService.getConfigList(id, accessToken)
+      return result.data
+    }
+  )
 
   React.useEffect(() => {
     config.clear()
@@ -31,6 +35,7 @@ export const BoardProvider: React.FC<BoardContextProps> = observer((props) => {
 
   const initialValue = {
     configList,
+    isLoading,
   }
 
   return (
