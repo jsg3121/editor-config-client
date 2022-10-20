@@ -3,7 +3,7 @@ import React from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useParams } from 'react-router-dom'
 import { selectOptions } from '../../../../common'
-import { Button, Form, FormItem } from '../../../../components'
+import { Button, Form, FormItem, Modal } from '../../../../components'
 import { ConfigContext } from '../../../../context'
 import { Actions, useDispatch, useSelector } from '../../../../store'
 
@@ -13,7 +13,7 @@ type RouteParams = {
 
 const ConfigForm: React.FC = observer(() => {
   const { id } = useParams<RouteParams>()
-  const { data, isLoading, config, mutate, selectDescription } =
+  const { data, isLoading, config, mutate, selectDescription, isSuccess } =
     React.useContext(ConfigContext)
   const { id: userId, accessToken } = useSelector((store) => store.account)
   const dispatch = useDispatch()
@@ -73,6 +73,10 @@ const ConfigForm: React.FC = observer(() => {
     },
     [selectDescription]
   )
+
+  const hadleClickRouteModal = React.useCallback(() => {
+    dispatch(Actions.routerActions.replace('/board'))
+  }, [dispatch])
 
   const buttons = React.useMemo(() => {
     return (
@@ -166,6 +170,13 @@ const ConfigForm: React.FC = observer(() => {
             })}
         </Form>
       </div>
+      {isSuccess && (
+        <Modal
+          onClick={hadleClickRouteModal}
+          description="성공적으로 삭제 되었습니다."
+          type="primary"
+        />
+      )}
     </>
   )
 })
