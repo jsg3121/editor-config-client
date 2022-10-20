@@ -287,7 +287,7 @@
 }
 
 .config-list__items {
-  @apply mr-8 px-2 flex flex-col items-center cursor-pointer hover:scale-105 transition-transform;
+  @apply w-32 mb-4 flex flex-col items-center cursor-pointer hover:scale-105 transition-transform;
   filter: drop-shadow(1px 1px 2px #333333);
 
   p {
@@ -295,7 +295,7 @@
   }
 
   .config-list__items--name {
-    @apply text-lg mt-1;
+    @apply w-24 text-lg text-center mt-1 text-ellipsis whitespace-nowrap overflow-hidden;
   }
 
   .config-list__items--type {

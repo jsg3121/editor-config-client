@@ -17,7 +17,7 @@ const ConfigForm: React.FC = observer(() => {
     React.useContext(ConfigContext)
   const { id: userId, accessToken } = useSelector((store) => store.account)
   const dispatch = useDispatch()
-  const { register, handleSubmit } = useForm<SettingList>()
+  const { register, handleSubmit, setValue } = useForm<SettingList>()
 
   const onSubmit: SubmitHandler<SettingList> = React.useCallback(
     (data) => {
@@ -78,6 +78,13 @@ const ConfigForm: React.FC = observer(() => {
     dispatch(Actions.routerActions.replace('/board'))
   }, [dispatch])
 
+  const handleSelectType = React.useCallback(
+    (val: { label: string; value: string }) => {
+      setValue('configType', val.value)
+    },
+    [setValue]
+  )
+
   const buttons = React.useMemo(() => {
     return (
       <>
@@ -110,14 +117,12 @@ const ConfigForm: React.FC = observer(() => {
             register={register}
             type="text"
           />
-          <FormItem.Text
-            inputSize="large"
-            label="configType"
-            defaultValue={config?.selectDetail.configType}
-            disabled={config?.selectDetail.configType ? true : false}
-            name="파일 타입"
-            register={register}
-            type="text"
+          <FormItem.Select
+            label="파일타입"
+            onSelect={handleSelectType}
+            defaultValue=""
+            options={['prettier']}
+            onHover={handleHover}
           />
           {data &&
             config &&
